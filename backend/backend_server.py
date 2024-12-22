@@ -16,7 +16,7 @@ def query_model():
     # Call Ollama using subprocess to execute the model with the prompt
     try:
         result = subprocess.run(
-            ["ollama", "run", "qwen:0.5b"],
+            ["ollama", "run", "qwen:0.5b"], # Replace with custom LLM model
             input=prompt,  # Pass the prompt as stdin input
             text=True,
             capture_output=True
@@ -34,5 +34,5 @@ def query_model():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)  # Expose API on port 5000
+    app.run(host='0.0.0.0', port=5000)  # Expose API on port
 
