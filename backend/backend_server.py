@@ -16,7 +16,7 @@ def query_model():
     # Call Ollama using subprocess to execute the model with the prompt
     try:
         result = subprocess.run(
-            ["ollama", "run", "qwen:0.5b"],
+            ["ollama", "run", "qwen:0.5b"], # Replace with the model you want
             input=prompt,  # Pass the prompt as stdin input
             text=True,
             capture_output=True
