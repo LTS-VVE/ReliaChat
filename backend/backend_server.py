@@ -1,38 +1,60 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, Response, stream_with_context
 import subprocess
+import json
 
 app = Flask(__name__)
 
-# Define the endpoint for interacting with the model
+def stream_model_output(prompt):
+    # Start the Ollama process with pipes for real-time communication
+    process = subprocess.Popen(
+        ["ollama", "run", "qwen:0.5b"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1  # Line buffered
+    )
+    
+    # Write the prompt to stdin and close it to signal we're done sending input
+    process.stdin.write(prompt)
+    process.stdin.close()
+    
+    # Read and yield output line by line
+    while True:
+        output_line = process.stdout.readline()
+        if output_line == '' and process.poll() is not None:
+            break
+        if output_line:
+            # Yield each line as a server-sent event
+            yield f"data: {json.dumps({'response': output_line.strip()})}\n\n"
+    
+    # Check for any errors
+    if process.returncode != 0:
+        error_message = process.stderr.read()
+        yield f"data: {json.dumps({'error': error_message})}\n\n"
+
 @app.route('/api/v1/query', methods=['POST'])
 def query_model():
-    # Parse the input JSON
     data = request.get_json()
     prompt = data.get("prompt", "")
-    
-    if not prompt:
-        return jsonify({"error": "No prompt provided"}), 400
 
-    # Call Ollama using subprocess to execute the model with the prompt
-    try:
-        result = subprocess.run(
-            ["ollama", "run", "qwen:0.5b"], # Replace with the model you want
-            input=prompt,  # Pass the prompt as stdin input
-            text=True,
-            capture_output=True
+    if not prompt:
+        return Response(
+            json.dumps({"error": "No prompt provided"}),
+            status=400,
+            mimetype='application/json'
         )
 
-        # Check if the model executed successfully
-        if result.returncode != 0:
-            return jsonify({"error": "Error running model", "message": result.stderr}), 500
-
-        # Send the model's output as the response
-        return jsonify({"response": result.stdout.strip()})
-
-    except Exception as e:
-        return jsonify({"error": "Internal server error", "message": str(e)}), 500
-
+    # Return a streaming response
+    return Response(
+        stream_with_context(stream_model_output(prompt)),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': '*'
+        }
+    )
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)  # Expose API on port 5000
-
+    app.run(host='0.0.0.0', port=5000, threaded=True)
