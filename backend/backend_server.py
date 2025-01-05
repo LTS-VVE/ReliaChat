@@ -7,7 +7,7 @@ app = Flask(__name__)
 def stream_model_output(prompt):
     # Start the Ollama process with pipes for real-time communication
     process = subprocess.Popen(
-        ["ollama", "run", "qwen:0.5b"],
+        ["ollama", "run", "gemma2:2b"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
