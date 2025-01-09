@@ -5,7 +5,7 @@ import json
 app = Flask(__name__)
 
 def stream_model_output(prompt):
-    # Start the Ollama process with pipes for real-time communication
+    # Ollama start, pipes to run real-time response to front-end
     process = subprocess.Popen(
         ["ollama", "run", "gemma2:2b"],
         stdin=subprocess.PIPE,
@@ -15,7 +15,7 @@ def stream_model_output(prompt):
         bufsize=1  # Line buffered
     )
     
-    # Write the prompt to stdin and close it to signal we're done sending input
+    # Write the prompt to stdin
     process.stdin.write(prompt)
     process.stdin.close()
     
@@ -28,7 +28,7 @@ def stream_model_output(prompt):
             # Yield each line as a server-sent event
             yield f"data: {json.dumps({'response': output_line.strip()})}\n\n"
     
-    # Check for any errors
+    # Error check
     if process.returncode != 0:
         error_message = process.stderr.read()
         yield f"data: {json.dumps({'error': error_message})}\n\n"
