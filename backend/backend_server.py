@@ -5,7 +5,7 @@ import json
 app = Flask(__name__)
 
 def stream_model_output(prompt):
-    # Ollama start, pipes to run real-time response to front-end
+    # Start the subprocess to run the command
     process = subprocess.Popen(
         ["ollama", "run", "gemma2:2b"],
         stdin=subprocess.PIPE,
@@ -15,18 +15,22 @@ def stream_model_output(prompt):
         bufsize=1  # Line buffered
     )
     
-    # Write the prompt to stdin
-    process.stdin.write(prompt)
+    # Write the prompt to stdin and close it
+    process.stdin.write(prompt + "\n")
     process.stdin.close()
     
     # Read and yield output line by line
+    full_response = ""
     while True:
         output_line = process.stdout.readline()
         if output_line == '' and process.poll() is not None:
             break
         if output_line:
-            # Yield each line as a server-sent event
-            yield f"data: {json.dumps({'response': output_line.strip()})}\n\n"
+            # Collect the full response
+            full_response += output_line.strip() + " "
+            print(output_line.strip())  # Print the result live in the server logs
+            # Yield the current full response as a server-sent event
+            yield f"data: {json.dumps({'response': full_response.strip()})}\n\n"
     
     # Error check
     if process.returncode != 0:
