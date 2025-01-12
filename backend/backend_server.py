@@ -7,7 +7,7 @@ app = Flask(__name__)
 def stream_model_output(prompt):
     # Start the subprocess to run the command
     process = subprocess.Popen(
-        ["ollama", "run", "gemma2:2b"],
+        ["ollama", "run", "smollm:135m"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -28,7 +28,8 @@ def stream_model_output(prompt):
         if output_line:
             # Collect the full response
             full_response += output_line.strip() + " "
-            print(output_line.strip())  # Print the result live in the server logs
+            print(output_line.strip())  # Print the result live in the server
+gs
             # Yield the current full response as a server-sent event
             yield f"data: {json.dumps({'response': full_response.strip()})}\n\n"
     
