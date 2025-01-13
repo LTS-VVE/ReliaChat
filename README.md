@@ -6,7 +6,7 @@
 > users are freely able to customize and use their own models.
 ## ``` Version 1.3.2-BETA ```
 
-[Android Build](https://github.com/LTS-VVE/ReliaChat/builds/android)<br>
+[Android Build](https://github.com/LTS-VVE/ReliaChat/releases/tag/Android)<br>
 [iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat/builds/iOS)
 > [!NOTE]
 > That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the build.
