@@ -21,10 +21,8 @@
 <br>
 <br>
 <br>
-<p align="left">
+<p align="center">
   <img src="https://raw.githubusercontent.com/flet-dev/flet/main/media/logo/flet-logo.svg" alt="Flet" width="200" height="100">
-  <img src="https://www.svgrepo.com/show/2087/plus.svg" alt="plus" width="200" height="100">
-  <img src="https://isagebrum.com/images/technology/python-image.svg" alt="python" width="200" height="100">
   <img src="https://www.svgrepo.com/show/2087/plus.svg" alt="plus" width="200" height="100">
   <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/1.13.0/files/dark/ollama.png" alt="ollama" width="100" height="100">
 </p>
