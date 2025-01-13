@@ -28,7 +28,7 @@
 </p>
 <br>
 <br>
-<p align="center">ReliaChat is an open-source app, made for a high school project, build using the flet flutter Python to connect locally on a set port on your device via requests and the Termux/iSH (For android and iOS repectively.) app.
+<p align="center">ReliaChat is an open-source app, made for a high school project, build using the Flet Flutter Python  Framework to connect locally on a set port on your device via requests and the Termux/iSH (For android and iOS repectively.) app.
 It has a modern UI, Easy to use frontend, and easy command pasting for non-advanced users, while maintaining massive language support, easy of use, and being privacy respecting.</p><br><br>
 
 > [!WARNING]
