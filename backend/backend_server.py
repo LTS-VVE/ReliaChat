@@ -7,7 +7,7 @@ app = Flask(__name__)
 def stream_model_output(prompt):
     # Start the subprocess to run the command
     process = subprocess.Popen(
-        ["ollama", "run", "smollm:135m"],
+        ["ollama", "run", "gemma2:2b"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
