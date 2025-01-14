@@ -4,6 +4,11 @@
 > ReliaChat AI Innovations is NOT RESPONSIBLE FOR ANY WARRANTY, INNACURATE, OR MORALLY WRONG RESPONSES FROM THE AI THAT YOU ARE CHATTING WITH. <br>
 > The AI Model is pre-trained on existing data by organizations and publiclly freely avaible on [Ollama Models](https://ollama.com/models)
 > users are freely able to customize and use their own models.
+
+<br><br>
+> [!IMPORTANT]
+>[Github Project](https://github.com/LTS-VVE/ReliaChat)<br>
+>[Gitlab Project](https://gitlab.com/LTS-VVE/ReliaChat)
 ## ``` Version 1.3.2-BETA ```
 
 [Android Build](https://github.com/LTS-VVE/ReliaChat/releases/tag/Android)<br>
