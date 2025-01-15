@@ -25,4 +25,4 @@ company = "ReliaChat"
 copyright = "Copyright (C) 2025 by ReliaChat AI Innovations Foundation"
 
 [tool.flet.app]
-path = "src"
+path = "frontend"
