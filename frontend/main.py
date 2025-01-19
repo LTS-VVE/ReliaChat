@@ -501,7 +501,7 @@ def main(page: ft.Page):
                 ft.TextButton(translate("help"), on_click=lambda _: page.launch_url("https://relia.rf.gd/docs"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
                 ft.TextButton(translate("privacy_policy"), on_click=lambda _: page.launch_url("https://relia.rf.gd/privacy-policy"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
                 ft.TextButton(translate("about"), on_click=lambda _: page.launch_url("https://relia.rf.gd/about"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
-                ft.TextButton(translate("terms_of_use"), on_click=lambda _: page.launch_url("https://relia.rf.gd/terms-and-conditions"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
+                ft.TextButton(translate("terms_of_use"), on_click=lambda _: page.launch_url("https://relia.rf.gd/privacy-policy"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
                 ft.TextButton(translate("erase_all_chats"), on_click=lambda _: erase_all_chats(page), style=ft.ButtonStyle(color=sidebar_text_color, bgcolor=ft.colors.RED_600, elevation=2)),
                 ft.Text(translate("version"), size=10, color=sidebar_text_color)
             ],
