@@ -60,34 +60,62 @@ It has a modern UI, Easy to use frontend, and easy command pasting for non-advan
 ![image(5)](https://github.com/user-attachments/assets/4c4e23b6-b0b1-4864-ba16-0befae4f643d)
 ## How the App Works
 ```mermaid
-%%{init: {"theme": "dark"}}%%
-graph TD;
-    subgraph Termux
+%%{init: {
+  'theme': 'dark',
+  'themeVariables': {
+    'fontFamily': 'arial',
+    'fontSize': '16px',
+    'lineColor': '#808080',
+    'primaryColor': '#1f2937',
+    'primaryTextColor': '#ffffff',
+    'primaryBorderColor': '#404040',
+    'secondaryColor': '#2d3748',
+    'tertiaryColor': '#374151'
+  }
+}}%%
+
+graph TD
+    %% Define main components
+    subgraph Termux[Termux Environment]
         direction TB
-        TermuxNode["Termux (Running Ollama and the server)"]
+        TermuxNode[("Termux<br/>Mobile Linux Environment")]
+        style TermuxNode fill:#1f2937,stroke:#404040
     end
 
-    subgraph Frontend
+    subgraph Client[Client Layer]
         direction TB
-        FrontendNode["Frontend (Flet App)"]
+        FrontendNode["Frontend<br/>(Flet App)<br/>Python UI Framework"]
+        style FrontendNode fill:#2d3748,stroke:#404040
     end
 
-    subgraph Backend
+    subgraph Server[Server Layer]
         direction TB
-        BackendNode["Backend (Flask Server)"]
+        BackendNode["Backend Server<br/>(Flask)<br/>Port: 8000"]
+        style BackendNode fill:#374151,stroke:#404040
     end
 
-    subgraph Ollama
+    subgraph AI[AI Service]
         direction TB
-        OllamaNode["Ollama Server (127.0.0.1:5000)"]
+        OllamaNode["Ollama Server<br/>Local LLM Service<br/>Port: 11434"]
+        style OllamaNode fill:#1f2937,stroke:#404040
     end
 
-    FrontendNode -->|Sends Request| BackendNode
-    BackendNode -->|Forwards to| OllamaNode
-    OllamaNode -->|Responds to| BackendNode
-    BackendNode -->|Sends Response| FrontendNode
-    TermuxNode -->|Hosts| BackendNode
-    TermuxNode -->|Hosts| OllamaNode
+    %% Define relationships with detailed labels
+    FrontendNode -->|"1. HTTP Requests<br/>REST API Calls"| BackendNode
+    BackendNode -->|"2. LLM Queries"| OllamaNode
+    OllamaNode -->|"3. AI Responses"| BackendNode
+    BackendNode -->|"4. JSON Response"| FrontendNode
+    
+    %% Hosting relationships
+    TermuxNode -.->|"Hosts & Manages"| BackendNode
+    TermuxNode -.->|"Hosts & Manages"| OllamaNode
+
+    %% Styling
+    classDef default fill:#2d3748,stroke:#404040,color:#fff
+    classDef container fill:#1f2937,stroke:#404040,color:#fff
+    
+    %% Apply container styling to subgraphs
+    class Termux,Client,Server,AI container
 ```
 We use the Requests via urllib since, building the app for iOS and Android with the `Requests` module fails.
 ```python
