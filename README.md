@@ -62,12 +62,32 @@ It has a modern UI, Easy to use frontend, and easy command pasting for non-advan
 ```mermaid
 %%{init: {"theme": "dark"}}%%
 graph TD;
-    Frontend["Frontend (Flet App)"] --> PythonRequest["Python Request (urllib.request)"];
-    PythonRequest --> Backend["Backend (Flask Server)"];
-    Backend --> Ollama["Ollama Server (Default 127.0.0.1:5000)"];
-    Ollama --> Backend["Frontend (Flet App)"];
-    Backend["Backend (Flask Server)"] --> PythonRequest["PythonRequest (urllib.request)"];
-    PythonRequest["PythonRequest (urllib.request)"] --> Frontend["Frontend (Flet App)"]
+    subgraph Termux
+        direction TB
+        TermuxNode["Termux (Running Ollama and the server)"]
+    end
+
+    subgraph Frontend
+        direction TB
+        FrontendNode["Frontend (Flet App)"]
+    end
+
+    subgraph Backend
+        direction TB
+        BackendNode["Backend (Flask Server)"]
+    end
+
+    subgraph Ollama
+        direction TB
+        OllamaNode["Ollama Server (127.0.0.1:5000)"]
+    end
+
+    FrontendNode -->|Sends Request| BackendNode
+    BackendNode -->|Forwards to| OllamaNode
+    OllamaNode -->|Responds to| BackendNode
+    BackendNode -->|Sends Response| FrontendNode
+    TermuxNode -->|Hosts| BackendNode
+    TermuxNode -->|Hosts| OllamaNode
 ```
 We use the Requests via urllib since, building the app for iOS and Android with the `Requests` module fails.
 ```python
