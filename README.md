@@ -76,7 +76,7 @@ It has a modern UI, Easy to use frontend, and easy command pasting for non-advan
 
 graph TD
     %% Define main components
-    subgraph Termux[Termux Environment]
+    subgraph Termux[Termux/iSH Environment]
         direction TB
         TermuxNode[("Termux/iSH<br/>Mobile Linux/Unix Environment")]
         style TermuxNode fill:#1f2937,stroke:#404040
