@@ -78,7 +78,7 @@ graph TD
     %% Define main components
     subgraph Termux[Termux Environment]
         direction TB
-        TermuxNode[("Termux<br/>Mobile Linux Environment")]
+        TermuxNode[("Termux/iSH<br/>Mobile Linux/Unix Environment")]
         style TermuxNode fill:#1f2937,stroke:#404040
     end
 
