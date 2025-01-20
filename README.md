@@ -1,9 +1,6 @@
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
-> [!CAUTION]
-> As mentioned in the [GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.](https://github.com/LTS-VVE/ReliaChat/blob/main/LICENSE)<br>
-> ReliaChat AI Innovations is NOT RESPONSIBLE FOR ANY WARRANTY, INNACURATE, OR MORALLY WRONG RESPONSES FROM THE AI THAT YOU ARE CHATTING WITH. <br>
-> The AI Model is pre-trained on existing data by organizations and publiclly freely avaible on [Ollama Models](https://ollama.com/models)
-> users are freely able to customize and use their own models.
+> [!IMPORTANT]
+> This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3
 
 <br><br>
 > [!IMPORTANT]
