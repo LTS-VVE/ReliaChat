@@ -14,7 +14,7 @@
 > That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the build.
 
 > [!IMPORTANT]
-> Please make sure you report issues that occurr within the app, this could help us move forward with the project.
+> Please make sure you report issues that occurr in the app via github or gitlab. This could help us move forward with the project.
 
 > [!TIP]
 > Please make sure you are within the EU to install (sideload) apps on iOS.
