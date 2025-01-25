@@ -1,10 +1,14 @@
 from flask import Flask, request, Response, stream_with_context
 import subprocess
 import json
+import shlex
 
 app = Flask(__name__)
 
 def stream_model_output(prompt):
+    # Sanitize the prompt to prevent command injection
+    safe_prompt = shlex.quote(prompt)
+    
     # Start the subprocess to run the command
     process = subprocess.Popen(
         ["ollama", "run", "gemma2:2b"],
@@ -15,8 +19,8 @@ def stream_model_output(prompt):
         bufsize=1  # Line buffered
     )
     
-    # Write the prompt to stdin and close it
-    process.stdin.write(prompt + "\n")
+    # Write the sanitized prompt to stdin and close it
+    process.stdin.write(safe_prompt + "\n")
     process.stdin.close()
     
     # Read and yield output line by line
@@ -29,7 +33,7 @@ def stream_model_output(prompt):
             # Collect the full response
             full_response += output_line.strip() + " "
             print(output_line.strip())  # Print the result live in the server
-gs
+
             # Yield the current full response as a server-sent event
             yield f"data: {json.dumps({'response': full_response.strip()})}\n\n"
     
