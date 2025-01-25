@@ -1,15 +1,28 @@
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
-> This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3
+> This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.
 
-<br><br>
+<br>
+
 > [!IMPORTANT]
 >[Github Project](https://github.com/LTS-VVE/ReliaChat)<br>
 >[Gitlab Project](https://gitlab.com/LTS-VVE/ReliaChat)
-## ``` Version 1.3.2-BETA ```
+## ``` Version 1.3.3-BETA ```
+> [!NOTE]
+> NEW RELEASE ``` V 1.3.3-BETA ```<br>![image](https://github.com/user-attachments/assets/a0f36b7a-3f63-4587-b495-4d2dfcfbd886)
+
+> [!TIP]
+> What's in the new release?
+> <br> `Word filtering has been added. Words that include profanity, discrimination and illegal behaviors has been added.` <br><br> **(This feature only applies to English and Albanian common profanity language. `Such as, illegal activities. Unwanted behaviors, anti agenda, Child, Animal or human abuse and more`.)**
+
+> [!CAUTION]
+> ReliaChat AI Innovations, IS NOT RESPONSIBLE FOR ANY ACTIONS YOU MAKE USING THE AI APP. THE APP IS BUILD AS FRONT-END, AND HAS RESPONSIBILITY TO SEND REQUESTS LOCALLY ON ALREADY TRAINED MODELS (Such as [Ollama Models](https://ollama.com/models), [Hugging Face](https://huggingface.co/models) or external sources for customizability).<br> THESE MODELS ARE PRE-TRAINED BY OPEN-SOURCE COMMUNITIES. PLEASE BE SURE TO USE THE SOFTWARE PROVIDED BY ReliaChat AI Innovations, ETHICALLY.
+
+> [!NOTE]
+> This feature can be turned off via the setting menu. <br><br>
 
 [Android Build](https://github.com/LTS-VVE/ReliaChat/releases/tag/Android)<br>
-[iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat/builds/iOS)
+[iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat/builds/iOS)<br><br>
 > [!NOTE]
 > That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the build.
 
@@ -59,6 +72,41 @@ It has a modern UI, Easy to use frontend, and easy command pasting for non-advan
 ![image(4)](https://github.com/user-attachments/assets/4dd32826-1ac1-44c5-a39a-ac80b1779436)
 ![image(5)](https://github.com/user-attachments/assets/4c4e23b6-b0b1-4864-ba16-0befae4f643d)
 ## How the App Works
+### New filtering System:
+
+> [!WARNING]
+> The code below is a demonstration of how it works, the word list is located on the frontend folder of this github repo.
+
+```python
+# This script defines a function called `strict_content` which is used for content moderation.
+# The function checks if any blocked words are present in the given content and returns True if any are found.
+# This is useful for filtering out inappropriate or harmful content in user-generated inputs. ReliaChat AI Innovations, IS NOT RESPONSIBLE FOR ANY WARRNTY
+# OR MISUSE ON THE SOFTWARE. THE SOFTWARE IS PROVIDED AS IS. FOR MORE INFO GO TO: https://github.com/LTS-VVE/ReliaChat/blob/main/LICENSE, TO VIEW THE LICENSE.
+
+def strict_content(content):
+    # Blocked Words.
+    # NOTE THAT THIS SECTION OR FILE OF CODE IS SIMPLY FOR MODERATION, AND ReliaChat AI Innovations IS NOT PROMOTING, ADVERTISING, OR HAVING RELIABILITY
+    # FOR ANY OF THE WORDS, PROVIDED FOR MODERATION.
+    blocked_words = [
+        "badword1", "badword2",
+    ]
+    
+    # Currently there only is 2 langauges for profanity check. Please view our READ.ME on github or gitlab for more info.
+
+
+    # Check if any blocked word is in the content
+    for word in blocked_words:
+        if word in content.lower():
+            return True
+    
+    return False
+```
+In the list we can see an example that if the user inputs the word that is containted within the `strict_content` file in this case `bardword1`, `badword2`, the frontend will block all attemps being made to the ollama server for extra-protection. This is done that if the AI Model is expiriencing inaccurate, morally wrong responses or hallucinations, the filter will act as a safe-guard to protect the user from unethical use of AI. This feature can be toggled off, however it is recommended to be kept on, as AI LLM's that are small like `gemma:2b`, or others, do not have enough tokens to enforce moderate responses. Therefore we imported a simple system so the user prompts are regulated to enforce safety.
+
+> [!WARNING]
+> Please note, that we are currently adding AI moderation to the filter as well, currently only user requests are filtered which could prove to be unethical, again ReliaChat AI Innovations is not responsible for any ACTION, taken on YOU'RE DEVICE. THE SOFTWARE IS PROVIDED AS IS, FOR MORE INFO GO TO [License](https://github.com/LTS-VVE/ReliaChat/blob/main/LICENSE).
+
+## Diagram of how the app computes.<br>
 ```mermaid
 %%{init: {
   'theme': 'dark',
@@ -73,50 +121,49 @@ It has a modern UI, Easy to use frontend, and easy command pasting for non-advan
     'tertiaryColor': '#374151'
   }
 }}%%
-
 graph TD
-    %% Define main components
-    subgraph Termux[Termux/iSH Environment]
+    subgraph Termux["Termux/iSH Environment"]
         direction TB
-        TermuxNode[("Termux/iSH<br/>Mobile Linux/Unix Environment")]
+        TermuxNode[("Mobile Linux/Unix Environment")]
         style TermuxNode fill:#1f2937,stroke:#404040
     end
-
-    subgraph Client[Client Layer]
+    subgraph Client["Client Layer"]
         direction TB
-        FrontendNode["Frontend<br/>(Flet App)<br/>Python UI Framework"]
+        FrontendNode["Flet App<br/>Python UI Framework"]
         style FrontendNode fill:#2d3748,stroke:#404040
     end
-
-    subgraph Server[Server Layer]
+    subgraph Moderation["Moderation Layer"]
         direction TB
-        BackendNode["Backend Server<br/>(Flask)<br/>Port: 8000"]
+        ModerationNode["Input Validation"]
+        style ModerationNode fill:#1f2937,stroke:#404040
+    end
+    subgraph Server["Server Layer"]
+        direction TB
+        BackendNode["Flask Backend<br/>Port: 8000"]
         style BackendNode fill:#374151,stroke:#404040
     end
-
-    subgraph AI[AI Service]
+    subgraph AI["AI Service"]
         direction TB
-        OllamaNode["Ollama Server<br/>Local LLM Service<br/>Port: 11434"]
+        OllamaNode["Ollama LLM<br/>Port: 11434"]
         style OllamaNode fill:#1f2937,stroke:#404040
     end
-
-    %% Define relationships with detailed labels
-    FrontendNode -->|"1. HTTP Requests<br/>REST API Calls"| BackendNode
-    BackendNode -->|"2. LLM Queries"| OllamaNode
-    OllamaNode -->|"3. AI Responses"| BackendNode
-    BackendNode -->|"4. JSON Response"| FrontendNode
     
-    %% Hosting relationships
-    TermuxNode -.->|"Hosts & Manages"| BackendNode
-    TermuxNode -.->|"Hosts & Manages"| OllamaNode
-
-    %% Styling
+    FrontendNode -->|"User Input"| Moderation
+    Moderation -->|"Validated Input"| BackendNode
+    BackendNode -->|"LLM Query"| OllamaNode
+    OllamaNode -->|"AI Response"| BackendNode
+    BackendNode -->|"JSON Result"| FrontendNode
+    
+    TermuxNode -.->|"Hosts"| BackendNode
+    TermuxNode -.->|"Hosts"| OllamaNode
+    
     classDef default fill:#2d3748,stroke:#404040,color:#fff
     classDef container fill:#1f2937,stroke:#404040,color:#fff
     
-    %% Apply container styling to subgraphs
-    class Termux,Client,Server,AI container
+    class Termux,Client,Moderation,Server,AI container
 ```
+<br><br>
+## Ollama Server Requests<br>
 We use the Requests via urllib since, building the app for iOS and Android with the `Requests` module fails.
 ```python
 import urllib.request
@@ -196,7 +243,8 @@ In the code, simply replace the "en" with your preferred language and provide tr
 > More languages will be added soon. (Any language can be added manually by editing the code, however on the main repo, the following are supported by default).<br><br>
 
 > [!NOTE]
-> NOTE, THAT THESE ARE APP LANGAUGES, AND NOT AI LANGUAGES. CHOOSE YOUR AI MODEL, IF YOU WANT MULTI-LANGUAL SUPPORT FOR THE RESPONSES, PLEASE USE A MULTI-LANGUAL MODEL.
+> NOTE, THAT THESE ARE APP LANGAUGES, AND NOT AI LANGUAGES. CHOOSE YOUR AI MODEL, IF YOU WANT MULTI-LANGUAL SUPPORT FOR THE RESPONSES, PLEASE USE A MULTI-LANGUAL MODEL. `As mentioned earlier, moderation on applies
+> for Albanian (Shqip), and English. Please add you're own moderation if wanted.`
 <div align="center">
 
 | <p align="center">Language          | <p align="center">Flag       |
