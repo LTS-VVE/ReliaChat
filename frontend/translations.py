@@ -1,67 +1,71 @@
 translations = {
     "en": {
-        "settings": "Settings",
-        "help": "Help",
-        "privacy_policy": "Privacy Policy",
-        "about": "About",
-        "terms_of_use": "Terms of Use",
-        "erase_all_chats": "Erase All Chats",
-        "version": "Version 1.3.2 BETA",
-        "deletion_confirmation": "Deletion Confirmation.",
-        "deletion_warning": "Are you sure you want to continue this action? It cannot be undone.",
-        "confirm": "Confirm",
-        "cancel": "Cancel",
-        "good_morning": "Good morning",
-        "good_afternoon": "Good afternoon",
-        "good_evening": "Good evening",
-        "type_prompt": "Type your prompt...",
-        "copied_to_clipboard": "Copied to clipboard!",
-        "processing_query": "Processing your query... ( ⏳ )",
-        "analyzing": "Analyzing... [ 🔍 ]",
-        "dark_mode": "Dark Mode",
-        "light_mode": "Light Mode",
-        "connection_status": "Connection Status:",
-        "connected": "Connected",
-        "not_connected": "Not connected",
-        "local_ip": "Local IP",
-        "port": "Port",
-        "username": "Username",
-        "temperature": "Temperature (0.0 to 1.0)",
-        "save": "Save",
-        "warn_setup_local_server": "Make sure you have setup local server.",
-        "disclaimer": "AI responses are generated based on available data and may contain inaccuracies or errors. Use with caution. ReliaChat AI Innovations, is NOT responsible for any inaccurate, unethical, or morally wrong responses. Please reflect on yourself, and values before making ultimate decisions using AI"
+    "settings": "Settings",
+    "help": "Help",
+    "privacy_policy": "Privacy Policy",
+    "about": "About",
+    "terms_of_use": "Terms of Use",
+    "erase_all_chats": "Erase All Chats",
+    "version": "Version 1.3.2 BETA",
+    "deletion_confirmation": "Deletion Confirmation.",
+    "deletion_warning": "Are you sure you want to continue this action? It cannot be undone.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "good_morning": "Good morning",
+    "good_afternoon": "Good afternoon",
+    "good_evening": "Good evening",
+    "type_prompt": "Type your prompt...",
+    "copied_to_clipboard": "Copied to clipboard!",
+    "processing_query": "Processing your query... ( ⏳ )",
+    "analyzing": "Analyzing... [ 🔍 ]",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    "connection_status": "Connection Status:",
+    "connected": "Connected",
+    "not_connected": "Not connected",
+    "local_ip": "Local IP",
+    "port": "Port",
+    "username": "Username",
+    "temperature": "Temperature (0.0 to 1.0)",
+    "save": "Save",
+    "warn_setup_local_server": "Make sure you have setup local server.",
+    "disclaimer": "AI responses are generated based on available data and may contain inaccuracies or errors. Use with caution. ReliaChat AI Innovations, is NOT responsible for any inaccurate, unethical, or morally wrong responses. Please reflect on yourself, and values before making ultimate decisions using AI",
+    "filter_mode": "Filter Mode",
+    "content_blocked": "Content Blocked."
     },
     "sq": {
-        "settings": "Cilësimet",
-        "help": "Ndihmë",
-        "privacy_policy": "Politika e Privatësisë",
-        "about": "Rreth Nesh",
-        "terms_of_use": "Kushtet e Përdorimit",
-        "erase_all_chats": "Fshij të Gjitha Bisedat",
-        "version": "Versioni 1.3.2 BETA",
-        "deletion_confirmation": "Konfirmimi i Fshirjes.",
-        "deletion_warning": "A jeni i sigurt që dëshironi të vazhdoni këtë veprim? Nuk mund të zhbëhet.",
-        "confirm": "Konfirmo",
-        "cancel": "Anulo",
-        "good_morning": "Mirëmëngjes",
-        "good_afternoon": "Mirëdita",
-        "good_evening": "Mirëmbrëma",
-        "type_prompt": "Shkruaj kërkesën tuaj...",
-        "copied_to_clipboard": "Kopjuar në kujtesën e përkohshme!",
-        "processing_query": "Duke përpunuar kërkesën tuaj... ( ⏳ )",
-        "analyzing": "Duke analizuar... [ 🔍 ]",
-        "dark_mode": "Modaliteti i Errët",
-        "light_mode": "Modaliteti i Ndritshëm",
-        "connection_status": "Statusi i Lidhjes:",
-        "connected": "I lidhur",
-        "not_connected": "I palidhur",
-        "local_ip": "IP Lokale",
-        "port": "Porti",
-        "username": "Emri i përdoruesit",
-        "temperature": "Temperatura (0.0 deri 1.0)",
-        "save": "Ruaj",
-        "warn_setup_local_server": "Sigurohuni që keni ngritur serverin lokal.",
-        "disclaimer": "Përgjigjet e AI krijohen bazuar në të dhënat e disponueshme dhe mund të përmbajnë pasaktësi ose gabime. Përdorni me kujdes. ReliaChat AI Innovations, NUK është përgjegjës për asnjë përgjigje të pasaktë, joetike ose moralisht të gabuar. Ju lutemi reflektoni mbi vetveten dhe vlerat tuaja para se të merrni vendime përfundimtare duke përdorur AI."
+    "settings": "Cilësimet",
+    "help": "Ndihmë",
+    "privacy_policy": "Politika e Privatësisë",
+    "about": "Rreth Nesh",
+    "terms_of_use": "Kushtet e Përdorimit",
+    "erase_all_chats": "Fshij të Gjitha Bisedat",
+    "version": "Versioni 1.3.2 BETA",
+    "deletion_confirmation": "Konfirmimi i Fshirjes.",
+    "deletion_warning": "A jeni i sigurt që dëshironi të vazhdoni këtë veprim? Nuk mund të zhbëhet.",
+    "confirm": "Konfirmo",
+    "cancel": "Anulo",
+    "good_morning": "Mirëmëngjes",
+    "good_afternoon": "Mirëdita",
+    "good_evening": "Mirëmbrëma",
+    "type_prompt": "Shkruaj kërkesën tuaj...",
+    "copied_to_clipboard": "Kopjuar në kujtesën e përkohshme!",
+    "processing_query": "Duke përpunuar kërkesën tuaj... ( ⏳ )",
+    "analyzing": "Duke analizuar... [ 🔍 ]",
+    "dark_mode": "Modaliteti i Errët",
+    "light_mode": "Modaliteti i Ndritshëm",
+    "connection_status": "Statusi i Lidhjes:",
+    "connected": "I lidhur",
+    "not_connected": "I palidhur",
+    "local_ip": "IP Lokale",
+    "port": "Porti",
+    "username": "Emri i përdoruesit",
+    "temperature": "Temperatura (0.0 deri 1.0)",
+    "save": "Ruaj",
+    "warn_setup_local_server": "Sigurohuni që keni ngritur serverin lokal.",
+    "disclaimer": "Përgjigjet e AI krijohen bazuar në të dhënat e disponueshme dhe mund të përmbajnë pasaktësi ose gabime. Përdorni me kujdes. ReliaChat AI Innovations, NUK është përgjegjës për asnjë përgjigje të pasaktë, joetike ose moralisht të gabuar. Ju lutemi reflektoni mbi vetveten dhe vlerat tuaja para se të merrni vendime përfundimtare duke përdorur AI.",
+    "filter_mode": "Mënyra e filtrimit",
+    "content_blocked": "Përmbajtja e bllokuar.",
     },
     "de": {
     "settings": "Einstellungen",
@@ -93,7 +97,9 @@ translations = {
     "temperature": "Temperatur (0,0 bis 1,0)",
     "save": "Speichern",
     "warn_setup_local_server": "Stellen Sie sicher, dass Sie den lokalen Server eingerichtet haben.",
-    "disclaimer": "KI-Antworten werden auf der Grundlage verfügbarer Daten generiert und können Ungenauigkeiten oder Fehler enthalten. Nutzung mit Vorsicht. ReliaChat AI Innovations ist NICHT verantwortlich für ungenaue, unethische oder moralisch falsche Antworten. Bitte reflektieren Sie über sich selbst und Ihre Werte, bevor Sie endgültige Entscheidungen mit Hilfe der KI treffen."
+    "disclaimer": "KI-Antworten werden auf der Grundlage verfügbarer Daten generiert und können Ungenauigkeiten oder Fehler enthalten. Nutzung mit Vorsicht. ReliaChat AI Innovations ist NICHT verantwortlich für ungenaue, unethische oder moralisch falsche Antworten. Bitte reflektieren Sie über sich selbst und Ihre Werte, bevor Sie endgültige Entscheidungen mit Hilfe der KI treffen.",
+    "filter_mode": "Filtermodus",
+    "content_blocked": "Inhalt blockiert.",
     },
     "uk": {
     "settings": "Налаштування",
@@ -125,7 +131,9 @@ translations = {
     "temperature": "Температура (0.0 до 1.0)",
     "save": "Зберегти",
     "warn_setup_local_server": "Переконайтеся, що ви налаштували локальний сервер.",
-    "disclaimer": "Відповіді ШІ створюються на основі доступних даних і можуть містити неточності або помилки. Використовуйте з обережністю. ReliaChat AI Innovations НЕ несе відповідальності за неточні, неетичні або морально неправильні відповіді. Будь ласка, обмірковуйте свої дії та цінності перед прийняттям остаточних рішень із використанням ШІ."
+    "disclaimer": "Відповіді ШІ створюються на основі доступних даних і можуть містити неточності або помилки. Використовуйте з обережністю. ReliaChat AI Innovations НЕ несе відповідальності за неточні, неетичні або морально неправильні відповіді. Будь ласка, обмірковуйте свої дії та цінності перед прийняттям остаточних рішень із використанням ШІ.",
+    "filter_mode": "Режим фільтрації",
+    "content_blocked": "Вміст заблоковано.",
     },
     "fr": {
     "settings": "Paramètres",
@@ -157,7 +165,9 @@ translations = {
     "temperature": "Température (0,0 à 1,0)",
     "save": "Enregistrer",
     "warn_setup_local_server": "Assurez-vous d'avoir configuré le serveur local.",
-    "disclaimer": "Les réponses de l'IA sont générées en fonction des données disponibles et peuvent contenir des inexactitudes ou des erreurs. Utilisez-les avec prudence. ReliaChat AI Innovations N'EST PAS responsable des réponses inexactes, non éthiques ou moralement incorrectes. Veuillez réfléchir à vos valeurs avant de prendre des décisions finales avec l'aide de l'IA."
+    "disclaimer": "Les réponses de l'IA sont générées en fonction des données disponibles et peuvent contenir des inexactitudes ou des erreurs. Utilisez-les avec prudence. ReliaChat AI Innovations N'EST PAS responsable des réponses inexactes, non éthiques ou moralement incorrectes. Veuillez réfléchir à vos valeurs avant de prendre des décisions finales avec l'aide de l'IA.",
+    "filter_mode": "Mode de filtrage",
+    "content_blocked": "Contenu bloqué.",
     },
     "zh": {
     "settings": "设置",
@@ -189,7 +199,9 @@ translations = {
     "temperature": "温度 (0.0 到 1.0)",
     "save": "保存",
     "warn_setup_local_server": "请确保已设置本地服务器。",
-    "disclaimer": "人工智能的回答基于可用数据生成，可能包含不准确或错误的信息。请谨慎使用。ReliaChat AI Innovations 对不准确、不道德或不符合道德的回答概不负责。在利用人工智能做出最终决定之前，请反思自己的价值观和选择。"
+    "disclaimer": "人工智能的回答基于可用数据生成，可能包含不准确或错误的信息。请谨慎使用。ReliaChat AI Innovations 对不准确、不道德或不符合道德的回答概不负责。在利用人工智能做出最终决定之前，请反思自己的价值观和选择。",
+    "filter_mode": "过滤模式",
+    "content_blocked": "内容已被屏蔽。",
     },
     "hi": {
     "settings": "सेटिंग्स",
@@ -221,7 +233,9 @@ translations = {
     "temperature": "तापमान (0.0 से 1.0)",
     "save": "सहेजें",
     "warn_setup_local_server": "सुनिश्चित करें कि आपने स्थानीय सर्वर सेटअप किया है।",
-    "disclaimer": "एआई द्वारा प्रदान किए गए उत्तर उपलब्ध डेटा के आधार पर बनाए जाते हैं और इनमें गलतियां या त्रुटियां हो सकती हैं। कृपया सावधानी से उपयोग करें। ReliaChat AI Innovations गलत, अनैतिक या नैतिक रूप से गलत उत्तरों के लिए जिम्मेदार नहीं है। कृपया एआई की सहायता से अंतिम निर्णय लेने से पहले अपनी नैतिकता और मूल्यों पर विचार करें।"
+    "disclaimer": "एआई द्वारा प्रदान किए गए उत्तर उपलब्ध डेटा के आधार पर बनाए जाते हैं और इनमें गलतियां या त्रुटियां हो सकती हैं। कृपया सावधानी से उपयोग करें। ReliaChat AI Innovations गलत, अनैतिक या नैतिक रूप से गलत उत्तरों के लिए जिम्मेदार नहीं है। कृपया एआई की सहायता से अंतिम निर्णय लेने से पहले अपनी नैतिकता और मूल्यों पर विचार करें।",
+    "filter_mode": "फ़िल्टर मोड",
+    "content_blocked": "सामग्री अवरुद्ध है।",
     },
     "ko": {
     "settings": "설정",
@@ -253,7 +267,9 @@ translations = {
     "temperature": "온도 (0.0 ~ 1.0)",
     "save": "저장",
     "warn_setup_local_server": "로컬 서버가 설정되었는지 확인하세요.",
-    "disclaimer": "AI 응답은 사용 가능한 데이터를 기반으로 생성되며 부정확하거나 오류가 있을 수 있습니다. 신중히 사용하세요. ReliaChat AI Innovations는 부정확하거나 비윤리적이거나 도덕적으로 잘못된 응답에 대해 책임을 지지 않습니다. AI를 사용하여 최종 결정을 내리기 전에 자신의 가치와 윤리를 신중히 고려하세요."
+    "disclaimer": "AI 응답은 사용 가능한 데이터를 기반으로 생성되며 부정확하거나 오류가 있을 수 있습니다. 신중히 사용하세요. ReliaChat AI Innovations는 부정확하거나 비윤리적이거나 도덕적으로 잘못된 응답에 대해 책임을 지지 않습니다. AI를 사용하여 최종 결정을 내리기 전에 자신의 가치와 윤리를 신중히 고려하세요.",
+    "filter_mode": "필터 모드",
+    "content_blocked": "차단된 콘텐츠입니다.",
     },
     "it": {
     "settings": "Impostazioni",
@@ -285,7 +301,9 @@ translations = {
     "temperature": "Temperatura (0,0 a 1,0)",
     "save": "Salva",
     "warn_setup_local_server": "Assicurati di aver configurato il server locale.",
-    "disclaimer": "Le risposte dell'IA sono generate in base ai dati disponibili e possono contenere inesattezze o errori. Usale con cautela. ReliaChat AI Innovations NON è responsabile per risposte imprecise, non etiche o moralmente sbagliate. Rifletti sui tuoi valori prima di prendere decisioni finali con l'aiuto dell'IA."
+    "disclaimer": "Le risposte dell'IA sono generate in base ai dati disponibili e possono contenere inesattezze o errori. Usale con cautela. ReliaChat AI Innovations NON è responsabile per risposte imprecise, non etiche o moralmente sbagliate. Rifletti sui tuoi valori prima di prendere decisioni finali con l'aiuto dell'IA.",
+    "filter_mode": "Modalità filtro",
+    "content_blocked": "Contenuto bloccato.",
     },
     "ru": {
     "settings": "Настройки",
@@ -317,7 +335,9 @@ translations = {
     "temperature": "Температура (0.0 до 1.0)",
     "save": "Сохранить",
     "warn_setup_local_server": "Убедитесь, что локальный сервер настроен.",
-    "disclaimer": "Ответы ИИ создаются на основе доступных данных и могут содержать неточности или ошибки. Используйте с осторожностью. ReliaChat AI Innovations НЕ несёт ответственности за неточные, неэтичные или морально неверные ответы. Пожалуйста, обдумывайте свои ценности перед принятием окончательных решений с использованием ИИ."
+    "disclaimer": "Ответы ИИ создаются на основе доступных данных и могут содержать неточности или ошибки. Используйте с осторожностью. ReliaChat AI Innovations НЕ несёт ответственности за неточные, неэтичные или морально неверные ответы. Пожалуйста, обдумывайте свои ценности перед принятием окончательных решений с использованием ИИ.",
+    "filter_mode": "Режим фильтрации",
+    "content_blocked": "Контент заблокирован.",
     },
     "es": {
     "settings": "Configuración",
@@ -349,7 +369,9 @@ translations = {
     "temperature": "Temperatura (0,0 a 1,0)",
     "save": "Guardar",
     "warn_setup_local_server": "Asegúrate de haber configurado el servidor local.",
-    "disclaimer": "Las respuestas de la IA se generan en función de los datos disponibles y pueden contener inexactitudes o errores. Úsalo con precaución. ReliaChat AI Innovations NO es responsable de respuestas inexactas, no éticas o moralmente incorrectas. Reflexiona sobre tus valores antes de tomar decisiones finales con la ayuda de la IA."
+    "disclaimer": "Las respuestas de la IA se generan en función de los datos disponibles y pueden contener inexactitudes o errores. Úsalo con precaución. ReliaChat AI Innovations NO es responsable de respuestas inexactas, no éticas o moralmente incorrectas. Reflexiona sobre tus valores antes de tomar decisiones finales con la ayuda de la IA.",
+    "filter_mode": "Modo de filtro",
+    "content_blocked": "Contenido bloqueado.",
     },
     "sv": {
     "settings": "Inställningar",
@@ -381,7 +403,9 @@ translations = {
     "temperature": "Temperatur (0,0 till 1,0)",
     "save": "Spara",
     "warn_setup_local_server": "Se till att du har ställt in den lokala servern.",
-    "disclaimer": "AI-svar genereras baserat på tillgängliga data och kan innehålla felaktigheter eller misstag. Använd med försiktighet. ReliaChat AI Innovations tar INTE ansvar för felaktiga, oetiska eller moraliskt felaktiga svar. Tänk på dina värderingar innan du fattar slutliga beslut med hjälp av AI."
+    "disclaimer": "AI-svar genereras baserat på tillgängliga data och kan innehålla felaktigheter eller misstag. Använd med försiktighet. ReliaChat AI Innovations tar INTE ansvar för felaktiga, oetiska eller moraliskt felaktiga svar. Tänk på dina värderingar innan du fattar slutliga beslut med hjälp av AI.",
+    "filter_mode": "Filterläge",
+    "content_blocked": "Innehåll blockerat.",
     },
     "he": {
         "settings": "הגדרות",
@@ -413,7 +437,9 @@ translations = {
         "temperature": "חום (0.0 עד 1.0)",
         "save": "שמור",
         "warn_setup_local_server": "ודא שהגדרת את השרת המקומי.",
-        "disclaimer": "תשובות AI נוצרות על בסיס נתונים זמינים ויכולות לכלול חוסר דיוק או טעויות. השתמש בזהירות. ReliaChat AI Innovations אינה אחראית לתשובות לא מדויקות, לא אתיות או לא מוסריות. אנא השתקף בעצמך ובערכים שלך לפני קבלת החלטות סופיות באמצעות AI."
+        "disclaimer": "תשובות AI נוצרות על בסיס נתונים זמינים ויכולות לכלול חוסר דיוק או טעויות. השתמש בזהירות. ReliaChat AI Innovations אינה אחראית לתשובות לא מדויקות, לא אתיות או לא מוסריות. אנא השתקף בעצמך ובערכים שלך לפני קבלת החלטות סופיות באמצעות AI.",
+        "filter_mode": "מצב סינון",
+        "content_blocked": "תוכן נחסם.",
     },
     "ar": {
         "settings": "الإعدادات",
@@ -445,7 +471,9 @@ translations = {
         "temperature": "درجة الحرارة (0.0 إلى 1.0)",
         "save": "حفظ",
         "warn_setup_local_server": "تأكد من إعداد الخادم المحلي.",
-        "disclaimer": "تم توليد ردود AI بناءً على البيانات المتاحة وقد تحتوي على أخطاء أو عدم دقة. استخدم بحذر. ReliaChat AI Innovations ليست مسؤولة عن الردود غير الدقيقة أو غير الأخلاقية أو غير الصحيحة أخلاقياً. يرجى التفكير في نفسك وقيمك قبل اتخاذ قرارات نهائية باستخدام الذكاء الاصطناعي."
+        "disclaimer": "تم توليد ردود AI بناءً على البيانات المتاحة وقد تحتوي على أخطاء أو عدم دقة. استخدم بحذر. ReliaChat AI Innovations ليست مسؤولة عن الردود غير الدقيقة أو غير الأخلاقية أو غير الصحيحة أخلاقياً. يرجى التفكير في نفسك وقيمك قبل اتخاذ قرارات نهائية باستخدام الذكاء الاصطناعي.",
+        "filter_mode": "وضع التصفية",
+        "content_blocked": "المحتوى محظور.",
     },
     "th": {
         "settings": "การตั้งค่า",
@@ -509,7 +537,9 @@ translations = {
         "temperature": "Temperatura (0.0 a 1.0)",
         "save": "Salvar",
         "warn_setup_local_server": "Certifique-se de que configurou o servidor local.",
-        "disclaimer": "As respostas da IA são geradas com base em dados disponíveis e podem conter imprecisões ou erros. Use com cautela. A ReliaChat AI Innovations NÃO é responsável por respostas imprecisas, antiéticas ou moralmente erradas. Reflita sobre si mesmo e seus valores antes de tomar decisões finais usando IA."
+        "disclaimer": "As respostas da IA são geradas com base em dados disponíveis e podem conter imprecisões ou erros. Use com cautela. A ReliaChat AI Innovations NÃO é responsável por respostas imprecisas, antiéticas ou moralmente erradas. Reflita sobre si mesmo e seus valores antes de tomar decisões finais usando IA.",
+        "filter_mode": "Modo de filtro",
+        "content_blocked": "Conteúdo bloqueado.",
     },
     "id": {
         "settings": "Pengaturan",
@@ -541,7 +571,9 @@ translations = {
         "temperature": "Suhu (0.0 hingga 1.0)",
         "save": "Simpan",
         "warn_setup_local_server": "Pastikan Anda telah mengatur server lokal.",
-        "disclaimer": "Tanggapan AI dihasilkan berdasarkan data yang tersedia dan mungkin mengandung ketidakakuratan atau kesalahan. Gunakan dengan hati-hati. ReliaChat AI Innovations TIDAK bertanggung jawab atas tanggapan yang tidak akurat, tidak etis, atau secara moral salah. Harap merenung tentang diri Anda dan nilai-nilai Anda sebelum membuat keputusan akhir menggunakan AI."
+        "disclaimer": "Tanggapan AI dihasilkan berdasarkan data yang tersedia dan mungkin mengandung ketidakakuratan atau kesalahan. Gunakan dengan hati-hati. ReliaChat AI Innovations TIDAK bertanggung jawab atas tanggapan yang tidak akurat, tidak etis, atau secara moral salah. Harap merenung tentang diri Anda dan nilai-nilai Anda sebelum membuat keputusan akhir menggunakan AI.",
+        "filter_mode": "Mode Filter",
+        "content_blocked": "Konten Diblokir.",
     },
     "ja": {
         "settings": "設定",
@@ -573,7 +605,9 @@ translations = {
         "temperature": "温度 (0.0から1.0)",
         "save": "保存",
         "warn_setup_local_server": "ローカルサーバーの設定を確認してください。",
-        "disclaimer": "AIの応答は利用可能なデータに基づいて生成され、誤りや不正確さを含んでいる可能性があります。注意して使用してください。ReliaChat AI Innovationsは、不正確、不道徳、または倫理的に間違った応答について責任を負いません。AIを使用して最終的な意思決定を行う前に、自分自身と価値観について考えてください。"
+        "disclaimer": "AIの応答は利用可能なデータに基づいて生成され、誤りや不正確さを含んでいる可能性があります。注意して使用してください。ReliaChat AI Innovationsは、不正確、不道徳、または倫理的に間違った応答について責任を負いません。AIを使用して最終的な意思決定を行う前に、自分自身と価値観について考えてください。",
+        "filter_mode": "フィルターモード",
+        "content_blocked": "コンテンツがブロックされました。",
     },
     "hr": {
         "settings": "Postavke",
@@ -605,7 +639,9 @@ translations = {
         "temperature": "Temperatura (0.0 do 1.0)",
         "save": "Spremi",
         "warn_setup_local_server": "Provjerite jeste li postavili lokalni poslužitelj.",
-        "disclaimer": "AI odgovori generirani su na temelju dostupnih podataka i mogu sadržavati netočnosti ili pogreške. Koristite s oprezom. ReliaChat AI Innovations NIJE odgovorna za netočne, neetične ili moralno pogrešne odgovore. Razmislite o sebi i svojim vrijednostima prije nego donesete konačne odluke koristeći AI."
+        "disclaimer": "AI odgovori generirani su na temelju dostupnih podataka i mogu sadržavati netočnosti ili pogreške. Koristite s oprezom. ReliaChat AI Innovations NIJE odgovorna za netočne, neetične ili moralno pogrešne odgovore. Razmislite o sebi i svojim vrijednostima prije nego donesete konačne odluke koristeći AI.",
+        "filter_mode": "Način filtriranja",
+        "content_blocked": "Sadržaj blokiran.",
     },
     "fi": {
         "settings": "Asetukset",
@@ -637,7 +673,9 @@ translations = {
         "temperature": "Lämpötila (0.0 - 1.0)",
         "save": "Tallenna",
         "warn_setup_local_server": "Varmista, että olet määrittänyt paikallisen palvelimen.",
-        "disclaimer": "AI-vastaukset luodaan käytettävissä olevien tietojen perusteella ja niissä saattaa olla virheitä tai epätarkkuuksia. Käytä varoen. ReliaChat AI Innovations EI ole vastuussa epätarkkojen, epäeettisten tai moraalisesti väärien vastausten antamisesta. Mieti itseäsi ja arvojasi ennen lopullisten päätösten tekemistä AI:n avulla."
+        "disclaimer": "AI-vastaukset luodaan käytettävissä olevien tietojen perusteella ja niissä saattaa olla virheitä tai epätarkkuuksia. Käytä varoen. ReliaChat AI Innovations EI ole vastuussa epätarkkojen, epäeettisten tai moraalisesti väärien vastausten antamisesta. Mieti itseäsi ja arvojasi ennen lopullisten päätösten tekemistä AI:n avulla.",
+        "filter_mode": "Suodatustila",
+        "content_blocked": "Sisältö estetty.",
     },
     "el": {
         "settings": "Ρυθμίσεις",
@@ -669,7 +707,9 @@ translations = {
         "temperature": "Θερμοκρασία (0.0 έως 1.0)",
         "save": "Αποθήκευση",
         "warn_setup_local_server": "Βεβαιωθείτε ότι έχετε ρυθμίσει τον τοπικό διακομιστή.",
-        "disclaimer": "Οι απαντήσεις AI δημιουργούνται με βάση διαθέσιμα δεδομένα και ενδέχεται να περιέχουν ανακρίβειες ή λάθη. Χρησιμοποιήστε με προσοχή. Η ReliaChat AI Innovations ΔΕΝ ευθύνεται για ανακριβείς, ανήθικες ή ηθικά λανθασμένες απαντήσεις. Σκεφτείτε τον εαυτό σας και τις αξίες σας πριν πάρετε τελικές αποφάσεις χρησιμοποιώντας AI."
+        "disclaimer": "Οι απαντήσεις AI δημιουργούνται με βάση διαθέσιμα δεδομένα και ενδέχεται να περιέχουν ανακρίβειες ή λάθη. Χρησιμοποιήστε με προσοχή. Η ReliaChat AI Innovations ΔΕΝ ευθύνεται για ανακριβείς, ανήθικες ή ηθικά λανθασμένες απαντήσεις. Σκεφτείτε τον εαυτό σας και τις αξίες σας πριν πάρετε τελικές αποφάσεις χρησιμοποιώντας AI.",
+        "filter_mode": "Λειτουργία φίλτρου",
+        "content_blocked": "Περιεχόμενο αποκλείστηκε.",
     },
     "mk": {
         "settings": "Поставки",
@@ -701,7 +741,9 @@ translations = {
         "temperature": "Температура (0.0 до 1.0)",
         "save": "Зачувај",
         "warn_setup_local_server": "Проверете дали сте ја поставиле локалната сервер.",
-        "disclaimer": "AI одговорите се генерирани на база на достапни податоци и можат да содржат несогласности или грешки. Користете со претпазливост. ReliaChat AI Innovations НЕ е одговорна за неадекватни, неетички или морално погрешни одговори. Ве молиме размислете за себе и вашите вредности пред да донесете конечни одлуки користејќи AI."
+        "disclaimer": "AI одговорите се генерирани на база на достапни податоци и можат да содржат несогласности или грешки. Користете со претпазливост. ReliaChat AI Innovations НЕ е одговорна за неадекватни, неетички или морално погрешни одговори. Ве молиме размислете за себе и вашите вредности пред да донесете конечни одлуки користејќи AI.",
+        "filter_mode": "Режим на филтрирање",
+        "content_blocked": "Содржината е блокирана.",
     },
     "pl": {
         "settings": "Ustawienia",
@@ -733,7 +775,9 @@ translations = {
         "temperature": "Temperatura (0.0 do 1.0)",
         "save": "Zapisz",
         "warn_setup_local_server": "Upewnij się, że skonfigurowałeś lokalny serwer.",
-        "disclaimer": "Odpowiedzi AI są generowane na podstawie dostępnych danych i mogą zawierać nieścisłości lub błędy. Korzystaj ostrożnie. ReliaChat AI Innovations NIE ponosi odpowiedzialności za nieprawidłowe, nieetyczne lub moralnie błędne odpowiedzi. Prosimy o refleksję nad sobą i swoimi wartościami przed podjęciem ostatecznych decyzji przy użyciu AI."
+        "disclaimer": "Odpowiedzi AI są generowane na podstawie dostępnych danych i mogą zawierać nieścisłości lub błędy. Korzystaj ostrożnie. ReliaChat AI Innovations NIE ponosi odpowiedzialności za nieprawidłowe, nieetyczne lub moralnie błędne odpowiedzi. Prosimy o refleksję nad sobą i swoimi wartościami przed podjęciem ostatecznych decyzji przy użyciu AI.",
+        "filter_mode": "Tryb filtrowania",
+        "content_blocked": "Treść zablokowana.",
     },
     "tr": {
         "settings": "Ayarlar",
@@ -765,7 +809,9 @@ translations = {
         "temperature": "Sıcaklık (0.0 ile 1.0 arası)",
         "save": "Kaydet",
         "warn_setup_local_server": "Lokal sunucuyu yapılandırdığınızdan emin olun.",
-        "disclaimer": "AI yanıtları, mevcut verilere dayalı olarak oluşturulmaktadır ve yanlışlıklar veya hatalar içerebilir. Dikkatli kullanın. ReliaChat AI Innovations, yanlış, etik olmayan veya ahlaki olarak hatalı yanıtlar için SORUMLU DEĞİLDİR. Lütfen AI kullanarak nihai kararlar vermeden önce kendinizi ve değerlerinizi gözden geçirin."
+        "disclaimer": "AI yanıtları, mevcut verilere dayalı olarak oluşturulmaktadır ve yanlışlıklar veya hatalar içerebilir. Dikkatli kullanın. ReliaChat AI Innovations, yanlış, etik olmayan veya ahlaki olarak hatalı yanıtlar için SORUMLU DEĞİLDİR. Lütfen AI kullanarak nihai kararlar vermeden önce kendinizi ve değerlerinizi gözden geçirin.",
+        "filter_mode": "Filtre Modu",
+        "content_blocked": "İçerik Engellendi.",
     },
     "ka": {
         "settings": "პარამეტრები",
@@ -797,7 +843,9 @@ translations = {
         "temperature": "ტემპერატურა (0.0-დან 1.0-მდე)",
         "save": "შეინახეთ",
         "warn_setup_local_server": "გთხოვთ, დაადასტუროთ, რომ შეამოწმეთ თქვენი ადგილობრივი სერვერი.",
-        "disclaimer": "AI პასუხები გამომუშავებულია ხელმისაწვდომი მონაცემების საფუძველზე და შეიძლება შეიცავდეს არაზუსტობებს ან შეცდომებს. გამოიყენეთ სიფრთხილით. ReliaChat AI Innovations არ არის პასუხისმგებელი ნებისმიერი არასწორი, არაჰუმანური ან არასამართლიანი პასუხებისთვის. გთხოვთ, გაანალიზოთ თქვენი ღირებულებები, სანამ მიიღებთ საბოლოო გადაწყვეტილებებს AI-ით."
+        "disclaimer": "AI პასუხები გამომუშავებულია ხელმისაწვდომი მონაცემების საფუძველზე და შეიძლება შეიცავდეს არაზუსტობებს ან შეცდომებს. გამოიყენეთ სიფრთხილით. ReliaChat AI Innovations არ არის პასუხისმგებელი ნებისმიერი არასწორი, არაჰუმანური ან არასამართლიანი პასუხებისთვის. გთხოვთ, გაანალიზოთ თქვენი ღირებულებები, სანამ მიიღებთ საბოლოო გადაწყვეტილებებს AI-ით.",
+        "filter_mode": "ფილტრის რეჟიმი",
+        "content_blocked": "შინაარსი დაბლოკილია.",
     },
     "ms": {
         "settings": "Tetapan",
@@ -829,7 +877,9 @@ translations = {
         "temperature": "Suhu (0.0 hingga 1.0)",
         "save": "Simpan",
         "warn_setup_local_server": "Pastikan anda telah menyediakan pelayan tempatan.",
-        "disclaimer": "Jawapan AI dijana berdasarkan data yang tersedia dan mungkin mengandungi ketidaktepatan atau kesilapan. Gunakan dengan berhati-hati. ReliaChat AI Innovations, TIDAK bertanggungjawab terhadap sebarang jawapan yang tidak tepat, tidak beretika, atau salah moral. Sila pertimbangkan diri anda dan nilai anda sebelum membuat keputusan muktamad menggunakan AI."
+        "disclaimer": "Jawapan AI dijana berdasarkan data yang tersedia dan mungkin mengandungi ketidaktepatan atau kesilapan. Gunakan dengan berhati-hati. ReliaChat AI Innovations, TIDAK bertanggungjawab terhadap sebarang jawapan yang tidak tepat, tidak beretika, atau salah moral. Sila pertimbangkan diri anda dan nilai anda sebelum membuat keputusan muktamad menggunakan AI.",
+        "filter_mode": "Mod Tapis",
+        "content_blocked": "Kandungan Disekat.",
     },
     "vi": {
         "settings": "Cài đặt",
@@ -861,7 +911,9 @@ translations = {
         "temperature": "Nhiệt độ (0.0 đến 1.0)",
         "save": "Lưu",
         "warn_setup_local_server": "Hãy chắc chắn rằng bạn đã thiết lập máy chủ cục bộ.",
-        "disclaimer": "Các câu trả lời AI được tạo ra dựa trên dữ liệu có sẵn và có thể chứa sự không chính xác hoặc lỗi. Sử dụng cẩn thận. ReliaChat AI Innovations không chịu trách nhiệm về bất kỳ câu trả lời nào sai sót, không đạo đức hoặc sai lầm. Xin vui lòng suy ngẫm về bản thân và giá trị của bạn trước khi đưa ra quyết định cuối cùng sử dụng AI."
+        "disclaimer": "Các câu trả lời AI được tạo ra dựa trên dữ liệu có sẵn và có thể chứa sự không chính xác hoặc lỗi. Sử dụng cẩn thận. ReliaChat AI Innovations không chịu trách nhiệm về bất kỳ câu trả lời nào sai sót, không đạo đức hoặc sai lầm. Xin vui lòng suy ngẫm về bản thân và giá trị của bạn trước khi đưa ra quyết định cuối cùng sử dụng AI.",
+        "filter_mode": "Chế độ lọc",
+        "content_blocked": "Nội dung bị chặn.",
     },
     "cs": {
         "settings": "Nastavení",
@@ -893,7 +945,9 @@ translations = {
         "temperature": "Teplota (0.0 až 1.0)",
         "save": "Uložit",
         "warn_setup_local_server": "Ujistěte se, že jste nastavili místní server.",
-        "disclaimer": "Odpovědi AI jsou generovány na základě dostupných údajů a mohou obsahovat nepřesnosti nebo chyby. Používejte s opatrností. ReliaChat AI Innovations nenese odpovědnost za nepřesné, neetické nebo nesprávné odpovědi. Před konečnými rozhodnutími využívajícími AI zvažte sebe a své hodnoty."
+        "disclaimer": "Odpovědi AI jsou generovány na základě dostupných údajů a mohou obsahovat nepřesnosti nebo chyby. Používejte s opatrností. ReliaChat AI Innovations nenese odpovědnost za nepřesné, neetické nebo nesprávné odpovědi. Před konečnými rozhodnutími využívajícími AI zvažte sebe a své hodnoty.",
+        "filter_mode": "Režim filtru",
+        "content_blocked": "Obsah zablokován.",
     },
     "hu": {
         "settings": "Beállítások",
@@ -925,7 +979,9 @@ translations = {
         "temperature": "Hőmérséklet (0.0-tól 1.0-ig)",
         "save": "Mentés",
         "warn_setup_local_server": "Győződjön meg róla, hogy beállította a helyi szervert.",
-        "disclaimer": "Az AI válaszok az elérhető adatok alapján generálódnak, és tartalmazhatnak pontatlanságokat vagy hibákat. Használja óvatosan. A ReliaChat AI Innovations nem vállal felelősséget semmilyen pontatlan, etikátlan vagy hibás válaszért. Kérjük, fontolja meg magát és értékeit, mielőtt végső döntéseket hoz az AI használatával."
+        "disclaimer": "Az AI válaszok az elérhető adatok alapján generálódnak, és tartalmazhatnak pontatlanságokat vagy hibákat. Használja óvatosan. A ReliaChat AI Innovations nem vállal felelősséget semmilyen pontatlan, etikátlan vagy hibás válaszért. Kérjük, fontolja meg magát és értékeit, mielőtt végső döntéseket hoz az AI használatával.",
+        "filter_mode": "Szűrő mód",
+        "content_blocked": "Tartalom letiltva.",
     },
     "la": {
         "settings": "Optiones",
@@ -957,7 +1013,9 @@ translations = {
         "temperature": "Temperatura (0.0 ad 1.0)",
         "save": "Servare",
         "warn_setup_local_server": "Fac ut localem servientem instituas.",
-        "disclaimer": "Responsa AI generantur ex data praesto et possunt inexacta vel errata continere. Utere cum cautela. ReliaChat AI Innovations non est reus pro ullis responsionibus inexactis, immoralis, vel falsis. Quaeso reflecte in te ipso et valoribus tuis antequam decisiones per finales uti AI."
+        "disclaimer": "Responsa AI generantur ex data praesto et possunt inexacta vel errata continere. Utere cum cautela. ReliaChat AI Innovations non est reus pro ullis responsionibus inexactis, immoralis, vel falsis. Quaeso reflecte in te ipso et valoribus tuis antequam decisiones per finales uti AI.",
+        "filter_mode": "Modus Filtrorum",
+        "content_blocked": "Contentum Obstructum.",
     },
     "zh-hk": {
         "settings": "設定",
@@ -989,7 +1047,9 @@ translations = {
         "temperature": "溫度 (0.0 到 1.0)",
         "save": "保存",
         "warn_setup_local_server": "請確保已設置本地伺服器。",
-        "disclaimer": "AI 回應是根據可用數據生成的，可能包含不準確或錯誤的信息。請謹慎使用。ReliaChat AI Innovations 對任何不準確、不道德或錯誤的回應不承擔責任。在使用 AI 作出最終決定之前，請三思而行，並反思您的價值觀。"
+        "disclaimer": "AI 回應是根據可用數據生成的，可能包含不準確或錯誤的信息。請謹慎使用。ReliaChat AI Innovations 對任何不準確、不道德或錯誤的回應不承擔責任。在使用 AI 作出最終決定之前，請三思而行，並反思您的價值觀。",
+        "filter_mode": "過濾模式",
+        "content_blocked": "內容已被屏蔽。",
     },
     "sr": {
     "settings": "Podešavanja",
@@ -1021,7 +1081,9 @@ translations = {
     "temperature": "Temperatura (0.0 do 1.0)",
     "save": "Spasi",
     "warn_setup_local_server": "Pobrinite se da ste postavili lokalni server.",
-    "disclaimer": "AI odgovori se generišu na osnovu dostupnih podataka i mogu sadržati netačnosti ili greške. Koristite sa oprezom. ReliaChat AI Innovations nije odgovoran za bilo koje netačne, neetičke ili moralno pogrešne odgovore. Molimo vas da se osvrnete na sebe i svoje vrednosti pre nego što donosite konačne odluke koristeći AI."
+    "disclaimer": "AI odgovori se generišu na osnovu dostupnih podataka i mogu sadržati netačnosti ili greške. Koristite sa oprezom. ReliaChat AI Innovations nije odgovoran za bilo koje netačne, neetičke ili moralno pogrešne odgovore. Molimo vas da se osvrnete na sebe i svoje vrednosti pre nego što donosite konačne odluke koristeći AI.",
+    "filter_mode": "Режим филтрирања",
+    "content_blocked": "Садржај блокиран.",
     },
     "am": {
     "settings": "ማቅረብ",
@@ -1053,7 +1115,9 @@ translations = {
     "temperature": "ሙቀት (0.0 እስከ 1.0)",
     "save": "ማስታወቂያ",
     "warn_setup_local_server": "እባክህ አካባቢ ሰርቨር አስተካክል.",
-    "disclaimer": "ማስተካከል በማስተዳደር መሠረት እንደሚከተለው እንዴ በተጠቃሚው ምክንያት፣ ትንሽ ስምንቱን ይውሰዱ።"
+    "disclaimer": "ማስተካከል በማስተዳደር መሠረት እንደሚከተለው እንዴ በተጠቃሚው ምክንያት፣ ትንሽ ስምንቱን ይውሰዱ።",
+    "filter_mode": "አጣራ ሁነት",
+    "content_blocked": "ይዘት ታግዷል።",
     },
     "tl": {
     "settings": "Mga Setting",
@@ -1085,7 +1149,9 @@ translations = {
     "temperature": "Temperatura (0.0 hanggang 1.0)",
     "save": "I-save",
     "warn_setup_local_server": "Siguraduhin na mayroon kang naka-set up na lokal na server.",
-    "disclaimer": "Ang mga tugon ng AI ay binuo batay sa magagamit na data at maaaring maglaman ng mga kamalian o hindi tumpak na impormasyon. Gamitin nang may pag-iingat. Hindi responsable ang ReliaChat AI Innovations para sa anumang hindi tumpak, hindi etikal, o moral na maling tugon. Mangyaring mag-reflect sa iyong sarili at mga halaga bago gumawa ng mga desisyon gamit ang AI."
+    "disclaimer": "Ang mga tugon ng AI ay binuo batay sa magagamit na data at maaaring maglaman ng mga kamalian o hindi tumpak na impormasyon. Gamitin nang may pag-iingat. Hindi responsable ang ReliaChat AI Innovations para sa anumang hindi tumpak, hindi etikal, o moral na maling tugon. Mangyaring mag-reflect sa iyong sarili at mga halaga bago gumawa ng mga desisyon gamit ang AI.",
+    "filter_mode": "Paraan ng pagsala",
+    "content_blocked": "Hinarang ang nilalaman.",
     },
     "bg": {
     "settings": "Настройки",
@@ -1117,7 +1183,9 @@ translations = {
     "temperature": "Температура (от 0.0 до 1.0)",
     "save": "Запази",
     "warn_setup_local_server": "Уверете се, че сте настроили локален сървър.",
-    "disclaimer": "Отговорите на AI се генерират въз основа на налични данни и може да съдържат неточности или грешки. Използвайте с внимание. ReliaChat AI Innovations не носи отговорност за неточни, неетични или морално неправилни отговори. Моля, отразете себе си и своите ценности преди да вземате окончателни решения, използвайки AI."
+    "disclaimer": "Отговорите на AI се генерират въз основа на налични данни и може да съдържат неточности или грешки. Използвайте с внимание. ReliaChat AI Innovations не носи отговорност за неточни, неетични или морално неправилни отговори. Моля, отразете себе си и своите ценности преди да вземате окончателни решения, използвайки AI.",
+    "filter_mode": "Режим на филтриране",
+    "content_blocked": "Съдържанието е блокирано.",
     },
     "da": {
     "settings": "Indstillinger",
@@ -1149,7 +1217,9 @@ translations = {
     "temperature": "Temperatur (0,0 til 1,0)",
     "save": "Gem",
     "warn_setup_local_server": "Sørg for, at du har opsat en lokal server.",
-    "disclaimer": "AI-svar genereres baseret på tilgængelige data og kan indeholde unøjagtigheder eller fejl. Brug med forsigtighed. ReliaChat AI Innovations er IKKE ansvarlig for unøjagtige, uetiske eller moralsk forkerte svar. Vær venlig at reflektere over dig selv og dine værdier, inden du træffer endelige beslutninger ved brug af AI."
+    "disclaimer": "AI-svar genereres baseret på tilgængelige data og kan indeholde unøjagtigheder eller fejl. Brug med forsigtighed. ReliaChat AI Innovations er IKKE ansvarlig for unøjagtige, uetiske eller moralsk forkerte svar. Vær venlig at reflektere over dig selv og dine værdier, inden du træffer endelige beslutninger ved brug af AI.",
+    "filter_mode": "Filtertilstand",
+    "content_blocked": "Indhold blokeret.",
     },
     "ga": {
     "settings": "Socruithe",
@@ -1181,7 +1251,9 @@ translations = {
     "temperature": "Teocht (0.0 go 1.0)",
     "save": "Sábháil",
     "warn_setup_local_server": "Cinntigh go bhfuil an freastalaí áitiúil socraithe agat.",
-    "disclaimer": "Tugtar freagraí AI bunaithe ar na sonraí atá ar fáil agus féadfaidh siad a bheith mícheart nó le botúin. Úsáid le cúram. Ní fhreagraíonn ReliaChat AI Innovations as aon fhreagraí míchearta, neamhéiticúla, nó go morálta mícheart. Déan machnamh ort féin agus ar do luachanna sula ndéanfaidh tú cinntí deiridh ag úsáid AI."
+    "disclaimer": "Tugtar freagraí AI bunaithe ar na sonraí atá ar fáil agus féadfaidh siad a bheith mícheart nó le botúin. Úsáid le cúram. Ní fhreagraíonn ReliaChat AI Innovations as aon fhreagraí míchearta, neamhéiticúla, nó go morálta mícheart. Déan machnamh ort féin agus ar do luachanna sula ndéanfaidh tú cinntí deiridh ag úsáid AI.",
+    "filter_mode": "Mód Scagaire",
+        "content_blocked": "Ábhar Blocáilte.",
     },
     "kk": {
     "settings": "Баптаулар",
@@ -1213,7 +1285,9 @@ translations = {
     "temperature": "Температура (0.0 ден 1.0 дейін)",
     "save": "Сақтау",
     "warn_setup_local_server": "Жергілікті сервердің орнатылғанын тексеріңіз.",
-    "disclaimer": "AI жауаптары қол жетімді деректер негізінде жасалады және қателіктер немесе дәлсіздіктер болуы мүмкін. Қауіпсіздікпен пайдаланыңыз. ReliaChat AI Innovations ешқандай дәлсіз, этикалық емес немесе моральдық тұрғыдан қате жауаптарға жауапты емес. AI пайдаланған кезде соңғы шешімдер қабылдар алдында өзіңіздің құндылықтарыңызды ойластырыңыз."
+    "disclaimer": "AI жауаптары қол жетімді деректер негізінде жасалады және қателіктер немесе дәлсіздіктер болуы мүмкін. Қауіпсіздікпен пайдаланыңыз. ReliaChat AI Innovations ешқандай дәлсіз, этикалық емес немесе моральдық тұрғыдан қате жауаптарға жауапты емес. AI пайдаланған кезде соңғы шешімдер қабылдар алдында өзіңіздің құндылықтарыңызды ойластырыңыз.",
+    "filter_mode": "Сүзгі режимі",
+    "content_blocked": "Мазмұн бұғатталды.",
     },
     "ne": {
     "settings": "सेटिंगहरू",
@@ -1245,7 +1319,9 @@ translations = {
     "temperature": "तापमान (0.0 देखि 1.0 सम्म)",
     "save": "सञ्चय गर्नुहोस्",
     "warn_setup_local_server": "स्थानीय सर्भर सेटअप भएको छ कि छैन जाँच गर्नुहोस्।",
-    "disclaimer": "AI प्रतिक्रियाहरू उपलब्ध डाटामा आधारित भएर उत्पन्न हुन्छन् र तिनमा त्रुटि वा असत्यता हुन सक्छ। सतर्कताका साथ प्रयोग गर्नुहोस्। ReliaChat AI Innovations कुनै पनि गलत, अनैतिक, वा नैतिक रूपमा गलत प्रतिक्रियाहरूको जिम्मेवार छैन। कृपया आफ्नै मूल्य र आत्मविश्वासमा विचार गर्नुहोस्, र AI को उपयोग गर्दा अन्तिम निर्णय लिनुहोस्।"
+    "disclaimer": "AI प्रतिक्रियाहरू उपलब्ध डाटामा आधारित भएर उत्पन्न हुन्छन् र तिनमा त्रुटि वा असत्यता हुन सक्छ। सतर्कताका साथ प्रयोग गर्नुहोस्। ReliaChat AI Innovations कुनै पनि गलत, अनैतिक, वा नैतिक रूपमा गलत प्रतिक्रियाहरूको जिम्मेवार छैन। कृपया आफ्नै मूल्य र आत्मविश्वासमा विचार गर्नुहोस्, र AI को उपयोग गर्दा अन्तिम निर्णय लिनुहोस्।",
+    "filter_mode": "फिल्टर मोड",
+    "content_blocked": "सामग्री अवरुद्ध गरियो।",
     },
     "no": {
     "settings": "Innstillinger",
@@ -1277,7 +1353,9 @@ translations = {
     "temperature": "Temperatur (0.0 til 1.0)",
     "save": "Lagre",
     "warn_setup_local_server": "Pass på at du har satt opp lokal server.",
-    "disclaimer": "AI-responser genereres basert på tilgjengelige data og kan inneholde unøyaktigheter eller feil. Bruk med forsiktighet. ReliaChat AI Innovations er IKKE ansvarlig for unøyaktige, uetiske eller moralsk gale svar. Vennligst reflekter over deg selv, og dine verdier før du tar endelige beslutninger basert på AI."
+    "disclaimer": "AI-responser genereres basert på tilgjengelige data og kan inneholde unøyaktigheter eller feil. Bruk med forsiktighet. ReliaChat AI Innovations er IKKE ansvarlig for unøyaktige, uetiske eller moralsk gale svar. Vennligst reflekter over deg selv, og dine verdier før du tar endelige beslutninger basert på AI.",
+    "filter_mode": "Filtermodus",
+    "content_blocked": "Innhold blokkert.",
     },
     "fa": {
     "settings": "تنظیمات",
@@ -1309,7 +1387,9 @@ translations = {
     "temperature": "دما (0.0 تا 1.0)",
     "save": "ذخیره",
     "warn_setup_local_server": "مطمئن شوید که سرور محلی را تنظیم کرده‌اید.",
-    "disclaimer": "پاسخ‌های هوش مصنوعی بر اساس داده‌های موجود تولید می‌شوند و ممکن است شامل نادرستی‌ها یا اشتباهات باشند. از آنها با احتیاط استفاده کنید. ReliaChat AI Innovations مسئول پاسخ‌های نادرست، غیراخلاقی یا اشتباه از نظر اخلاقی نمی‌باشد. لطفاً قبل از اتخاذ تصمیمات نهایی با استفاده از هوش مصنوعی، به خود و ارزش‌های خود فکر کنید."
+    "disclaimer": "پاسخ‌های هوش مصنوعی بر اساس داده‌های موجود تولید می‌شوند و ممکن است شامل نادرستی‌ها یا اشتباهات باشند. از آنها با احتیاط استفاده کنید. ReliaChat AI Innovations مسئول پاسخ‌های نادرست، غیراخلاقی یا اشتباه از نظر اخلاقی نمی‌باشد. لطفاً قبل از اتخاذ تصمیمات نهایی با استفاده از هوش مصنوعی، به خود و ارزش‌های خود فکر کنید.",
+    "filter_mode": "حالت فیلتر",
+    "content_blocked": "محتوا مسدود شده است.",
     },
     "pt-br": {
     "settings": "Configurações",
@@ -1341,7 +1421,9 @@ translations = {
     "temperature": "Temperatura (0.0 a 1.0)",
     "save": "Salvar",
     "warn_setup_local_server": "Certifique-se de ter configurado o servidor local.",
-    "disclaimer": "As respostas da IA são geradas com base nos dados disponíveis e podem conter imprecisões ou erros. Use com cautela. A ReliaChat AI Innovations NÃO se responsabiliza por respostas imprecisas, antiéticas ou moralmente erradas. Por favor, reflita sobre si mesmo e seus valores antes de tomar decisões finais utilizando IA."
+    "disclaimer": "As respostas da IA são geradas com base nos dados disponíveis e podem conter imprecisões ou erros. Use com cautela. A ReliaChat AI Innovations NÃO se responsabiliza por respostas imprecisas, antiéticas ou moralmente erradas. Por favor, reflita sobre si mesmo e seus valores antes de tomar decisões finais utilizando IA.",
+    "filter_mode": "Modo de filtro",
+    "content_blocked": "Conteúdo bloqueado.",
     },
     "ro": {
     "settings": "Setări",
@@ -1373,7 +1455,9 @@ translations = {
     "temperature": "Temperatură (0.0 la 1.0)",
     "save": "Salvează",
     "warn_setup_local_server": "Asigurați-vă că ați configurat serverul local.",
-    "disclaimer": "Răspunsurile IA sunt generate pe baza datelor disponibile și pot conține erori sau inexactități. Utilizați cu prudență. ReliaChat AI Innovations nu este responsabilă pentru răspunsuri incorecte, neetice sau moral greșite. Vă rugăm să reflectați asupra valorilor dumneavoastră înainte de a lua decizii finale utilizând IA."
+    "disclaimer": "Răspunsurile IA sunt generate pe baza datelor disponibile și pot conține erori sau inexactități. Utilizați cu prudență. ReliaChat AI Innovations nu este responsabilă pentru răspunsuri incorecte, neetice sau moral greșite. Vă rugăm să reflectați asupra valorilor dumneavoastră înainte de a lua decizii finale utilizând IA.",
+    "filter_mode": "Mod de filtrare",
+    "content_blocked": "Conținut blocat.",
     },
     "ta": {
     "settings": "அமைப்புகள்",
@@ -1405,7 +1489,9 @@ translations = {
     "temperature": "வெப்பநிலை (0.0 முதல் 1.0 வரை)",
     "save": "சேமிக்கவும்",
     "warn_setup_local_server": "உள்ளூர் சர்வர் அமைக்க உறுதி செய்யவும்.",
-    "disclaimer": "AI பதில்கள் கிடைக்கக்கூடிய தரவின் அடிப்படையில் உருவாக்கப்படுகின்றன மற்றும் தவறுகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும். கவனத்துடன் பயன்படுத்தவும். ReliaChat AI Innovations எந்த தவறான அல்லது குறிக்கோளற்ற பதில்களுக்கு பொறுப்பாக இருக்காது. AI ஐ பயன்படுத்துவதற்கு முன் தங்களுடைய மதிப்பீடு மற்றும் முடிவுகளை கருதவும்."
+    "disclaimer": "AI பதில்கள் கிடைக்கக்கூடிய தரவின் அடிப்படையில் உருவாக்கப்படுகின்றன மற்றும் தவறுகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும். கவனத்துடன் பயன்படுத்தவும். ReliaChat AI Innovations எந்த தவறான அல்லது குறிக்கோளற்ற பதில்களுக்கு பொறுப்பாக இருக்காது. AI ஐ பயன்படுத்துவதற்கு முன் தங்களுடைய மதிப்பீடு மற்றும் முடிவுகளை கருதவும்.",
+    "filter_mode": "வடிகட்டு நிலை",
+    "content_blocked": "உள்ளடக்கம் தடைசெய்யப்பட்டது.",
     },
     "sw": {
     "settings": "Mipangilio",
@@ -1437,7 +1523,9 @@ translations = {
     "temperature": "Joto (0.0 hadi 1.0)",
     "save": "Hifadhi",
     "warn_setup_local_server": "Hakikisha umeweka seva ya ndani.",
-    "disclaimer": "Majibu ya AI yanatokana na data inayopatikana na yanaweza kuwa na makosa. Tumia kwa tahadhari. ReliaChat AI Innovations, SIYO wawajibikaji kwa makosa yoyote, majibu yasiyo ya maadili, au yasiyofaa. Tafadhali tafakari juu yako mwenyewe na maadili kabla ya kufanya maamuzi ya mwisho kwa kutumia AI."
+    "disclaimer": "Majibu ya AI yanatokana na data inayopatikana na yanaweza kuwa na makosa. Tumia kwa tahadhari. ReliaChat AI Innovations, SIYO wawajibikaji kwa makosa yoyote, majibu yasiyo ya maadili, au yasiyofaa. Tafadhali tafakari juu yako mwenyewe na maadili kabla ya kufanya maamuzi ya mwisho kwa kutumia AI.",
+    "filter_mode": "Hali ya kuchuja",
+    "content_blocked": "Maudhui yamezuiwa.",
     },
 }
 
