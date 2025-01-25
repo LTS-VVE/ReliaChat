@@ -14,6 +14,7 @@
 > [!TIP]
 > What's in the new release?
 > <br> `Word filtering has been added. Words that include profanity, discrimination and illegal behaviors has been added.` <br><br> **(This feature only applies to English and Albanian common profanity language. `Such as, illegal activities. Unwanted behaviors, anti agenda, Child, Animal or human abuse and more`.)**
+> <br><br>UI Changes. **(Chatbubble change, filter chatbubble, performance updates, user chatbubble changes, padding.)**
 
 > [!CAUTION]
 > ReliaChat AI Innovations, IS NOT RESPONSIBLE FOR ANY ACTIONS YOU MAKE USING THE AI APP. THE APP IS BUILD AS FRONT-END, AND HAS RESPONSIBILITY TO SEND REQUESTS LOCALLY ON ALREADY TRAINED MODELS (Such as [Ollama Models](https://ollama.com/models), [Hugging Face](https://huggingface.co/models) or external sources for customizability).<br> THESE MODELS ARE PRE-TRAINED BY OPEN-SOURCE COMMUNITIES. PLEASE BE SURE TO USE THE SOFTWARE PROVIDED BY ReliaChat AI Innovations, ETHICALLY.
