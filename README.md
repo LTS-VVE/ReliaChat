@@ -9,7 +9,7 @@
 >[Gitlab Project](https://gitlab.com/LTS-VVE/ReliaChat)
 ## ``` Version 1.3.3-BETA ```
 > [!NOTE]
-> NEW RELEASE ``` V 1.3.3-BETA ```<br>![image](https://github.com/user-attachments/assets/a0f36b7a-3f63-4587-b495-4d2dfcfbd886)
+> NEW RELEASE ``` V 1.3.3-BETA ```
 
 > [!TIP]
 > What's in the new release?
