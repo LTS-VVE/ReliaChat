@@ -1,0 +1,52 @@
+# Termux Setup for Ollama and ReliaChat Backend
+
+# Update and Upgrade Packages
+pkg update -y && pkg upgrade -y
+
+# Install Prerequisites
+pkg install -y python git curl wget openssh
+
+# Install Pip
+python -m ensurepip --upgrade
+
+# Install Python Packages
+pip install flask requests
+
+# Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Create Project Directory
+mkdir -p ~/ReliaChat/backend
+cd ~/ReliaChat/backend
+
+# Download Backend Server Script
+wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server.py
+
+# Pull Gemma2 Model
+ollama pull gemma2:2b
+
+# Create Startup Script
+cat > ~/startup.sh << 'EOL'
+#!/bin/bash
+# Start Ollama service
+ollama serve &
+
+# Wait for Ollama to initialize
+sleep 5
+
+# Navigate to backend directory and run Flask server
+cd ~/ReliaChat/backend
+python backend_server.py
+EOL
+
+# Make Startup Script Executable
+chmod +x ~/startup.sh
+
+# Configure Termux Autostart
+echo "~/startup.sh" >> ~/.bashrc
+
+# Set Executable Permissions for Backend Script
+chmod +x ~/ReliaChat/backend/backend_server.py
+
+# Final Instructions
+echo "Setup Complete! Restart Termux to start Ollama and Backend Server."
