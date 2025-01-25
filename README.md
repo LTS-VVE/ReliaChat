@@ -48,7 +48,38 @@
 It has a modern UI, Easy to use frontend, and easy command pasting for non-advanced users, while maintaining massive language support, easy of use, and being privacy respecting.</p><br><br>
 
 > [!WARNING]
-> We recommned you follow the [commands](https://github.com/LTS-VVE) to install ollama on your mobile device (Android/iOS) platforms in order to chat with the desired or preset AI model.
+> We recommned you follow the [commands](https://github.com/LTS-VVE/ReliaChat/blob/main/commands.txt) to install ollama on your mobile device (Android/iOS) platforms in order to chat with the desired or preset AI model.
+
+> [!NOTE]
+> Commands to install it for android:
+
+```
+pkg update -y && pkg upgrade -y
+pkg install -y python curl wget openssh git golang cmake clang
+python -m ensurepip --upgrade
+pip install flask requests
+git clone https://github.com/ollama/ollama.git
+cd ollama
+go generate ./...
+go build .
+mkdir -p ~/ReliaChat/backend
+cd ~/ReliaChat/backend
+wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server.py
+cd ../ollama
+./ollama pull gemma2:2b
+cat > ~/startup.sh << 'EOL'
+#!/bin/bash
+cd ~/ollama
+./ollama serve &
+sleep 5
+cd ~/ReliaChat/backend
+python backend_server.py
+EOL
+chmod +x ~/startup.sh
+chmod +x ~/ReliaChat/backend/backend_server.py
+echo "~/startup.sh" >> ~/.bashrc
+echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Please RESTART TERMUX BY CLICKING EXIT ON THE NOTIFICATION DROP DOWN.\033[0m"
+```
 
 > [!NOTE]
 > The UI has been costumized to feel modern and easy to use, however this is the very first
