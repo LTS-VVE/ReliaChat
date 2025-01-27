@@ -21,7 +21,7 @@
 def strict_content(content):
     # Blocked Words.
     # NOTE THAT THIS SECTION OR FILE OF CODE IS SIMPLY FOR MODERATION, AND ReliaChat AI Innovations IS NOT PROMOTING, ADVERTISING, OR HAVING RELIABILITY
-    # FOR ANY OF THE WORDS, PROVIDED FOR MODERATION.
+    # FOR ANY OF THE WORDS THAT ARE LISTED BELOW. THESE ARE PURELY PROVIDED FOR MODERATION.
     blocked_words = [
         "rape", "kill", "murder", "suicide", "pedophilia", "child exploitation",
         "how to purchase drugs", "how to buy drugs", "buy drugs now", "animal fuckery",
@@ -125,10 +125,8 @@ def strict_content(content):
         "si të ble drogë",
     ]
     
-    # Currently there only is 2 langauges for profanity check. Please chekc the READ.ME in the main directory for more info.
+    # Currently there are only is 2 langauges for profanity check. Please check the READ.ME in the main directory for more info.
 
-
-    # Check if any blocked word is in the content
     for word in blocked_words:
         if word in content.lower():
             return True
