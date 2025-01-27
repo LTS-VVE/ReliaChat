@@ -20,8 +20,9 @@
 
 def strict_content(content):
     # Blocked Words.
-    # NOTE THAT THIS SECTION OR FILE OF CODE IS SIMPLY FOR MODERATION, AND ReliaChat AI Innovations IS NOT PROMOTING, ADVERTISING, OR HAVING RELIABILITY
-    # FOR ANY OF THE WORDS THAT ARE LISTED BELOW. THESE ARE PURELY PROVIDED FOR MODERATION.
+    # NOTE THAT THIS SECTION OF CODE IS SIMPLY FOR MODERATION, AND ReliaChat AI Innovations IS NOT PROMOTING, ADVERTISING, OR TAKES ANY
+    # RELIABILITY FOR THAT MATTER
+    # THE WORDS THAT ARE LISTED BELOW. THESE ARE PURELY PROVIDED FOR MODERATION.
     blocked_words = [
         "rape", "kill", "murder", "suicide", "pedophilia", "child exploitation",
         "how to purchase drugs", "how to buy drugs", "buy drugs now", "animal fuckery",
