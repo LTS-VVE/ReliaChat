@@ -1,6 +1,7 @@
 """
 /*
-* Mobile Chat App to freely communiacate with an LLM locally on your mobile device, to chat without surveliance
+* Mobile Chat App to freely communiacate with an LLM locally on your mobile device, to chat without surveliance.
+* Main file (main.py) SOURCE CODE.
 * Copyright (C) 2025  LTS-VVE
 *
 * This program is free software: you can redistribute it and/or modify
