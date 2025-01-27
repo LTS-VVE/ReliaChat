@@ -9,7 +9,7 @@ def strict_content(content):
     # FOR ANY OF THE WORDS, PROVIDED FOR MODERATION.
     blocked_words = [
         "rape", "kill", "murder", "suicide", "pedophilia", "child exploitation", 
-        "child pornography", "terrorism", "extremist", "bomb", "weapon", "assault", 
+        "child pornography", "terrorism", "extremist", "bomb recepies", "weaponary", "assault", 
         "abuse", "violence", "gore", "torture", "slavery", "genocide", "incest", 
         "bestiality", "necrophilia", "cannibalism", "snuff film", "human trafficking", 
         "child abuse", "child molestation", "child sexual abuse", "child sexual exploitation", 
@@ -76,7 +76,7 @@ def strict_content(content):
         "faggots", "faggot", "anti-gay", "anti gay", "Anti Lgbtqia+", "Anti Agenda LGBTQ+", "Anti LGBT", "Fuck faggots",
         "die faggots", "die child", "How to terrorise children?", "How to build bomb", "how to fuck an animal", "fucking animals", "anti lgbt", "child labor",
         "dhunim", "vrasje", "vrasje", "vetëvrasje", "pedofili", "shfrytëzim i fëmijëve",
-        "pornografi fëmijësh", "terrorizëm", "ekstremist", "bombë", "armë", "sulm",
+        "pornografi fëmijësh", "terrorizëm", "ekstremist", "bombë", "armë",
         "abuzim", "dhunë", "krim", "torturë", "skllavëri", "gjenocid", "incest",
         "bestialitet", "nekrofilia", "kanibalizëm", "film snuff", "trafikimi i qenieve njerëzore",
         "abuzim i fëmijëve", "ngacmim i fëmijëve", "abuzim seksual i fëmijëve", "shfrytëzim seksual i fëmijëve",
@@ -103,8 +103,9 @@ def strict_content(content):
         "skllavëri e punës së fëmijëve", "abuzim i punës së fëmijëve", "shkelje e punës së fëmijëve", "shfrytëzim i punës së fëmijëve",
         "trafikim i punës së fëmijëve", "skllavëri e punës së fëmijëve", "abuzim i punës së fëmijëve", "shkelje e punës së fëmijëve",
         "shfrytëzim i punës së fëmijëve", "trafikim i punës së fëmijëve", "skllavëri e punës së fëmijëve", "abuzim i punës së fëmijëve",
-        "shkelje e punës së fëmijëve", "anti-gej", "anti homoseksualeve", "si te vras", "abuzimi mendor", "eating disorder", "eation disorders",
-        "anti gej",
+        "shkelje e punës së fëmijëve", "anti-gej", "anti homoseksualeve", "si te vras", "abuzimi mendor", "eating disorder", "eating disorders",
+        "anti gej", "trafikimi i femijëve", "trafikimi i njerëzve", "si të kryej një akt seksual ndaj një kafshëje", "çtë bej për një individ me çrregullime mendore", 
+        "si të abuzoj gruan time", "si të abuzoj një fëmijë", "si të ndërtoje armë", "si të nderojë bomba", "si të vrasë",
     ]
     
     # Currently there only is 2 langauges for profanity check. Please view our READ.ME on github or gitlab for more info.
