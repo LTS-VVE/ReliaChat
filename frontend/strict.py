@@ -8,7 +8,8 @@ def strict_content(content):
     # NOTE THAT THIS SECTION OR FILE OF CODE IS SIMPLY FOR MODERATION, AND ReliaChat AI Innovations IS NOT PROMOTING, ADVERTISING, OR HAVING RELIABILITY
     # FOR ANY OF THE WORDS, PROVIDED FOR MODERATION.
     blocked_words = [
-        "rape", "kill", "murder", "suicide", "pedophilia", "child exploitation", 
+        "rape", "kill", "murder", "suicide", "pedophilia", "child exploitation",
+        "how to purchase drugs", "how to buy drugs", "buy drugs now", "animal fuckery",
         "child pornography", "terrorism", "extremist", "bomb recepies", "weaponary", "assault", 
         "abuse", "violence", "gore", "torture", "slavery", "genocide", "incest", 
         "bestiality", "necrophilia", "cannibalism", "snuff film", "human trafficking", 
@@ -103,9 +104,10 @@ def strict_content(content):
         "skllavëri e punës së fëmijëve", "abuzim i punës së fëmijëve", "shkelje e punës së fëmijëve", "shfrytëzim i punës së fëmijëve",
         "trafikim i punës së fëmijëve", "skllavëri e punës së fëmijëve", "abuzim i punës së fëmijëve", "shkelje e punës së fëmijëve",
         "shfrytëzim i punës së fëmijëve", "trafikim i punës së fëmijëve", "skllavëri e punës së fëmijëve", "abuzim i punës së fëmijëve",
-        "shkelje e punës së fëmijëve", "anti-gej", "anti homoseksualeve", "si te vras", "abuzimi mendor", "eating disorder", "eating disorders",
-        "anti gej", "trafikimi i femijëve", "trafikimi i njerëzve", "si të kryej një akt seksual ndaj një kafshëje", "çtë bej për një individ me çrregullime mendore", 
-        "si të abuzoj gruan time", "si të abuzoj një fëmijë", "si të ndërtoje armë", "si të nderojë bomba", "si të vrasë",
+        "shkelje e punës së fëmijëve", "anti-gej", "anti homoseksualeve", "si te vras", "abuzimi mendor", "anti gej", "trafikimi i femijëve", 
+        "trafikimi i njerëzve", "si të kryej një akt seksual ndaj një kafshëje", "çtë bej për një individ me çrregullime mendore", 
+        "si të abuzoj gruan time", "si të abuzoj një fëmijë", "si të ndërtoje armë", "si të nderojë bomba", "si të vrasë", "si të vetëkuroj veten", "si të vetekuroj veten",
+        "si të ble drogë",
     ]
     
     # Currently there only is 2 langauges for profanity check. Please view our READ.ME on github or gitlab for more info.
