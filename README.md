@@ -1,3 +1,6 @@
+# WE ARE UPDATING SOME FRONT-END AND BACKEND ISSUES, PROFANITY WORD LIST, REMOVED TEMPORARILY.
+<br><br>
+
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
 > This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.
