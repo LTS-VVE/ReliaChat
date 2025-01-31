@@ -1,32 +1,32 @@
-# WE ARE UPDATING SOME FRONT-END AND BACKEND ISSUES, PROFANITY WORD LIST, REMOVED TEMPORARILY.
-<br><br>
-
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
-> This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.
+> This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.<br>
 
+> [!IMPORTANT]
+> Please report issues on the github/gitlab issues tab or directly email us at: reliachat@proton.me.
 <br>
 
 > [!IMPORTANT]
 >[Github Project](https://github.com/LTS-VVE/ReliaChat)<br>
 >[Gitlab Project](https://gitlab.com/LTS-VVE/ReliaChat)
-## ``` Version 1.3.3-BETA ```
+## ``` Version 1.3.4-BETA ```
 > [!NOTE]
-> NEW RELEASE ``` V 1.3.3-BETA ```
+> NEW RELEASE ``` V 1.3.4-BETA ```
 
 > [!TIP]
 > What's in the new release?
-> <br> `Word filtering has been added. Words that include profanity, discrimination and illegal behaviors has been added.`
+> <br> `Word filtering has been improved. Words that include profanity, discrimination and illegal behaviors has been improved.`
 > <br>UI Changes. **(Chatbubble change, filter chatbubble, performance updates, user chatbubble changes, padding.)**
+
+> [!IMPORTANT]
+> We will add AI filtering in the future release.
 
 > [!CAUTION]
 > ReliaChat AI Innovations, IS NOT RESPONSIBLE FOR ANY ACTIONS YOU MAKE USING THE AI APP. THE APP IS BUILD AS FRONT-END, AND HAS RESPONSIBILITY TO SEND REQUESTS LOCALLY ON ALREADY TRAINED MODELS (Such as [Ollama Models](https://ollama.com/models), [Hugging Face](https://huggingface.co/models) or external sources for customizability).<br> THESE MODELS ARE PRE-TRAINED BY OPEN-SOURCE COMMUNITIES. PLEASE BE SURE TO USE THE SOFTWARE PROVIDED BY ReliaChat AI Innovations, ETHICALLY.
 
 > [!NOTE]
-> This feature can be turned off via the setting menu. <br><br>
+> This filtering feature can be turned off via the setting menu. <br><br>
 
-[Android Build](https://github.com/LTS-VVE/ReliaChat/releases/tag/V-1.3.3_PRE-RELEASE_ANDROID)<br>
-[iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat)<br><br>
 > [!NOTE]
 > That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the build.
 
@@ -35,6 +35,13 @@
 
 > [!TIP]
 > Please make sure you are within the EU to install (sideload) apps on iOS.
+<br><br>
+
+# Builds
+[Android Build](https://github.com/LTS-VVE/ReliaChat/releases/tag/V-1.3.3_PRE-RELEASE_ANDROID)<br>
+[iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat)<br><br>
+> [!NOTE]
+> Please remember that the iOS build is likely to come out on the first stable release.
 <br><br>
 # <p align="center">What about ReliaChat?</p>
 <br>
@@ -53,7 +60,7 @@ It has a modern UI, Easy to use frontend, and easy command pasting for non-advan
 > [!WARNING]
 > We recommned you follow the [commands](https://github.com/LTS-VVE/ReliaChat/blob/main/commands.txt) to install ollama on your mobile device (Android/iOS) platforms in order to chat with the desired or preset AI model.
 
-> [!NOTE]
+> [!TIP]
 > Commands to install it for android:
 
 ```
@@ -89,12 +96,15 @@ echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend a
 > version, and some UI featured may not work as expected.
 ## How the app behaives when ran:
 > [!NOTE]
-> UI On Sidebar
+> UI On Sidebar.
 
-![image(1)](https://github.com/user-attachments/assets/c1bc186b-49a4-4dc8-a8c8-e638ab9e7f72)
-![image(2)](https://github.com/user-attachments/assets/f51e3b34-e016-4035-ada1-d3758827deb2)<br>
+![oie_png(3)](https://github.com/user-attachments/assets/b0be1a11-ecc9-4d7f-86db-29ce5ac99e97)
+![oie_png](https://github.com/user-attachments/assets/1cddc94c-b983-4c4c-a2f4-3901006624e6)<br>
 > [!IMPORTANT]
-> UI, MAY NOT WORK AS EXPECTED. IT IS EXPERIMENTAL.
+> UI, may not work well, as it is in early development. Please report you're issues in the github/gitlab issues section or send us an email on reliachat@proton.me.
+
+> [!NOTE]
+> We are currently aware of the stack bug on mobile when tried to change the settings (such as not formated text entery container boxes).<br> We will fix this in the future release. 
 
 > [!NOTE]
 > Greeting based on system time.
@@ -104,8 +114,7 @@ echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend a
 > [!NOTE]
 > Erase all chats function (`Erasing All Chat History`), and the Settings tab.
 
-![image(4)](https://github.com/user-attachments/assets/4dd32826-1ac1-44c5-a39a-ac80b1779436)
-![image(5)](https://github.com/user-attachments/assets/4c4e23b6-b0b1-4864-ba16-0befae4f643d)
+![oie_png(2)](https://github.com/user-attachments/assets/abe8b2b1-f090-45cb-95d1-70a4b95825ef)
 ## How the App Works
 ### New filtering System:
 
@@ -331,3 +340,6 @@ In the code, simply replace the "en" with your preferred language and provide tr
 | <p align="center">Latin             | <p align="center">🇺🇳        |
 
 </div>
+
+> [!TIP]
+> Hey! It looks like you actually read the documentation! We appriciate that!
