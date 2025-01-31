@@ -316,7 +316,7 @@ def main(page: ft.Page):
             active_color="white",
             inactive_thumb_color="gray",
             active_track_color="red",
-            inactive_track_color="gray",
+            inactive_track_color="sidebar_text_color",
         )
 
         theme_toggle = ft.Switch(
@@ -325,7 +325,7 @@ def main(page: ft.Page):
             active_color="white",
             inactive_thumb_color="gray",
             active_track_color="#86759c",
-            inactive_track_color="black",
+            inactive_track_color="sidebar_text_color",
         )
 
         temperature_input = ft.TextField(
@@ -419,8 +419,8 @@ def main(page: ft.Page):
             ft.Row([
                 ft.ElevatedButton(translate("cancel"), on_click=cancel_settings_action, bgcolor=ft.colors.RED_800, color="white", expand=True),
                 ft.ElevatedButton(translate("save"), on_click=save_settings_action, bgcolor=ft.colors.WHITE, color="black", expand=True)
-            ], alignment=ft.MainAxisAlignment.CENTER, spacing=10)
-        ], spacing=10)
+            ], alignment=ft.MainAxisAlignment.CENTER, spacing=2)
+        ], spacing=2)
 
         dlg_content = ft.Container(
             content=content,
@@ -453,12 +453,12 @@ def main(page: ft.Page):
         if input_field.value.strip():
             user_message = input_field.value
             
-            user_bubble = create_glowing_chat_bubble(user_message, is_user=True, theme_mode=theme_mode, bgcolor="#a8dadc", glow_color="#a8dadc")
+            user_bubble = create_glowing_chat_bubble(user_message, is_user=True, theme_mode=theme_mode, bgcolor="#8f8f8f", glow_color="#8f8f8f")
             user_row = ft.Row(
                 [
                     ft.Container(width=40),
                     user_bubble,
-                    ft.Icon(ft.icons.PERSON, color="#a8dadc"),
+                    ft.Icon(ft.icons.PERSON_ROUNDED, color="sidebar_text_color"),
                 ],
                 alignment=ft.MainAxisAlignment.END
             )
@@ -474,7 +474,7 @@ def main(page: ft.Page):
                 ai_bubble = create_glowing_chat_bubble(blocked_message, is_user=False, theme_mode=theme_mode, bgcolor="red", glow_color="red")
                 ai_row = ft.Row(
                     [
-                        ft.Icon(ft.icons.ASSISTANT, color="red"),
+                        ft.Icon(ft.icons.SHIELD_ROUNDED, color="red"),
                         ai_bubble,
                         ft.Container(width=40),
                     ],
@@ -498,7 +498,7 @@ def main(page: ft.Page):
 
             ai_row = ft.Row(
                 [
-                    ft.Icon(ft.icons.ASSISTANT, color="#86759c"),
+                    ft.Icon(ft.icons.ASSISTANT_ROUNDED, color="#86759c"),
                     ai_bubble,
                     ft.IconButton(ft.icons.COPY, on_click=lambda e: copy_to_clipboard(e, ai_response), icon_color="black" if theme_mode == "light" else "white"),
                     ft.Container(width=40),
@@ -526,8 +526,8 @@ def main(page: ft.Page):
             message["message"], 
             is_user=is_user, 
             theme_mode=theme_mode, 
-            bgcolor="#a8dadc" if is_user else ("red" if message["message"] == translate("content_blocked") else "#86759c"), 
-            glow_color="#a8dadc" if is_user else ("red" if message["message"] == translate("content_blocked") else "#86759c")
+            bgcolor="#8f8f8f" if is_user else ("red" if message["message"] == translate("content_blocked") else "#86759c"), 
+            glow_color="#8f8f8f" if is_user else ("red" if message["message"] == translate("content_blocked") else "#86759c")
         )
         
         if is_user:
@@ -535,14 +535,14 @@ def main(page: ft.Page):
                 [
                     ft.Container(width=40),
                     bubble,
-                    ft.Icon(ft.icons.PERSON, color="#a8dadc"),
+                    ft.Icon(ft.icons.PERSON_ROUNDED, color="sidebar_text_color"),
                 ],
                 alignment=ft.MainAxisAlignment.END
             )
         else:
             row = ft.Row(
                 [
-                    ft.Icon(ft.icons.ASSISTANT, color="red" if message["message"] == translate("content_blocked") else "#86759c"),
+                    ft.Icon(ft.icons.HISTORY_ROUNDED, color="red" if message["message"] == translate("content_blocked") else "#86759c"),
                     bubble,
                     ft.IconButton(ft.icons.COPY, on_click=lambda e, text=message["message"]: copy_to_clipboard(e, text), icon_color="black" if theme_mode == "light" else "white"),
                     ft.Container(width=40),
@@ -559,17 +559,18 @@ def main(page: ft.Page):
                 ft.Row(
                     [
                         ft.Text(translate("settings"), size=20, weight=ft.FontWeight.BOLD, color=sidebar_text_color),
-                        ft.IconButton(ft.icons.CLOSE, on_click=toggle_sidebar, icon_color=sidebar_text_color)
+                        ft.IconButton(ft.icons.MENU_OPEN_ROUNDED, on_click=toggle_sidebar, icon_color=sidebar_text_color)
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN
                 ),
-                ft.TextButton(translate("settings"), on_click=lambda _: show_settings_dialog(), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
-                ft.TextButton(translate("help"), on_click=lambda _: page.launch_url("https://relia.rf.gd/docs"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
-                ft.TextButton(translate("privacy_policy"), on_click=lambda _: page.launch_url("https://relia.rf.gd/privacy-policy"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
-                ft.TextButton(translate("about"), on_click=lambda _: page.launch_url("https://relia.rf.gd/about"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
-                ft.TextButton(translate("terms_of_use"), on_click=lambda _: page.launch_url("https://relia.rf.gd/terms-and-conditions"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
-                ft.TextButton(translate("erase_all_chats"), on_click=lambda _: erase_all_chats(page), style=ft.ButtonStyle(color=sidebar_text_color, bgcolor=ft.colors.RED_600, elevation=2)),
-                ft.Text(translate("version"), size=10, color=sidebar_text_color)
+                ft.TextButton(translate("settings"), icon="SETTINGS_OUTLINED", on_click=lambda _: show_settings_dialog(), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
+                ft.TextButton(translate("help"), icon="SUPPORT_OUTLINED", on_click=lambda _: page.launch_url("https://relia.rf.gd/docs"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
+                ft.TextButton(translate("privacy_policy"), icon="POLICY_OUTLINED", on_click=lambda _: page.launch_url("https://relia.rf.gd/privacy-policy"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
+                ft.TextButton(translate("about"), icon="INFO_OUTLINED", on_click=lambda _: page.launch_url("https://relia.rf.gd/about"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
+                ft.TextButton(translate("terms_of_use"), icon="RULE_OUTLINED", on_click=lambda _: page.launch_url("https://relia.rf.gd/terms-and-conditions"), style=ft.ButtonStyle(color=sidebar_text_color, elevation=2)),
+                ft.TextButton(translate("erase_all_chats"), icon="DELETE_OUTLINE_OUTLINED", on_click=lambda _: erase_all_chats(page), style=ft.ButtonStyle(color=sidebar_text_color, bgcolor=ft.colors.RED_600, elevation=2)),
+                ft.TextButton("ReliaChat's Work", disabled=False, icon="ADD_LINK_OUTLINED", on_click=lambda _: page.launch_url("https://relia.rf.gd/credits"), style=ft.ButtonStyle(color=sidebar_text_color)),
+                ft.Text(translate("version"), size=10, color="sidebar_text_color"),
             ],
             spacing=10,
         ),
@@ -601,9 +602,10 @@ def main(page: ft.Page):
     top_bar = ft.Container(
         content=ft.Row(
             [
-                ft.IconButton(ft.icons.MENU, on_click=toggle_sidebar, icon_color="black" if theme_mode == "light" else "white", bgcolor=None),
+                ft.IconButton(ft.icons.MENU_ROUNDED, on_click=toggle_sidebar, icon_color="black" if theme_mode == "light" else "white", bgcolor=None),
                 ft.Text(f"{greeting}, {username}", size=16, color="black" if theme_mode == "light" else "white", weight=ft.FontWeight.BOLD),
-                ft.IconButton(ft.icons.WB_SUNNY if theme_mode == "light" else ft.icons.BRIGHTNESS_2, on_click=lambda e: page.update(), icon_color="black" if theme_mode == "light" else "white")
+                        ft.IconButton(
+            ft.icons.WB_SUNNY if theme_mode == "light" else ft.icons.BRIGHTNESS_2, on_click=lambda e: page.update(), icon_color="black" if theme_mode == "light" else "white", disabled=True)
             ],
             alignment=ft.MainAxisAlignment.CENTER,
         ),
@@ -615,16 +617,16 @@ def main(page: ft.Page):
     disclaimer_text = ft.Text(
         translate("disclaimer"),
         color="yellow",
-        size=11
+        size=11,
     )
 
     warning_text = ft.Row(
         [
-            ft.Icon(ft.icons.WARNING, color="red"),
+            ft.Icon(ft.icons.WARNING_ROUNDED, color="red"),
             ft.Text(
                 translate("warn_setup_local_server"),
                 color="red",
-                size=12.5,
+                size=11.5,
                 weight=ft.FontWeight.BOLD
             ),
         ],
@@ -651,7 +653,7 @@ def main(page: ft.Page):
                             input_field,
                             ft.Container(
                                 content=ft.IconButton(
-                                    ft.icons.SEND,
+                                    ft.icons.SEND_ROUNDED,
                                     on_click=send_message,
                                     bgcolor=None,
                                     icon_color="black" if theme_mode == "light" else "white"
