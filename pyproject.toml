@@ -22,7 +22,7 @@ product = "ReliaChat"
 company = "ReliaChat"
 
 # copyright text to display in about app dialogs
-copyright = "Copyright (C) 2025-2026 by ReliaChat AI Innovations Foundation"
+copyright = "Copyright (C) 2025 by ReliaChat AI Innovations Project Contributors"
 
 [tool.flet.app]
 path = "frontend"
