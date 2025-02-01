@@ -116,6 +116,15 @@ echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend a
 > Erase all chats function (`Erasing All Chat History`), and the Settings tab.
 
 ![oie_png(2)](https://github.com/user-attachments/assets/abe8b2b1-f090-45cb-95d1-70a4b95825ef)
+
+> [!NOTE]
+> How the AI responds visually.
+
+![oie_png(4)](https://github.com/user-attachments/assets/a07cdb6d-dcad-4835-bef5-efbb12c3f543)<br>
+> [!NOTE]
+> How the AI responds visually, when prompted a filtered/censored word or a string of characters containg the phrases.
+
+![oie_png(5)](https://github.com/user-attachments/assets/9c3c8319-bf2d-4d0f-ad66-6c060cb0afe1)<br>
 ## How the App Works
 ### New filtering System:
 
