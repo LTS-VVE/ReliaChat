@@ -1,7 +1,7 @@
 [project]
 name = "ReliaChat"
 version = "1.3.4 BETA"
-description = "ReliaChat, is an innovative AI chatapp, meant to be used on mobile on both iOS & Android. ReliaChat AI Innovations, is not responsible for any critical errors, or responses on your device. The power to chat without surveliance."
+description = "ReliaChat is an innovative AI chat app for iOS and Android, offering a modern, privacy-respecting chat experience. Built on the GPL v3.0 license, the software is provided 'as is' without warranty."
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
@@ -12,14 +12,14 @@ dependencies = [
 [tool.flet]
 # org name in reverse domain name notation, e.g. "com.mycompany".
 # Combined with project.name to build bundle ID for iOS and Android apps
-org = "android.reliachat.rf.gd"
+org = "reliachat.rf.gd"
 
 # project display name that is used as an app title on Android and iOS home screens,
 # shown in window titles and about app dialogs on desktop.
 product = "ReliaChat"
 
 # company name to display in about app dialogs
-company = "ReliaChat"
+company = "ReliaChat AI Innovations"
 
 # copyright text to display in about app dialogs
 copyright = "Copyright (C) 2025 by ReliaChat AI Innovations Project Contributors"
