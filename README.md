@@ -9,9 +9,9 @@
 > [!IMPORTANT]
 >[Github Project](https://github.com/LTS-VVE/ReliaChat)<br>
 >[Gitlab Project](https://gitlab.com/LTS-VVE/ReliaChat)
-## ``` Version 1.3.4-BETA ```
+## ``` Version 1.3.4-BETA ```.
 > [!NOTE]
-> NEW RELEASE ``` V 1.3.4-BETA ```
+> NEW RELEASE ``` V 1.3.4-BETA ```.
 
 > [!TIP]
 > What's in the new release?
@@ -254,7 +254,8 @@ def save_settings_action(e):
             page.update()
 ```
 If the dialog is open (`dlg.open = False`), then the dialog will not be shown, if value is set to `True`, it will show the settings there for showing the endpoint, port, and ip on the frontend.
-When the settings are saved it will grab them and place them in the `{port/custom_endpoint/ip}`. This will make a connection to the backend server (`Flask Py Server`) to route the ip to the default set `IP`, `PORT` and `ENDPOINT`.<br>
+When the settings are saved it will grab them and place them in the `{port/custom_endpoint/ip}`. This will make a connection to the backend server (`Flask Py Server`) to route the ip to the default set `IP`, `PORT` and `ENDPOINT`.<br><br>
+## Backend.
 In the backend, we will route the Ollama server (`ollama serve &`), to the custom endpoint.
 ```python
 @app.route('/api/v1/query', methods=['POST'])
@@ -266,6 +267,7 @@ After the process is completed, we will gain 2 streaming responses (repeated) fr
 > [!NOTE]
 > Make sure to view your custom code carefully as the function could break easily, removing the casting response from the server.
 
+## Language Support Customization. (App layout).
 <br>As for language support you simply go to the `translations.py` file, and translate the functions to your preferred langauge.<br>
 Example:
 ```python
@@ -282,7 +284,7 @@ In the code, simply replace the "en" with your preferred language and provide tr
 <br><br>
 > [!NOTE]
 > Other Featured like a time based greeting, animatined typewritter and blinking cursor are implemented, along with a copy button, chat history and transparent blurry chat bubbles. (Basic app amenities.)
-## Supported Languages
+## Supported Languages.
 > [!NOTE]
 > More languages will be added soon. (Any language can be added manually by editing the code, however on the main repo, the following are supported by default).<br><br>
 
