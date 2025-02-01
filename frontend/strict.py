@@ -130,7 +130,6 @@ def strict_content(content):
         "vdeksh ishalla", "si te drogohem", "si te injektoj shpejte", "injektim shpejt", "substanca alternative per droge", "si te kanibalizoje",
         "menyra per te genjyer nje te mitur", "si te vjedh bebe", "pedofil", "pedofile", "dhunojë fëmijë", "dhunojë femije", "dhunojë fëmije", "dhunoje femije", "dhunoj",
         "1 man 1 jar", "xxx", "drug intake now", "now drug intake", "shfrytzim i femijeve", "shfrytezimet e femijeve", "imi i nje vajzeve", "imi i nje djali",
-        "example word",
     ]
     
     # Currently there are only is 2 langauges for profanity check. Please check the READ.ME in the main directory for more info.
