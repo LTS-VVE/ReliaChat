@@ -16,7 +16,7 @@
 > [!TIP]
 > What's in the new release?
 > <br> `Word filtering has been improved. Words that include profanity, discrimination and illegal behaviors has been improved.`
-> <br>UI Changes. **(Chatbubble change, filter chatbubble, performance updates, user chatbubble changes, padding.)**
+> <br>`UI Changes. (Chatbubble changes, filter chatbubble, performance updates, user chatbubble changes, padding.)`
 
 > [!IMPORTANT]
 > We will add AI filtering in the future release.
