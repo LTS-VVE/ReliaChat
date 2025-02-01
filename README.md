@@ -15,11 +15,12 @@
 
 > [!TIP]
 > What's in the new release?
-> <br> `Word filtering has been improved. Words that include profanity, discrimination and illegal behaviors has been improved.`
-> <br>`UI Changes. (Chatbubble changes, filter chatbubble, performance updates, user chatbubble changes, padding.)`
+> <br>1. **Word filtering has been improved. Words that include profanity, discrimination and illegal behaviors has been improved.**
+> <br><br>2. **UI Changes. (Chatbubble changes, filter chatbubble, performance updates, user chatbubble changes, padding.)**
+> <br><br>3. **Description update.**
 
 > [!IMPORTANT]
-> We will add AI filtering in the future release.
+> We will add filtering for AI in the future releases.
 
 > [!CAUTION]
 > ReliaChat AI Innovations, IS NOT RESPONSIBLE FOR ANY ACTIONS YOU MAKE USING THE AI APP. THE APP IS BUILD AS FRONT-END, AND HAS RESPONSIBILITY TO SEND REQUESTS LOCALLY ON ALREADY TRAINED MODELS (Such as [Ollama Models](https://ollama.com/models), [Hugging Face](https://huggingface.co/models) or external sources for customizability).<br> THESE MODELS ARE PRE-TRAINED BY OPEN-SOURCE COMMUNITIES. PLEASE BE SURE TO USE THE SOFTWARE PROVIDED BY ReliaChat AI Innovations, ETHICALLY.
@@ -28,10 +29,10 @@
 > This filtering feature can be turned off via the setting menu. <br><br>
 
 > [!NOTE]
-> That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the build.
+> That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the official build for iOS devices.
 
 > [!IMPORTANT]
-> Please make sure you report issues that occurr in the app via github or gitlab. This could help us move forward with the project.
+> Please make sure you report issues that occurr in the app via github, gitlab or via our email at reliachat@proton.me. This will help us move forward with the project.
 
 > [!TIP]
 > Please make sure you are within the EU to install (sideload) apps on iOS.
