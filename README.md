@@ -1,14 +1,3 @@
-# IMPORTANT WEB NOTICE:
-
-
-Dear ReliaChat Users,
-
-We want to inform you that our website will temporarily operate without an SSL certificate starting soon, as we work to renew it. During this short period, your browser may display a security warning when accessing ReliaChat. Please rest assured that no data or functionality will be compromised—this is purely a technical renewal process.
-
-We apologize for any inconvenience and appreciate your patience. Our team is prioritizing a swift resolution to restore full security. Thank you for trusting ReliaChat!
-
-— The ReliaChat Team
-
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
 > This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.<br>
