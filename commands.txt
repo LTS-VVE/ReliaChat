@@ -62,4 +62,4 @@ chmod +x ~/ReliaChat/backend/backend_server.py
 echo "~/startup.sh" >> ~/.bashrc
 
 # Display completion message in green
-echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Please RESTART TERMUX BY CLICKING EXIT ON THE NOTIFICATION DROP DOWN. Thank you for using ReliaChat! \033[0m"
+echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Please RESTART TERMUX BY CLICKING EXIT ON THE NOTIFICATION DROP DOWN. Thank you for using ReliaChat! A non profit. \033[0m"
