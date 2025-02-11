@@ -1,3 +1,6 @@
+> [!NOTICE]
+> The new build for v.1.3.4 has some color issues that are not supported in flet `0.26.0`. We will fix this issue in the future release.
+
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
 > This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.<br>
