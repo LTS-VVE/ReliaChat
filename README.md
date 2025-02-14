@@ -1,6 +1,8 @@
-> [!IMPORTANT]
-> The new build for v.1.3.4 has some color issues that are not supported in flet `0.26.0`. We will fix this issue in the future release.
-
+> [!CAUTION]
+> We detected some issues in our app with the following:<br><br>
+> All builds were not properly tested on android, and when you try to send a message via the front-end, it returns a blank response. This is an issue on our fault and we will fix it shortly. Also we have added a
+> new backend for mobile devices, android is targeted with Termux to mitigate and fix this issue. We previously thought this was just an issue with our backend however it seems larger than we previosly thought.<br><br>
+> The new build for v.1.3.4 has some color issues that are not supported in flet `0.26.0`. We will fix this issue in the future release, as it is not our current priority.
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
 > This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.<br>
