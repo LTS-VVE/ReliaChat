@@ -94,6 +94,7 @@ echo -e "\033[32m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠹⠿⠿⠛⠛⢿⣿⣿⣿⠛⠛⠻⠿⠏⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \033[0m"
 echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Launching Server... Thank you for using ReliaChat! When attempting to relaunch the api server simply run python3 ~/ollama/backend_server_for_mobile.py \033[0m"
+./ollama serve &
 python3 backend_server_for_mobile.py
 ```
 
