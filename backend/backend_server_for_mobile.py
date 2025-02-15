@@ -45,7 +45,7 @@ def stream_model_output(prompt):
 
     # Prepare the command for running the model.
     # It uses the ollama binary from ~/ollama and runs the model "gemma2:2b".
-    cmd = [OLLAMA_BIN, "run", "gemma2:2b"]
+    cmd = [OLLAMA_BIN, "run", "gemma:2b"]
 
     # Start the subprocess with the proper working directory
     process = subprocess.Popen(
