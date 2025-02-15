@@ -78,23 +78,23 @@ git clone https://github.com/ollama/ollama.git
 cd ollama
 go generate ./...
 go build .
-mkdir -p ~/ReliaChat/backend
-cd ~/ReliaChat/backend
-wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server.py
-cd ../ollama
 ./ollama pull gemma2:2b
-cat > ~/startup.sh << 'EOL'
-#!/bin/bash
-cd ~/ollama
-./ollama serve &
-sleep 5
-cd ~/ReliaChat/backend
-python backend_server.py
-EOL
-chmod +x ~/startup.sh
-chmod +x ~/ReliaChat/backend/backend_server.py
-echo "~/startup.sh" >> ~/.bashrc
-echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Please RESTART TERMUX BY CLICKING EXIT ON THE NOTIFICATION DROP DOWN. Thank you for using ReliaChat! \033[0m"
+wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server_for_mobile.py
+echo -e "\033[32m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣰⣶⣦⣤⣤⣾⣿⣿⣿⣤⣤⣴⣶⣦⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀
+⠀⠀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⠀⠀
+⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠻⣿⣿⣿⣿⣿⡏⠀⠀
+⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⢀⣼⣿⣿⣿⣿⣦⡀⠀
+⠰⣿⣿⣿⣿⣿⣿⣿⡿⠋⠻⣿⠟⠃⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠆
+⠀⠈⠻⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀
+⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣷⣤⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀
+⠀⠀⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠀⠀
+⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠹⠿⠿⠛⠛⢿⣿⣿⣿⠛⠛⠻⠿⠏⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \033[0m"
+echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Launching Server... Thank you for using ReliaChat! When attempting to relaunch the api server simply run python3 ~/ollama/backend_server_for_mobile.py \033[0m"
+python3 backend_server_for_mobile.py
 ```
 
 > [!NOTE]
