@@ -78,7 +78,7 @@ git clone https://github.com/ollama/ollama.git
 cd ollama
 go generate ./...
 go build .
-./ollama pull gemma2:2b
+./ollama pull gemma:2b
 wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server_for_mobile.py
 echo -e "\033[32m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⣰⣶⣦⣤⣤⣾⣿⣿⣿⣤⣤⣴⣶⣦⠀⠀⠀⠀⠀⠀
@@ -93,7 +93,7 @@ echo -e "\033[32m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠹⠿⠿⠛⠛⢿⣿⣿⣿⠛⠛⠻⠿⠏⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \033[0m"
-echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Launching Server... Thank you for using ReliaChat! When attempting to relaunch the api server simply run python3 ~/ollama/backend_server_for_mobile.py \033[0m"
+echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Launching Server... Thank you for using ReliaChat! When attempting to relaunch the api server simply run python3 ~/ollama/backend_server_for_mobile.py or by going into the directory and running python3 backend_server_for_mobile.py. \033[0m"
 ./ollama serve &
 python3 backend_server_for_mobile.py
 ```
