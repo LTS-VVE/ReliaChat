@@ -2,7 +2,7 @@
 > We have fixed the backend issue, and you can now officially chat with an LLM of your choice, at any time. (As long as the model is installed).<br><br>
 
 > [!NOTE]
-> The new build for v.1.3.5 has fixed color issues that are not supported in flet `0.26.0`.<br>
+> The new build for v.1.3.5 has fixed color issues that are not supported in flet `0.26.0` and `0.27.0`.<br>
 # <p align="center">ReliaChat AI Innovations App (Source-Code)</p>
 > [!IMPORTANT]
 > This project is under the GNU AFFERO GENERAL PUBLIC LICENSE v3.<br>
