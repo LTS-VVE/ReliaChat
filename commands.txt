@@ -1,65 +1,26 @@
-# Update and upgrade all existing packages in the Termux environment
 pkg update -y && pkg upgrade -y
-
-# Install necessary development and runtime dependencies
 pkg install -y python curl wget openssh git golang cmake clang
-
-# Ensure pip is installed and upgraded to the latest version
 python -m ensurepip --upgrade
-
-# Install required Python libraries for the backend server
 pip install flask requests
-
-# Clone the Ollama repository from GitHub
 git clone https://github.com/ollama/ollama.git
-
-# Navigate to the Ollama directory
 cd ollama
-
-# Generate necessary Go files for the Ollama project
 go generate ./...
-
-# Compile the Ollama binary
 go build .
-
-# Create the project directory structure for the backend
-mkdir -p ~/ReliaChat/backend
-
-# Navigate to the backend directory
-cd ~/ReliaChat/backend
-
-# Download the backend server Python script from GitHub
-wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server.py
-
-# Return to the Ollama directory
-cd ../ollama
-
-# Pull the Gemma2 2B language model
-./ollama pull gemma2:2b
-
-# Create a startup script to launch Ollama and the backend server
-cat > ~/startup.sh << 'EOL'
-#!/bin/bash
-# Change to Ollama directory
-cd ~/ollama
-# Start Ollama service in the background
+./ollama pull gemma:2b
+wget https://raw.githubusercontent.com/LTS-VVE/ReliaChat/main/backend/backend_server_for_mobile.py
+echo -e "\033[32m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣰⣶⣦⣤⣤⣾⣿⣿⣿⣤⣤⣴⣶⣦⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀
+⠀⠀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⠀⠀
+⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠻⣿⣿⣿⣿⣿⡏⠀⠀
+⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⢀⣼⣿⣿⣿⣿⣦⡀⠀
+⠰⣿⣿⣿⣿⣿⣿⣿⡿⠋⠻⣿⠟⠃⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠆
+⠀⠈⠻⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀
+⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣷⣤⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀
+⠀⠀⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠀⠀
+⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠹⠿⠿⠛⠛⢿⣿⣿⣿⠛⠛⠻⠿⠏⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \033[0m"
+echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Launching Server... Thank you for using ReliaChat! When attempting to relaunch the api server simply run python3 ~/ollama/backend_server_for_mobile.py or by going into the directory and running python3 backend_server_for_mobile.py. \033[0m"
 ./ollama serve &
-# Wait for Ollama to initialize
-sleep 5
-# Change to backend directory
-cd ~/ReliaChat/backend
-# Launch the Flask backend server
-python backend_server.py
-EOL
-
-# Make the startup script executable
-chmod +x ~/startup.sh
-
-# Make the backend server script executable
-chmod +x ~/ReliaChat/backend/backend_server.py
-
-# Add startup script to bash profile to run on Termux launch
-echo "~/startup.sh" >> ~/.bashrc
-
-# Display completion message in green
-echo -e "\033[32mInstallation and setup complete. Ollama and ReliaChat backend are ready to launch. Please RESTART TERMUX BY CLICKING EXIT ON THE NOTIFICATION DROP DOWN. Thank you for using ReliaChat! A non profit. \033[0m"
+python3 backend_server_for_mobile.py
