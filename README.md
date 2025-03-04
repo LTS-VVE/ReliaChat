@@ -1,3 +1,4 @@
+## Please star our project!!
 > [!NOTE]
 > We have fixed the backend issue, and you can now officially chat with an LLM of your choice, at any time. (As long as the model is installed).<br><br>
 
