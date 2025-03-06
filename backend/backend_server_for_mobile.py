@@ -39,17 +39,13 @@ def start_ollama_server():
 def stream_model_output(prompt):
     # Ensure the ollama server is running
     start_ollama_server()
-
+    
     # Sanitize the prompt to prevent command injection
     safe_prompt = shlex.quote(prompt)
-
-    # Prepare the command for running the model.
-    # It uses the ollama binary from ~/ollama and runs the model "gemma2:2b".
-    cmd = [OLLAMA_BIN, "run", "gemma:2b"]
-
-    # Start the subprocess with the proper working directory
+    
+    # Start the subprocess to run the command
     process = subprocess.Popen(
-        cmd,
+        [OLLAMA_BIN, "run", "gemma:2b"],
         cwd=OLLAMA_DIR,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
@@ -57,43 +53,37 @@ def stream_model_output(prompt):
         text=True,
         bufsize=1  # Line buffered
     )
-
-    # Write the sanitized prompt to stdin and close it
+    
+    # Write the sanitized prompt to stdin and flush immediately
     process.stdin.write(safe_prompt + "\n")
+    process.stdin.flush()
     process.stdin.close()
-
-    # Read and yield output line by line
-    full_response = ""
+    
+    # Read and yield output line by line as soon as they are available
     while True:
         output_line = process.stdout.readline()
         if output_line == '' and process.poll() is not None:
             break
         if output_line:
-            # Append the new output, clean it up and print live
-            full_response += output_line.strip() + " "
-            print(output_line.strip())
-
-            # Yield the current output as a server-sent event
-            yield f"data: {json.dumps({'response': full_response.strip()})}\n\n"
-
-    # Check if the process ended with an error and yield the error message if so
+            # Immediately yield the current output line
+            yield f"data: {json.dumps({'response': output_line.strip()})}\n\n"
+    
+    # If an error occurred, yield the error message immediately
     if process.returncode != 0:
         error_message = process.stderr.read()
-        yield f"data: {json.dumps({'error': error_message})}\n\n"
+        yield f"data: {json.dumps({'error': error_message.strip()})}\n\n"
 
 @app.route('/api/v1/query', methods=['POST'])
 def query_model():
     data = request.get_json()
     prompt = data.get("prompt", "")
-
     if not prompt:
         return Response(
             json.dumps({"error": "No prompt provided"}),
             status=400,
             mimetype='application/json'
         )
-
-    # Return a streaming response for server-sent events
+    # Return a streaming response
     return Response(
         stream_with_context(stream_model_output(prompt)),
         mimetype='text/event-stream',
@@ -102,6 +92,19 @@ def query_model():
             'Connection': 'keep-alive',
             'Access-Control-Allow-Origin': '*'
         }
+    )
+
+# Status endpoint to always return connected status
+@app.route('/api/v1/status', methods=['GET'])
+def status():
+    status_data = {
+        "status": "connected",
+        "model_name": "gemma:2b"
+    }
+    return Response(
+        json.dumps(status_data),
+        status=200,
+        mimetype='application/json'
     )
 
 def cleanup():
