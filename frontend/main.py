@@ -36,6 +36,59 @@ RESPONSES_FILE = "responses.txt"
 # Global language (updated during setup)
 current_language = "en"
 
+# Global language options shared across setup screens
+LANGUAGE_OPTIONS = [
+    ft.dropdown.Option("en", "English (en)"),
+    ft.dropdown.Option("sq", "Shqip (sq)"),
+    ft.dropdown.Option("de", "Deutsch (de)"),
+    ft.dropdown.Option("da", "Dansk (da)"),
+    ft.dropdown.Option("hu", "Magyar (hu)"),
+    ft.dropdown.Option("ga", "Gaeilge (ga)"),
+    ft.dropdown.Option("it", "Italiano (it)"),
+    ft.dropdown.Option("no", "Norsk (no)"),
+    ft.dropdown.Option("uk", "українська (uk)"),
+    ft.dropdown.Option("ro", "Română (ro)"),
+    ft.dropdown.Option("ru", "Русский (ru)"),
+    ft.dropdown.Option("es", "Español (es)"),
+    ft.dropdown.Option("fr", "Français (fr)"),
+    ft.dropdown.Option("sv", "svenska (sv)"),
+    ft.dropdown.Option("zh", "简体中文 (zh)"),
+    ft.dropdown.Option("zh-hk", "粵語 (Cantonese) (zh-hk)"),
+    ft.dropdown.Option("ja", "日本語 (ja)"),
+    ft.dropdown.Option("ko", "한국어 (ko)"),
+    ft.dropdown.Option("hi", "हिंदी (hi)"),
+    ft.dropdown.Option("ta", "தமிழ் (ta)"),
+    ft.dropdown.Option("he", "עִברִית (he)"),
+    ft.dropdown.Option("ar", "عربي (ar)"),
+    ft.dropdown.Option("am", "አማርኛ (am)"),
+    ft.dropdown.Option("sw", "Kiswahili (sw)"),
+    ft.dropdown.Option("fa", "فارسی (fa)"),
+    ft.dropdown.Option("ne", "नेपाली (ne)"),
+    ft.dropdown.Option("tl", "Tagalog/Filipino (tl)"),
+    ft.dropdown.Option("bg", "Български (bg)"),
+    ft.dropdown.Option("th", "ภาษาไทย (th)"),
+    ft.dropdown.Option("pt", "Português (pt)"),
+    ft.dropdown.Option("pt-br", "Português (Brasil) (pt-br)"),
+    ft.dropdown.Option("id", "Bahasa Indonesia (id)"),
+    ft.dropdown.Option("el", "ελληνικά (el)"),
+    ft.dropdown.Option("hr", "Hrvatski (hr)"),
+    ft.dropdown.Option("sr", "Srpski (sr)"),
+    ft.dropdown.Option("fi", "Suomi (fi)"),
+    ft.dropdown.Option("mk", "македонски (mk)"),
+    ft.dropdown.Option("pl", "Polski (pl)"),
+    ft.dropdown.Option("tr", "Türkçe (tr)"),
+    ft.dropdown.Option("ka", "ქართული (ka)"),
+    ft.dropdown.Option("kk", "Қазақ тілі (kk)"),
+    ft.dropdown.Option("ms", "Melayu (ms)"),
+    ft.dropdown.Option("vi", "Tiếng Việt (vi)"),
+    ft.dropdown.Option("cs", "čeština (cs)"),
+    ft.dropdown.Option("la", "Latin (la)"),
+]
+
+# Global generation control variables
+is_generating = False
+stop_generation_flag = False
+
 def translate(key):
     global current_language
     return get_translation(current_language, key)
@@ -44,7 +97,6 @@ def load_settings():
     try:
         with open(SETTINGS_FILE, "r") as file:
             settings = json.load(file)
-            # In this version, we use an extra flag "setup_complete"
             return (
                 settings.get("ip", "127.0.0.1"),
                 settings.get("port", 5000),
@@ -54,13 +106,11 @@ def load_settings():
                 settings.get("language", "en"),
                 settings.get("custom_endpoint", "/api/v1/query"),
                 settings.get("filter_mode", "on"),
-                settings.get("setup_complete", False)
             )
     except (FileNotFoundError, json.JSONDecodeError):
-        # Default settings; setup is not complete.
-        return "127.0.0.1", 5000, "User", "dark", 0.7, "en", "/api/v1/query", "on", False
+        return "127.0.0.1", 5000, "User", "dark", 0.7, "en", "/api/v1/query", "on"
 
-def save_settings(ip, port, username, theme_mode, temperature, custom_endpoint, filter_mode, setup_complete=None):
+def save_settings(ip, port, username, theme_mode, temperature, custom_endpoint, filter_mode):
     global current_language
     settings = {
         "ip": ip,
@@ -72,8 +122,6 @@ def save_settings(ip, port, username, theme_mode, temperature, custom_endpoint, 
         "custom_endpoint": custom_endpoint,
         "filter_mode": filter_mode,
     }
-    if setup_complete is not None:
-        settings["setup_complete"] = setup_complete
     with open(SETTINGS_FILE, "w") as file:
         json.dump(settings, file)
 
@@ -121,7 +169,6 @@ def erase_all_chats(page):
     page.update()
 
 def get_ollama_response(message, ip, port, temperature, custom_endpoint):
-    # Fallback function used if streaming is not needed.
     url = f"http://{ip}:{port}{custom_endpoint}"
     headers = {"Content-Type": "application/json"}
     data = {"prompt": message, "temperature": temperature}
@@ -134,19 +181,19 @@ def get_ollama_response(message, ip, port, temperature, custom_endpoint):
                 line = line.decode("utf-8")
                 if line.startswith("data:"):
                     response_part = json.loads(line[5:]).get("response", "")
-                    # Use the latest part as in the original code.
                     response_data = response_part
                     print(response_part)
         return response_data
     except Exception as e:
-        return f"Failed to connect to server at {url}. Please check the IP and Port. Error: {str(e)}"
+        return f"Failed to connect to server at {url}. {translate('check_ip_port')} Error: {str(e)}"
 
 def save_ollama_response(response):
     with open(RESPONSES_FILE, "a") as file:
         file.write(response + "\n")
 
-def create_glowing_chat_bubble(message, is_user=False, theme_mode="dark", bgcolor="#424242", glow_color="#8A2BE2"):
-    text_color = "white" if theme_mode == "dark" else "black"
+def create_glowing_chat_bubble(message, is_user=False, theme_mode="dark", bgcolor="#424242", glow_color="#8A2BE2", text_color=None):
+    if text_color is None:
+        text_color = "white" if theme_mode == "dark" else "black"
     return ft.Container(
         content=ft.Text(
             message,
@@ -182,7 +229,7 @@ def get_greeting():
         return translate("good_evening")
 
 def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_bubble, page, loading_color):
-    # Use a Markdown widget for formatted responses.
+    global stop_generation_flag
     message_md = ft.Markdown("", selectable=True)
     progress_ring = ft.ProgressRing(width=20, height=20, color=loading_color)
     cursor = ft.Text("|", size=14, weight=ft.FontWeight.BOLD)
@@ -210,6 +257,8 @@ def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_
         req = urllib.request.Request(url, data=data_bytes, headers=headers, method="POST")
         with urllib.request.urlopen(req) as response:
             for line in response:
+                if stop_generation_flag:
+                    break
                 line = line.decode("utf-8")
                 if line.startswith("data:"):
                     try:
@@ -235,10 +284,6 @@ def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_
     return full_response
 
 def typewriter_animation(response_text, chat_row, page, delay=0.001):
-    import re
-    processed_text = re.sub(r'(\d+\.)', r'\n\1', response_text)
-    processed_text = re.sub(r'```', r'\n```', processed_text)
-    
     chat_bubble = chat_row.controls[1]
     message_text = ft.Text("", size=14, weight=ft.FontWeight.NORMAL)
     chat_bubble.content = ft.Column([message_text])
@@ -259,7 +304,7 @@ def typewriter_animation(response_text, chat_row, page, delay=0.001):
     cursor_thread.start()
 
     message = ""
-    for char in processed_text:
+    for char in response_text:
         message += char
         message_text.value = message
         page.update()
@@ -271,149 +316,236 @@ def typewriter_animation(response_text, chat_row, page, delay=0.001):
         chat_bubble.content.controls.remove(cursor)
     page.update()
 
-# Setup wizard – if setup is not complete, show a simple wizard to configure settings.
 def run_setup(page: ft.Page, ip, port, username, theme_mode, temperature, language, custom_endpoint, filter_mode):
-    wizard_state = {"theme_mode": theme_mode, "username": username, "language": language}
+    wizard_state = {
+        "language": language,
+        "theme_mode": theme_mode,
+        "username": username
+    }
     step_index = 0
     setup_container = ft.Container(expand=True)
+    
+    install_commands = """THIS IS ONLY A TEST
+Please copy and paste the following commands into Termux to install the required backend components.
+If already installed, you may continue to the next step.
 
-    def go_next(value):
+Example:
+pkg install python
+pip install ollama-sdk
+...
+"""
+    def go_next(value=None):
         nonlocal step_index, wizard_state
+        global current_language
         if step_index == 0:
-            wizard_state["theme_mode"] = value
-        elif step_index == 1:
-            wizard_state["username"] = value if value.strip() != "" else "User"
-        elif step_index == 2:
             wizard_state["language"] = value
+            current_language = value
+        elif step_index == 1:
+            pass
+        elif step_index == 2:
+            wizard_state["theme_mode"] = value
+        elif step_index == 3:
+            wizard_state["username"] = value if value.strip() != "" else "User"
         step_index += 1
-        if step_index < 3:
+        setup_container.content = render_step(step_index)
+        page.update()
+        if step_index == 6:
+            current_language = wizard_state["language"]
+            save_settings(ip, port, wizard_state["username"], wizard_state["theme_mode"], temperature, custom_endpoint, filter_mode)
+            exit_container = ft.Container(
+                expand=True,
+                bgcolor="#000000",
+                alignment=ft.Alignment.CENTER,
+                content=ft.Text(translate("exiting"), color="white", size=20)
+            )
+            page.clean()
+            page.add(exit_container)
+            page.update()
+            time.sleep(1)
+            sys.exit(0)
+    
+    def go_back():
+        nonlocal step_index
+        if step_index > 0:
+            step_index -= 1
             setup_container.content = render_step(step_index)
             page.update()
-        else:
-            global current_language
-            current_language = wizard_state["language"]
-            save_settings(ip, port, wizard_state["username"], wizard_state["theme_mode"], temperature, custom_endpoint, filter_mode, setup_complete=True)
-            # Restart the app so that new settings take effect.
-            page.views.pop()
-            os.execv(sys.executable, [sys.executable] + sys.argv)
 
     def render_step(step):
+        def nav_row():
+            controls = []
+            if step > 0 and step < 6:
+                controls.append(ft.IconButton(
+                    icon=ft.icons.ARROW_BACK_ROUNDED,
+                    icon_color="#595959",
+                    on_click=lambda e: go_back()
+                ))
+            if step < 6:
+                controls.append(ft.IconButton(
+                    icon=ft.icons.ARROW_FORWARD_ROUNDED,
+                    icon_color="white",
+                    on_click=lambda e: go_next(input_value.value if input_value is not None else None)
+                ))
+            return ft.Row(controls, alignment=ft.MainAxisAlignment.END)
+        
+        input_value = None
         if step == 0:
-            radio = ft.RadioGroup(
-                content=ft.Column([
-                    ft.Radio(label="Light Theme", value="light"),
-                    ft.Radio(label="Dark Theme", value="dark"),
-                ], alignment=ft.MainAxisAlignment.CENTER),
-                value=wizard_state["theme_mode"]
-            )
-            next_button = ft.ElevatedButton("Next", on_click=lambda e: go_next(radio.value))
-            skip_button = ft.TextButton("Skip", on_click=lambda e: go_next(radio.value))
             return ft.Column(
                 [
-                    ft.Text("Setup: Choose The Theme", size=24, weight=ft.FontWeight.BOLD),
-                    radio,
-                    ft.Row([skip_button, next_button], alignment=ft.MainAxisAlignment.END)
+                    ft.Icon(ft.icons.PUBLIC, size=60, color="white"),
+                    ft.Text(
+                        translate("setup_choose_language") if translate("setup_choose_language") != "" else "Setup: Choose App Language",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    ft.Dropdown(
+                        value=wizard_state["language"] if wizard_state["language"] else "en",
+                        options=LANGUAGE_OPTIONS,
+                        width=300,
+                        on_change=lambda e: go_next(e.control.value)
+                    ),
+                    nav_row()
                 ],
-                expand=True,
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
             )
         elif step == 1:
-            name_field = ft.TextField(
-                hint_text="Enter your name...",
-                value=wizard_state["username"],
-                prefix_icon=ft.Icon(ft.icons.PERSON_ROUNDED),
-                width=300
-            )
-            next_button = ft.ElevatedButton("Next", on_click=lambda e: go_next(name_field.value))
-            skip_button = ft.TextButton("Skip", on_click=lambda e: go_next(name_field.value))
             return ft.Column(
                 [
-                    ft.Text("Setup: Choose Your Name", size=24, weight=ft.FontWeight.BOLD),
-                    name_field,
-                    ft.Row([skip_button, next_button], alignment=ft.MainAxisAlignment.END)
+                    ft.Icon(ft.icons.SYSTEM_UPDATE_ALT_ROUNDED, size=60, color="white"),
+                    ft.Text(
+                        translate("setup_install_instructions") if translate("setup_install_instructions") != "" else "Setup: Installation Instructions",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    ft.Container(
+                        content=ft.TextField(value=install_commands, read_only=True, multiline=True, expand=True),
+                        padding=10,
+                        bgcolor="#303030",
+                        border_radius=10,
+                    ),
+                    ft.IconButton(
+                        icon=ft.icons.COPY,
+                        icon_color="white",
+                        on_click=lambda e: page.set_clipboard(install_commands)
+                    ),
+                    nav_row()
                 ],
-                expand=True,
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
             )
         elif step == 2:
-            language_dropdown = ft.Dropdown(
-                value=wizard_state["language"] if wizard_state["language"] else "en",
-                options=[
-                    ft.dropdown.Option("en", "English 🇺🇸"),
-                    ft.dropdown.Option("sq", "Shqip 🇦🇱"),
-                    ft.dropdown.Option("de", "Deutsch 🇩🇪"),
-                    ft.dropdown.Option("da", "Dansk 🇩🇰"),
-                    ft.dropdown.Option("hu", "Magyar 🇭🇺"),
-                    ft.dropdown.Option("ga", "Gaeilge 🇮🇪"),
-                    ft.dropdown.Option("it", "Italiano 🇮🇹"),
-                    ft.dropdown.Option("no", "Norsk 🇳🇴"),
-                    ft.dropdown.Option("uk", "українська 🇺🇦"),
-                    ft.dropdown.Option("ro", "Română 🇷🇴"),
-                    ft.dropdown.Option("ru", "Русский 🇷🇺"),
-                    ft.dropdown.Option("es", "Español 🇪🇸"),
-                    ft.dropdown.Option("fr", "Français 🇫🇷"),
-                    ft.dropdown.Option("sv", "svenska 🇸🇪"),
-                    ft.dropdown.Option("zh", "简体中文 🇨🇳"),
-                    ft.dropdown.Option("zh-hk", "廣州話 🇭🇰"),
-                    ft.dropdown.Option("ja", "日本語 🇯🇵"),
-                    ft.dropdown.Option("ko", "한국어 🇰🇷"),
-                    ft.dropdown.Option("hi", "हिंदी 🇮🇳"),
-                    ft.dropdown.Option("ta", "தமிழ் 🇱🇰"),
-                    ft.dropdown.Option("he", "עִברִית 🇮🇱"),
-                    ft.dropdown.Option("ar", "عربي 🇦🇪"),
-                    ft.dropdown.Option("am", "አማርኛ 🇪🇹"),
-                    ft.dropdown.Option("sw", "Kiswahili 🇹🇿"),
-                    ft.dropdown.Option("fa", "فارسی 🇮🇷"),
-                    ft.dropdown.Option("ne", "नेपाली 🇳🇵"),
-                    ft.dropdown.Option("tl", "Filipino 🇵🇭"),
-                    ft.dropdown.Option("bg", "Български 🇧🇬"),
-                    ft.dropdown.Option("th", "ภาษาไทย 🇹🇭"),
-                    ft.dropdown.Option("pt", "Português 🇵🇹"),
-                    ft.dropdown.Option("pt-br", "Português (Brasil) 🇧🇷"),
-                    ft.dropdown.Option("id", "Bahasa Indonesia 🇮🇩"),
-                    ft.dropdown.Option("el", "ελληνικά 🇬🇷"),
-                    ft.dropdown.Option("hr", "Hrvatski 🇭🇷"),
-                    ft.dropdown.Option("sr", "Srpski 🇷🇸"),
-                    ft.dropdown.Option("fi", "Suomi 🇫🇮"),
-                    ft.dropdown.Option("mk", "македонски 🇲🇰"),
-                    ft.dropdown.Option("pl", "Polski 🇵🇱"),
-                    ft.dropdown.Option("tr", "Türkçe 🇹🇷"),
-                    ft.dropdown.Option("ka", "ქართული 🇬🇪"),
-                    ft.dropdown.Option("kk", "Қазақ тілі 🇰🇿"),
-                    ft.dropdown.Option("ms", "Melayu 🇲🇾"),
-                    ft.dropdown.Option("vi", "Tiếng Việt 🇻🇳"),
-                    ft.dropdown.Option("cs", "čeština 🇨🇿"),
-                    ft.dropdown.Option("la", "Latina 🇺🇳"),
-                ],
-                width=300
-            )
-            next_button = ft.ElevatedButton("Finish", on_click=lambda e: go_next(language_dropdown.value))
-            skip_button = ft.TextButton("Skip", on_click=lambda e: go_next(language_dropdown.value))
             return ft.Column(
                 [
-                    ft.Text("Setup: Choose App Language", size=24, weight=ft.FontWeight.BOLD),
-                    ft.Icon(ft.icons.PUBLIC, size=60),
-                    language_dropdown,
-                    ft.Row([skip_button, next_button], alignment=ft.MainAxisAlignment.END)
+                    ft.Icon(ft.icons.CONTRAST, size=60, color="white"),
+                    ft.Text(
+                        translate("setup_choose_theme") if translate("setup_choose_theme") != "" else "Setup: Choose The Theme",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    ft.RadioGroup(
+                        content=ft.Column([
+                            ft.Radio(label=translate("light_mode") if translate("light_mode") != "" else "Light Mode", value="light"),
+                            ft.Radio(label=translate("dark_mode") if translate("dark_mode") != "" else "Dark Mode", value="dark"),
+                        ], alignment=ft.MainAxisAlignment.CENTER),
+                        value=wizard_state["theme_mode"],
+                        on_change=lambda e: go_next(e.control.value)
+                    ),
+                    nav_row()
                 ],
-                expand=True,
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            )
+        elif step == 3:
+            input_value = ft.TextField(
+                hint_text=translate("setup_enter_username") if translate("setup_enter_username") != "" else "Enter your name...",
+                value=wizard_state["username"],
+                width=300
+            )
+            return ft.Column(
+                [
+                    ft.Icon(ft.icons.PERSON_ROUNDED, size=60, color="white"),
+                    ft.Text(
+                        translate("setup_choose_username") if translate("setup_choose_username") != "" else "Setup: Choose Your Name",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    input_value,
+                    nav_row()
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            )
+        elif step == 4:
+            status_text = ft.Text(translate("not_connected"), size=16, color="red")
+            def test_connection(e):
+                try:
+                    url = f"http://{ip}:{port}/api/v1/status"
+                    response = urllib.request.urlopen(url, timeout=2)
+                    if response.status == 200:
+                        status_text.value = translate("connected")
+                        status_text.color = "green"
+                    else:
+                        status_text.value = translate("not_connected")
+                        status_text.color = "red"
+                except Exception:
+                    status_text.value = translate("not_connected")
+                    status_text.color = "red"
+                page.update()
+            return ft.Column(
+                [
+                    ft.Icon(ft.icons.DNS_ROUNDED, size=60, color="white"),
+                    ft.Text(
+                        translate("setup_internet_setup") if translate("setup_internet_setup") != "" else "Setup: Check Backend Connection",
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    ft.ElevatedButton(
+                        translate("test_connection") if translate("test_connection") != "" else "Test Connection",
+                        on_click=test_connection,
+                        bgcolor="black",
+                        color="white"
+                    ),
+                    status_text,
+                    nav_row()
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            )
+        elif step == 5:
+            return ft.Column(
+                [
+                    ft.Icon(ft.icons.CHECK_CIRCLE_OUTLINE_ROUNDED, size=60, color="GREEN"),
+                    ft.Text(
+                        translate("setup_complete"),
+                        size=24,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    ft.Text(
+                        translate("restart_required"),
+                        size=16
+                    ),
+                    ft.ElevatedButton(
+                        translate("ok"),
+                        on_click=lambda e: go_next(),
+                        bgcolor=ft.colors.BLACK,
+                        color="white"
+                    )
+                ],
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
             )
     setup_container.content = render_step(step_index)
-    page.views.append(ft.View(
-        "/setup",
-        controls=[setup_container],
-        padding=20
-    ))
+    page.views.append(ft.View("/setup", controls=[setup_container], padding=20))
     page.go("/setup")
 
 def main(page: ft.Page):
-    global current_language
-    # Unpack all 9 values from load_settings
-    ip, port, username, theme_mode, temperature, current_language, custom_endpoint, filter_mode, setup_complete = load_settings()
+    global current_language, is_generating, stop_generation_flag
+    if not os.path.exists(SETTINGS_FILE):
+        run_setup(page, "127.0.0.1", 5000, "User", "dark", 0.7, "en", "/api/v1/query", "on")
+        return
+
+    ip, port, username, theme_mode, temperature, current_language, custom_endpoint, filter_mode = load_settings()
     chat_history = load_chat_history()
 
     page.title = "ReliaChat"
@@ -432,12 +564,6 @@ def main(page: ft.Page):
         page.theme_color = ft.colors.PURPLE
     page.update()
 
-    # Run setup wizard if settings are not complete.
-    if not setup_complete:
-        run_setup(page, ip, port, username, theme_mode, temperature, current_language, custom_endpoint, filter_mode)
-        return
-
-    # Show splash screen.
     splash_image = "assets/light_splash.png" if theme_mode == "light" else "assets/dark_splash.png"
     splash_screen = ft.Container(
         content=ft.Image(src=splash_image, expand=True),
@@ -475,7 +601,7 @@ def main(page: ft.Page):
         page.update()
 
     def show_settings_dialog():
-        ip, port, username, theme_mode, temperature, language, custom_endpoint, filter_mode, _ = load_settings()
+        ip, port, username, theme_mode, temperature, language, custom_endpoint, filter_mode = load_settings()
         connection_status = translate("not_connected")
         model_name = "Unknown"
         try:
@@ -532,7 +658,7 @@ def main(page: ft.Page):
             active_color="white",
             inactive_thumb_color="gray",
             active_track_color="red",
-            inactive_track_color="sidebar_text_color",
+            inactive_track_color="gray",
             on_change=lambda e: None,
         )
         theme_toggle = ft.Switch(
@@ -540,7 +666,7 @@ def main(page: ft.Page):
             active_color="white",
             inactive_thumb_color="gray",
             active_track_color="#86759c",
-            inactive_track_color="sidebar_text_color",
+            inactive_track_color="gray",
             on_change=lambda e: None,
         )
         connection_status_text = ft.Text(
@@ -549,56 +675,9 @@ def main(page: ft.Page):
             size=12,
             weight=ft.FontWeight.BOLD,
         )
-        language_options = [
-            ft.dropdown.Option("en", "English 🇺🇸"),
-            ft.dropdown.Option("sq", "Shqip 🇦🇱"),
-            ft.dropdown.Option("de", "Deutsch 🇩🇪"),
-            ft.dropdown.Option("da", "Dansk 🇩🇰"),
-            ft.dropdown.Option("hu", "Magyar 🇭🇺"),
-            ft.dropdown.Option("ga", "Gaeilge 🇮🇪"),
-            ft.dropdown.Option("it", "Italiano 🇮🇹"),
-            ft.dropdown.Option("no", "Norsk 🇳🇴"),
-            ft.dropdown.Option("uk", "українська 🇺🇦"),
-            ft.dropdown.Option("ro", "Română 🇷🇴"),
-            ft.dropdown.Option("ru", "Русский 🇷🇺"),
-            ft.dropdown.Option("es", "Español 🇪🇸"),
-            ft.dropdown.Option("fr", "Français 🇫🇷"),
-            ft.dropdown.Option("sv", "svenska 🇸🇪"),
-            ft.dropdown.Option("zh", "简体中文 🇨🇳"),
-            ft.dropdown.Option("zh-hk", "廣州話 🇭🇰"),
-            ft.dropdown.Option("ja", "日本語 🇯🇵"),
-            ft.dropdown.Option("ko", "한국어 🇰🇷"),
-            ft.dropdown.Option("hi", "हिंदी 🇮🇳"),
-            ft.dropdown.Option("ta", "தமிழ் 🇱🇰"),
-            ft.dropdown.Option("he", "עִברִית 🇮🇱"),
-            ft.dropdown.Option("ar", "عربي 🇦🇪"),
-            ft.dropdown.Option("am", "አማርኛ 🇪🇹"),
-            ft.dropdown.Option("sw", "Kiswahili 🇹🇿"),
-            ft.dropdown.Option("fa", "فارسی 🇮🇷"),
-            ft.dropdown.Option("ne", "नेपाली 🇳🇵"),
-            ft.dropdown.Option("tl", "Filipino 🇵🇭"),
-            ft.dropdown.Option("bg", "Български 🇧🇬"),
-            ft.dropdown.Option("th", "ภาษาไทย 🇹🇭"),
-            ft.dropdown.Option("pt", "Português 🇵🇹"),
-            ft.dropdown.Option("pt-br", "Português (Brasil) 🇧🇷"),
-            ft.dropdown.Option("id", "Bahasa Indonesia 🇮🇩"),
-            ft.dropdown.Option("el", "ελληνικά 🇬🇷"),
-            ft.dropdown.Option("hr", "Hrvatski 🇭🇷"),
-            ft.dropdown.Option("sr", "Srpski 🇷🇸"),
-            ft.dropdown.Option("fi", "Suomi 🇫🇮"),
-            ft.dropdown.Option("mk", "македонски 🇲🇰"),
-            ft.dropdown.Option("pl", "Polski 🇵🇱"),
-            ft.dropdown.Option("tr", "Türkçe 🇹🇷"),
-            ft.dropdown.Option("ka", "ქართული 🇬🇪"),
-            ft.dropdown.Option("kk", "Қазақ тілі 🇰🇿"),
-            ft.dropdown.Option("ms", "Melayu 🇲🇾"),
-            ft.dropdown.Option("vi", "Tiếng Việt 🇻🇳"),
-            ft.dropdown.Option("cs", "čeština 🇨🇿"),
-            ft.dropdown.Option("la", "Latina 🇺🇳"),
-        ]
         language_dropdown = ft.Dropdown(
             value=current_language,
-            options=language_options,
+            options=LANGUAGE_OPTIONS,
             on_change=lambda e: update_language(e.control.value),
         )
         def save_settings_action(e):
@@ -628,8 +707,20 @@ def main(page: ft.Page):
             ft.Row([ft.Text(translate("temperature")), temperature_input]),
             ft.Row([ft.Text(translate("connection_status")), connection_status_text]),
             ft.Row([
-                ft.ElevatedButton(translate("cancel"), on_click=cancel_settings_action, bgcolor=ft.colors.RED_800, color="white", expand=True),
-                ft.ElevatedButton(translate("save"), on_click=save_settings_action, bgcolor=ft.colors.WHITE, color="black", expand=True)
+                ft.ElevatedButton(
+                    translate("cancel"),
+                    on_click=cancel_settings_action,
+                    bgcolor=ft.colors.RED_800,
+                    color="white",
+                    expand=True
+                ),
+                ft.ElevatedButton(
+                    translate("save"),
+                    on_click=save_settings_action,
+                    bgcolor=ft.colors.WHITE,
+                    color="black",
+                    expand=True
+                )
             ], alignment=ft.MainAxisAlignment.CENTER, spacing=2)
         ], spacing=2)
         dlg_content = ft.Container(
@@ -645,16 +736,11 @@ def main(page: ft.Page):
         page.dialog = dlg
         dlg.open = True
         page.update()
-
-    # Build chat area.
-    chat_area = ft.ListView(
-        expand=True,
-        spacing=10,
-        auto_scroll=True
-    )
+    chat_area = ft.ListView(expand=True, spacing=10, auto_scroll=True)
     page.chat_area = chat_area
 
     def send_message(e=None):
+        global is_generating, stop_generation_flag
         if input_field.value.strip():
             user_message = input_field.value
             user_bubble = create_glowing_chat_bubble(
@@ -663,20 +749,16 @@ def main(page: ft.Page):
                 theme_mode=theme_mode,
                 bgcolor="#8f8f8f",
                 glow_color="#8f8f8f",
+                text_color=sidebar_text_color
             )
             user_row = ft.Row(
-                [
-                    ft.Container(width=40),
-                    user_bubble,
-                    ft.Icon(ft.icons.PERSON_ROUNDED, color="#a3a3a3"),
-                ],
+                [ft.Container(width=40), user_bubble, ft.Icon(ft.icons.PERSON_ROUNDED, color="#a3a3a3")],
                 alignment=ft.MainAxisAlignment.END,
             )
             chat_area.controls.append(user_row)
             page.update()
 
-            ip, port, username, _, temperature, _, custom_endpoint, filter_mode, _ = load_settings()
-
+            ip, port, username, _, temperature, _, custom_endpoint, filter_mode = load_settings()
             if filter_mode != "off" and strict_content(user_message):
                 blocked_message = translate("content_blocked")
                 ai_bubble = create_glowing_chat_bubble(
@@ -685,13 +767,10 @@ def main(page: ft.Page):
                     theme_mode=theme_mode,
                     bgcolor="red",
                     glow_color="red",
+                    text_color=sidebar_text_color
                 )
                 ai_row = ft.Row(
-                    [
-                        ft.Icon(ft.icons.SHIELD_ROUNDED, color="red"),
-                        ai_bubble,
-                        ft.Container(width=40),
-                    ],
+                    [ft.Icon(ft.icons.SHIELD_ROUNDED, color="red"), ai_bubble, ft.Container(width=40)],
                     alignment=ft.MainAxisAlignment.START,
                 )
                 chat_area.controls.append(ai_row)
@@ -710,10 +789,11 @@ def main(page: ft.Page):
                 theme_mode=theme_mode,
                 bgcolor=ft.colors.with_opacity(0.3, "#86759c"),
                 glow_color="#86759c",
+                text_color=sidebar_text_color
             )
             ai_row = ft.Row(
                 [
-                    ft.Icon(ft.icons.ASSISTANT_ROUNDED, color="#86759c"),
+                    ft.Icon(ft.icons.BLUR_ON_ROUNDED, color="#86759c"),
                     ai_bubble,
                     ft.IconButton(
                         ft.icons.COPY,
@@ -725,19 +805,28 @@ def main(page: ft.Page):
                 alignment=ft.MainAxisAlignment.START,
             )
             chat_area.controls.append(ai_row)
+            send_icon_button.visible = False
+            stop_icon_button.visible = True
             page.update()
 
+            is_generating = True
+            stop_generation_flag = False
             def update_ai_response():
+                global is_generating, stop_generation_flag
                 full_response = stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_bubble, page, loading_color)
+                is_generating = False
+                stop_generation_flag = False
+                send_icon_button.visible = True
+                stop_icon_button.visible = False
                 chat_history.append({"user": "You", "message": user_message, "is_user": True})
                 chat_history.append({"user": "AI", "message": full_response, "is_user": False})
                 save_chat_history(chat_history)
                 save_ollama_response(full_response)
+                page.update()
             threading.Thread(target=update_ai_response, daemon=True).start()
             input_field.value = ""
             page.update()
 
-    # Load previous chat history.
     chat_history = load_chat_history()
     for message in chat_history:
         is_user = message.get("is_user", message["user"] == "You")
@@ -747,14 +836,11 @@ def main(page: ft.Page):
             theme_mode=theme_mode,
             bgcolor="#8f8f8f" if is_user else ("red" if message["message"] == translate("content_blocked") else "#86759c"),
             glow_color="#8f8f8f" if is_user else ("red" if message["message"] == translate("content_blocked") else "#86759c"),
+            text_color=sidebar_text_color
         )
         if is_user:
             row = ft.Row(
-                [
-                    ft.Container(width=40),
-                    bubble,
-                    ft.Icon(ft.icons.PERSON_ROUNDED, color="#a3a3a3"),
-                ],
+                [ft.Container(width=40), bubble, ft.Icon(ft.icons.PERSON_ROUNDED, color="#a3a3a3")],
                 alignment=ft.MainAxisAlignment.END,
             )
         else:
@@ -786,6 +872,27 @@ def main(page: ft.Page):
         text_size=14,
     )
 
+    send_icon_button = ft.IconButton(
+        ft.icons.SEND_ROUNDED,
+        on_click=send_message,
+        icon_color="black" if theme_mode == "light" else "white",
+    )
+    stop_icon_button = ft.IconButton(
+        ft.icons.STOP_CIRCLE_ROUNDED,
+        on_click=lambda e: stop_generation(),
+        icon_color="red",
+        visible=False,
+    )
+
+    def stop_generation():
+        global stop_generation_flag, is_generating
+        if is_generating:
+            stop_generation_flag = True
+            is_generating = False
+            send_icon_button.visible = True
+            stop_icon_button.visible = False
+            page.update()
+
     greeting = get_greeting()
     top_bar = ft.Container(
         content=ft.Row(
@@ -794,7 +901,7 @@ def main(page: ft.Page):
                     ft.icons.MENU_ROUNDED,
                     on_click=toggle_sidebar,
                     icon_color="black" if theme_mode == "light" else "white",
-                    bgcolor=None
+                    bgcolor=None,
                 ),
                 ft.Text(
                     f"{greeting}, {username}",
@@ -803,7 +910,7 @@ def main(page: ft.Page):
                     weight=ft.FontWeight.BOLD,
                 ),
                 ft.IconButton(
-                    ft.icons.WB_SUNNY if theme_mode == "light" else ft.icons.BRIGHTNESS_2,
+                    ft.icons.BRIGHTNESS_HIGH_ROUNDED if theme_mode == "light" else ft.icons.BRIGHTNESS_LOW_SHARP,
                     on_click=lambda e: page.update(),
                     icon_color="black" if theme_mode == "light" else "white",
                     disabled=True,
@@ -818,18 +925,19 @@ def main(page: ft.Page):
 
     disclaimer_text = ft.Text(
         translate("disclaimer"),
-        color="yellow",
-        size=11,
+        color="gray",
+        size=9,
+        weight=ft.FontWeight.W_400,
     )
 
     warning_text = ft.Row(
         [
-            ft.Icon(ft.icons.WARNING_ROUNDED, color="red"),
+            ft.Icon(ft.icons.WARNING_ROUNDED, color=sidebar_text_color),
             ft.Text(
                 translate("warn_setup_local_server"),
-                color="red",
+                color="gray",
                 size=11.5,
-                weight=ft.FontWeight.BOLD
+                weight=ft.FontWeight.BOLD,
             ),
         ],
         alignment=ft.MainAxisAlignment.START,
@@ -878,7 +986,7 @@ def main(page: ft.Page):
                 ),
                 ft.TextButton(
                     translate("erase_all_chats"),
-                    icon="DELETE_OUTLINE_OUTLINED",
+                    icon="DELETE_FOREVER_OUTLINED",
                     on_click=lambda _: erase_all_chats(page),
                     style=ft.ButtonStyle(color=sidebar_text_color, bgcolor=ft.colors.RED_600, elevation=2),
                 ),
@@ -900,7 +1008,7 @@ def main(page: ft.Page):
         border_radius=10,
         blur=ft.Blur(5, 5),
         animate=ft.animation.Animation(1000, "easeInOut"),
-        ink=True
+        ink=True,
     )
 
     layout = ft.Stack(
@@ -915,28 +1023,20 @@ def main(page: ft.Page):
                         expand=True,
                         bgcolor="#FFFFFF" if theme_mode == "light" else "#000000",
                         padding=10,
-                        border_radius=20
+                        border_radius=20,
                     ),
                     ft.Row(
                         [
                             input_field,
-                            ft.Container(
-                                content=ft.IconButton(
-                                    ft.icons.SEND_ROUNDED,
-                                    on_click=send_message,
-                                    bgcolor=None,
-                                    icon_color="black" if theme_mode == "light" else "white"
-                                ),
-                                padding=10,
-                                bgcolor=None,
-                            ),
+                            send_icon_button,
+                            stop_icon_button,
                         ],
                         alignment=ft.MainAxisAlignment.CENTER,
                     ),
                 ],
                 expand=True,
             ),
-            sidebar
+            sidebar,
         ],
         expand=True,
     )
