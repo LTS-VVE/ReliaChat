@@ -1,4 +1,9 @@
-## Please star our project 🙌✨❤👀!
+# Announcement:<br> 
+# We are dropping flet in favor of a different framework. Transition will happen in the next 1-2 weeks, just in time for submissions.
+# Dropping support for the current state of the website to a framework.
+
+
+# Please star our project 🙌✨❤👀!
 > [!NOTE]
 > We have fixed the backend issue, and you can now officially chat with an LLM of your choice, at any time. (As long as the model is installed).<br><br>
 
