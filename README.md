@@ -20,9 +20,9 @@
 > [!IMPORTANT]
 >[Github Project](https://github.com/LTS-VVE/ReliaChat)<br>
 >[Gitlab Project](https://gitlab.com/LTS-VVE/ReliaChat)
-## ``` Version 1.3.4-BETA ```.
+## ``` Version 1.3.5-BETA ```.
 > [!NOTE]
-> NEW RELEASE ``` V 1.3.4-BETA ```.
+> NEW RELEASE ``` V 1.3.5-BETA ```.
 
 > [!TIP]
 > What's in the new release?
