@@ -1,6 +1,7 @@
 # Please star our project 🙌✨❤👀!
 > [!IMPORTANT]
-> We are starting to port our flet app to a different framework, this process will take some time. In the meantime we will focus on the current state of the App.
+> We are nearing the project's completion. At this stage, we will host our project and cross our fingers! Whether or not we move on to a different phase, all rights are reserved to LTS-VVE, and if the project is dropped, LTS-VVE will decide what to do with their software.<br><br>
+> We are starting to port our Flet app to a different framework, and we might not fully transition and leave the framework as it is. This process will take some time. In the meantime, we will focus on the current state of the app, such as local model processing within the app, separate chats, AI LLMs fine-tuned for specific fields, image processing, and more.
 
 > [!NOTE]
 > We have fixed the backend issue, and you can now officially chat with an LLM of your choice, at any time. (As long as the model is installed).<br><br>
