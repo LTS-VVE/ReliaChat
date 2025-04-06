@@ -41,7 +41,7 @@
 > This filtering feature can be turned off via the setting menu. <br><br>
 
 > [!NOTE]
-> That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use cloud VPS(es) or wait for the official build for iOS devices.
+> That, you can build it for iOS in your own machine, however you cannot install a pre-compiled IPA for iOS, therefore if no recources are avaible to you, we recommend you use a macbook (if witheld) to compile it. <br>Or wait for the official build for iOS devices.
 
 > [!IMPORTANT]
 > Please make sure you report issues that occurr in the app via github, gitlab or via our email at reliachat@proton.me. This will help us move forward with the project.
