@@ -4,6 +4,7 @@
 > 1. Local Model Uplaods via non-external server setup has been added, however not yet compatible for Android or iOS as it is an unsupported package in flet.<br>We are active working to port the LLAMA.cpp library into a flet extention in order for it to become supported for Android Devices. <br>`(Note: This feature is not translated and only available in the English version)`
 > 2. New update to over-all inferstructure update.
 > 3. Planning `Google PlayStore` release for a finalized version.
+> 4. Unnecessary comments have been removed form the `main.py` file.
 > Starting to port our Flet app to a different framework, and we might not fully transition and leave the framework as it is.
 
 > [!NOTE]
