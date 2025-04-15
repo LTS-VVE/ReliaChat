@@ -309,6 +309,17 @@ Example:
 In the code, simply replace the "en" with your preferred language and provide translations inside the parantheses after the colon's `:`. (ex. `"settings" : "Einstellungen"`). And change the parantheses of `"en"` to any language (ex. `"de"`)
 <br><br>
 > [!NOTE]
+> Setup Screen:<br><br>
+
+Language Selection:<br><br>![oie_png (2)](https://github.com/user-attachments/assets/c41bee1a-6fbd-4830-8829-11c3464da16e)<br>
+<br> Language Selection Drop-Down:<br><br>![oie_png (4)](https://github.com/user-attachments/assets/d93869ea-4bc2-462b-adeb-f5918c832f77)<br>
+<br> Installation instruction sccreen (`note that this is a test prompt installation, the commands can be found in the app and source-code it-self`:<br><br>![oie_png (5)](https://github.com/user-attachments/assets/f0b309bc-5277-46a8-9b2b-e74f7f51a634)<br>
+<br> Theme setup:<br><br>![oie_png (7)](https://github.com/user-attachments/assets/8a92fed2-45c3-47aa-b6e7-d3cbb84f1fc8)<br>
+<br> Username setup:<br><br>![oie_png (6)](https://github.com/user-attachments/assets/3037b6ef-7e37-4269-bb9b-44a90d448d3b)<br>
+<br> Back-end server connection ping (`If you want to load models locally, skip this step`):<br><br>![oie_png (7)](https://github.com/user-attachments/assets/1fce75a7-b1fe-45b6-8a83-68f2febbcbf0)
+<br> Setup finished:<br><br>![oie_png (9)](https://github.com/user-attachments/assets/fb6af2fd-0e05-4754-9b08-5474168a9395)
+
+> [!NOTE]
 > Other Featured like a time based greeting, animatined typewritter and blinking cursor are implemented, along with a copy button, chat history and transparent blurry chat bubbles. (Basic app amenities.)
 ## Supported Languages.
 > [!NOTE]
