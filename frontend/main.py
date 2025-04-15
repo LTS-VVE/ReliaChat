@@ -324,14 +324,15 @@ def run_setup(page: ft.Page, ip, port, username, theme_mode, temperature, langua
     wizard_state = {"language": language, "theme_mode": theme_mode, "username": username}
     step_index = 0
     setup_container = ft.Container(expand=True)
-    install_commands = """THIS IS ONLY A TEST
-Please copy and paste the following commands into Termux to install the required backend components.
-If already installed, you may continue to the next step.
-
-Example:
-pkg install python
-pip install ollama-sdk
-...
+    install_commands = """pkg update -y && pkg upgrade -y
+pkg install -y python curl wget openssh git golang cmake clang
+python -m ensurepip --upgrade
+pip install flask requests
+git clone https://github.com/ollama/ollama.git
+cd ollama
+go generate ./...
+go build .
+python3 backend_server_for_mobile.py
 """
     def go_next(value=None):
         nonlocal step_index, wizard_state
