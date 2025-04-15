@@ -1,8 +1,10 @@
 # Please star our project 🙌✨❤👀!
 > [!IMPORTANT]
-> We are nearing the project's completion. At this stage, we will host our project and cross our fingers! Whether or not we move on to a different phase, all rights are reserved to LTS-VVE, and if the project is dropped, LTS-VVE will decide what to do with their software.<br><br>
-> We are starting to port our Flet app to a different framework, and we might not fully transition and leave the framework as it is. This process will take some time. In the meantime, we will focus on the current state of the app, such as local model processing within the app, separate chats, AI LLMs fine-tuned for specific fields, image processing, and more.
-> <br><br> We are close to finishing polishing our application, models, website and more. The estimated time (ETA) is Wednesday 9th of April 2025.<br>(This was originally meant to be hosted in 26th of March but pushed due to unstable weather).
+> New update to `1.3.5-Beta`:<br>
+> 1. Local Model Uplaods via non-external server setup has been added, however not yet compatible for Android or iOS as it is an unsupported package in flet.<br>We are active working to port the LLAMA.cpp library into a flet extention in order for it to become supported for Android Devices. <br>`(Note: This feature is not translated and only available in the English version)`
+> 2. New update to over-all inferstructure update.
+> 3. Planning `Google PlayStore` release for a finalized version.
+> Starting to port our Flet app to a different framework, and we might not fully transition and leave the framework as it is.
 
 > [!NOTE]
 > We have fixed the backend issue, and you can now officially chat with an LLM of your choice, at any time. (As long as the model is installed).<br><br>
