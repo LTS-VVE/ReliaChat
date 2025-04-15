@@ -28,15 +28,22 @@ from datetime import datetime
 from translations import get_translation
 from strict import strict_content
 
-# Define file paths for persistent storage
+try:
+    from llama_cpp import Llama
+except ImportError:
+    Llama = None
+
+# File paths
 SETTINGS_FILE = "settings.json"
 CHAT_HISTORY_FILE = "chat_history.json"
-RESPONSES_FILE = "responses.txt"
 
-# Global language (updated during setup)
+# Global variables
 current_language = "en"
+is_generating = False
+stop_generation_flag = False
+local_model = None
+use_local = False
 
-# Global language options shared across setup screens
 LANGUAGE_OPTIONS = [
     ft.dropdown.Option("en", "English (en)"),
     ft.dropdown.Option("sq", "Shqip (sq)"),
@@ -84,10 +91,6 @@ LANGUAGE_OPTIONS = [
     ft.dropdown.Option("cs", "čeština (cs)"),
     ft.dropdown.Option("la", "Latin (la)"),
 ]
-
-# Global generation control variables
-is_generating = False
-stop_generation_flag = False
 
 def translate(key):
     global current_language
@@ -143,7 +146,6 @@ def erase_all_chats(page):
         save_chat_history(chat_history)
         try:
             os.remove(CHAT_HISTORY_FILE)
-            os.remove(RESPONSES_FILE)
         except FileNotFoundError:
             pass
         page.chat_area.controls.clear()
@@ -182,14 +184,12 @@ def get_ollama_response(message, ip, port, temperature, custom_endpoint):
                 if line.startswith("data:"):
                     response_part = json.loads(line[5:]).get("response", "")
                     response_data = response_part
-                    print(response_part)
         return response_data
     except Exception as e:
         return f"Failed to connect to server at {url}. {translate('check_ip_port')} Error: {str(e)}"
 
 def save_ollama_response(response):
-    with open(RESPONSES_FILE, "a") as file:
-        file.write(response + "\n")
+    pass
 
 def create_glowing_chat_bubble(message, is_user=False, theme_mode="dark", bgcolor="#424242", glow_color="#8A2BE2", text_color=None):
     if text_color is None:
@@ -235,7 +235,6 @@ def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_
     cursor = ft.Text("|", size=14, weight=ft.FontWeight.BOLD)
     ai_bubble.content = ft.Column([message_md, progress_ring, cursor])
     page.update()
-
     cursor_active = True
     def blink_cursor():
         nonlocal cursor_active
@@ -247,7 +246,6 @@ def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_
         page.update()
     cursor_thread = threading.Thread(target=blink_cursor)
     cursor_thread.start()
-
     full_response = ""
     url = f"http://{ip}:{port}{custom_endpoint}"
     headers = {"Content-Type": "application/json"}
@@ -273,7 +271,6 @@ def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_
         full_response = f"Error: {str(e)}"
         message_md.value = full_response
         page.update()
-
     cursor_active = False
     cursor_thread.join()
     if progress_ring in ai_bubble.content.controls:
@@ -283,48 +280,50 @@ def stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_
     page.update()
     return full_response
 
-def typewriter_animation(response_text, chat_row, page, delay=0.001):
+def typewriter_animation(response_text, chat_row, page, delay=0.03):
     chat_bubble = chat_row.controls[1]
     message_text = ft.Text("", size=14, weight=ft.FontWeight.NORMAL)
     chat_bubble.content = ft.Column([message_text])
     cursor = ft.Text("|", size=14, weight=ft.FontWeight.BOLD)
     chat_bubble.content.controls.append(cursor)
     page.update()
-
-    cursor_active = True
-    def blink_cursor():
-        nonlocal cursor_active
-        while cursor_active:
-            cursor.visible = not cursor.visible
-            page.update()
-            time.sleep(0.2)
-        cursor.visible = False
-        page.update()
-    cursor_thread = threading.Thread(target=blink_cursor)
-    cursor_thread.start()
-
-    message = ""
     for char in response_text:
-        message += char
-        message_text.value = message
+        if stop_generation_flag:
+            break
+        message_text.value += char
         page.update()
         time.sleep(delay)
-    
-    cursor_active = False
-    cursor_thread.join()
     if cursor in chat_bubble.content.controls:
         chat_bubble.content.controls.remove(cursor)
     page.update()
 
+
+def read_android_file(uri):
+    try:
+        from jnius import autoclass
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        activity = PythonActivity.mActivity
+        Uri = autoclass('android.net.Uri')
+        input_stream = activity.getContentResolver().openInputStream(Uri.parse(uri))
+        ByteArrayOutputStream = autoclass('java.io.ByteArrayOutputStream')
+        baos = ByteArrayOutputStream()
+        buffer = bytearray(1024)
+        while True:
+            count = input_stream.read(buffer, 0, 1024)
+            if count == -1:
+                break
+            baos.write(buffer, 0, count)
+        input_stream.close()
+        data = baos.toByteArray()
+        baos.close()
+        return bytes(data)
+    except Exception as e:
+        return None
+
 def run_setup(page: ft.Page, ip, port, username, theme_mode, temperature, language, custom_endpoint, filter_mode):
-    wizard_state = {
-        "language": language,
-        "theme_mode": theme_mode,
-        "username": username
-    }
+    wizard_state = {"language": language, "theme_mode": theme_mode, "username": username}
     step_index = 0
     setup_container = ft.Container(expand=True)
-    
     install_commands = """THIS IS ONLY A TEST
 Please copy and paste the following commands into Termux to install the required backend components.
 If already installed, you may continue to the next step.
@@ -362,15 +361,14 @@ pip install ollama-sdk
             page.add(exit_container)
             page.update()
             time.sleep(1)
-            sys.exit(0)
-    
+            page.views.pop()
+            page.go("/")
     def go_back():
         nonlocal step_index
         if step_index > 0:
             step_index -= 1
             setup_container.content = render_step(step_index)
             page.update()
-
     def render_step(step):
         def nav_row():
             controls = []
@@ -387,7 +385,6 @@ pip install ollama-sdk
                     on_click=lambda e: go_next(input_value.value if input_value is not None else None)
                 ))
             return ft.Row(controls, alignment=ft.MainAxisAlignment.END)
-        
         input_value = None
         if step == 0:
             return ft.Column(
@@ -539,21 +536,59 @@ pip install ollama-sdk
     page.views.append(ft.View("/setup", controls=[setup_container], padding=20))
     page.go("/setup")
 
+def run_native_inference(prompt, ai_bubble, page, loading_color):
+    global stop_generation_flag
+    try:
+        result = local_model(prompt=prompt, max_tokens=128)
+        text = result["choices"][0]["text"]
+    except Exception as ex:
+        text = f"Error running local model: {ex}"
+    if not text:
+        text = "No output returned from model."
+    message_text = ft.Text("", size=14, weight=ft.FontWeight.NORMAL)
+    progress_ring = ft.ProgressRing(width=20, height=20, color=loading_color)
+    cursor = ft.Text("|", size=14, weight=ft.FontWeight.BOLD)
+    ai_bubble.content = ft.Column([message_text, progress_ring, cursor])
+    page.update()
+    cursor_active = True
+    def blink_cursor():
+        nonlocal cursor_active
+        while cursor_active:
+            cursor.visible = not cursor.visible
+            page.update()
+            time.sleep(0.5)
+        cursor.visible = False
+        page.update()
+    cursor_thread = threading.Thread(target=blink_cursor)
+    cursor_thread.start()
+    for char in text:
+        if stop_generation_flag:
+            break
+        message_text.value += char
+        page.update()
+        time.sleep(0.03)
+    cursor_active = False
+    cursor_thread.join()
+    if progress_ring in ai_bubble.content.controls:
+        ai_bubble.content.controls.remove(progress_ring)
+    if cursor in ai_bubble.content.controls:
+        ai_bubble.content.controls.remove(cursor)
+    page.update()
+    return message_text.value
+
 def main(page: ft.Page):
-    global current_language, is_generating, stop_generation_flag
+    global current_language, is_generating, stop_generation_flag, local_model, use_local
     if not os.path.exists(SETTINGS_FILE):
         run_setup(page, "127.0.0.1", 5000, "User", "dark", 0.7, "en", "/api/v1/query", "on")
         return
-
     ip, port, username, theme_mode, temperature, current_language, custom_endpoint, filter_mode = load_settings()
     chat_history = load_chat_history()
-
     page.title = "ReliaChat"
     page.vertical_alignment = ft.MainAxisAlignment.START
-    page.window_width = 400
-    page.window_height = 700
-    page.window_icon = "assets/icon.png"
-    
+    if not sys.platform.startswith("android"):
+        page.window_width = 400
+        page.window_height = 700
+        page.window_icon = "assets/icon.png"
     if theme_mode == "light":
         page.bgcolor = "#FFFFFF"
         page.theme_mode = ft.ThemeMode.LIGHT
@@ -563,7 +598,6 @@ def main(page: ft.Page):
         page.theme_mode = ft.ThemeMode.DARK
         page.theme_color = ft.colors.PURPLE
     page.update()
-
     splash_image = "assets/light_splash.png" if theme_mode == "light" else "assets/dark_splash.png"
     splash_screen = ft.Container(
         content=ft.Image(src=splash_image, expand=True),
@@ -579,27 +613,22 @@ def main(page: ft.Page):
         page.remove(splash_screen)
         page.update()
     show_splash_screen()
-
     sidebar_text_color = "black" if theme_mode == "light" else "white"
     loading_color = "black" if theme_mode == "light" else "white"
-
     def toggle_sidebar(e):
         sidebar.visible = not sidebar.visible
         page.update()
-
     def copy_to_clipboard(e, text):
         page.set_clipboard(text)
         page.snack_bar = ft.SnackBar(ft.Text(translate("copied_to_clipboard")))
         page.snack_bar.open = True
         page.update()
-
     def update_language(language):
         nonlocal ip, port, username, theme_mode, temperature, custom_endpoint, filter_mode
         global current_language
         current_language = language
         save_settings(ip, port, username, theme_mode, temperature, custom_endpoint, filter_mode)
         page.update()
-
     def show_settings_dialog():
         ip, port, username, theme_mode, temperature, language, custom_endpoint, filter_mode = load_settings()
         connection_status = translate("not_connected")
@@ -612,6 +641,7 @@ def main(page: ft.Page):
                 model_name = response_data.get("model_name", "Unknown")
         except Exception as e:
             print(f"Error checking status: {e}")
+        settings_container = ft.Container(expand=True)
         ip_field = ft.TextField(
             hint_text=translate("local_ip"),
             value=ip,
@@ -690,12 +720,15 @@ def main(page: ft.Page):
                 custom_endpoint_field.value,
                 "on" if filter_toggle.value else "off",
             )
-            dlg.open = False
+            settings_container.visible = False
+            page.views.pop()
             page.update()
         def cancel_settings_action(e):
-            dlg.open = False
+            settings_container.visible = False
+            page.views.pop()
             page.update()
-        content = ft.Column([
+        settings_container.content = ft.Column([
+            ft.Text(translate("settings"), size=24, weight=ft.FontWeight.BOLD, color=sidebar_text_color),
             ip_field,
             port_field,
             username_field,
@@ -722,23 +755,59 @@ def main(page: ft.Page):
                     expand=True
                 )
             ], alignment=ft.MainAxisAlignment.CENTER, spacing=2)
-        ], spacing=2)
-        dlg_content = ft.Container(
-            content=content,
-            padding=10,
-            bgcolor="#FFFFFF" if theme_mode == "light" else "#000000",
-            border_radius=20,
-        )
-        dlg = ft.AlertDialog(
-            title=ft.Text(translate("settings"), color="black" if theme_mode == "light" else "white"),
-            content=dlg_content,
-        )
-        page.dialog = dlg
-        dlg.open = True
-        page.update()
+        ], spacing=10)
+        page.views.append(ft.View("/settings", controls=[settings_container], padding=20))
+        page.go("/settings")
     chat_area = ft.ListView(expand=True, spacing=10, auto_scroll=True)
     page.chat_area = chat_area
-
+    model_picker = ft.FilePicker(on_result=lambda e: set_local_model(e, page))
+    page.overlay.append(model_picker)
+    
+    def set_local_model(e, page):
+        global use_local, local_model
+        if e.files:
+            file_path = e.files[0].path
+            if file_path.startswith("content://") and sys.platform.startswith("android"):
+                file_data = read_android_file(file_path)
+                if file_data is None:
+                    page.snack_bar = ft.SnackBar(ft.Text("Error reading model file from content URI"))
+                    page.snack_bar.open = True
+                    page.update()
+                    return
+                temp_model_path = os.path.join(os.getcwd(), os.path.basename(file_path))
+                with open(temp_model_path, "wb") as f:
+                    f.write(file_data)
+                file_path = temp_model_path
+            elif file_path.startswith("content://"):
+                try:
+                    response = urllib.request.urlopen(file_path)
+                    file_data = response.read()
+                    temp_model_path = os.path.join(os.getcwd(), os.path.basename(file_path))
+                    with open(temp_model_path, "wb") as f:
+                        f.write(file_data)
+                    file_path = temp_model_path
+                except Exception as ex:
+                    page.snack_bar = ft.SnackBar(ft.Text(f"Error reading model file: {ex}"))
+                    page.snack_bar.open = True
+                    page.update()
+                    return
+            page.snack_bar = ft.SnackBar(ft.Text(f"Loading local model from: {os.path.basename(file_path)}..."))
+            page.snack_bar.open = True
+            page.update()
+            def load_model():
+                global use_local, local_model
+                try:
+                    local_model = Llama(model_path=file_path)
+                    use_local = True
+                    page.snack_bar = ft.SnackBar(ft.Text(f"Local model loaded from: {os.path.basename(file_path)}"))
+                    page.snack_bar.open = True
+                except Exception as ex:
+                    page.snack_bar = ft.SnackBar(ft.Text(f"Error loading model: {ex}"))
+                    page.snack_bar.open = True
+                    use_local = False
+                page.update()
+            threading.Thread(target=load_model, daemon=True).start()
+    
     def send_message(e=None):
         global is_generating, stop_generation_flag
         if input_field.value.strip():
@@ -757,77 +826,110 @@ def main(page: ft.Page):
             )
             chat_area.controls.append(user_row)
             page.update()
-
-            ip, port, username, _, temperature, _, custom_endpoint, filter_mode = load_settings()
-            if filter_mode != "off" and strict_content(user_message):
-                blocked_message = translate("content_blocked")
+            if use_local and local_model is not None:
+                send_icon_button.visible = False
+                stop_icon_button.visible = True
+                page.update()
                 ai_bubble = create_glowing_chat_bubble(
-                    blocked_message,
+                    "",
                     is_user=False,
                     theme_mode=theme_mode,
-                    bgcolor="red",
-                    glow_color="red",
+                    bgcolor=ft.colors.with_opacity(0.3, "#86759c"),
+                    glow_color="#86759c",
                     text_color=sidebar_text_color
                 )
                 ai_row = ft.Row(
-                    [ft.Icon(ft.icons.SHIELD_ROUNDED, color="red"), ai_bubble, ft.Container(width=40)],
+                    [
+                        ft.Icon(ft.icons.ALBUM_OUTLINED, color="#86759c"),
+                        ai_bubble,
+                        ft.IconButton(
+                            ft.icons.COPY,
+                            on_click=lambda e: copy_to_clipboard(e, ai_bubble.content.controls[0].value),
+                            icon_color="black" if theme_mode == "light" else "white",
+                        ),
+                        ft.Container(width=40),
+                    ],
                     alignment=ft.MainAxisAlignment.START,
                 )
                 chat_area.controls.append(ai_row)
                 page.update()
-                typewriter_animation(blocked_message, ai_row, page)
-                chat_history.append({"user": "You", "message": user_message, "is_user": True})
-                chat_history.append({"user": "AI", "message": blocked_message, "is_user": False})
-                save_chat_history(chat_history)
-                input_field.value = ""
+                def update_ai_response_native():
+                    response = run_native_inference(user_message, ai_bubble, page, loading_color)
+                    chat_history.append({"user": "You", "message": user_message, "is_user": True})
+                    chat_history.append({"user": "AI", "message": response, "is_user": False})
+                    save_chat_history(chat_history)
+                    send_icon_button.visible = True
+                    stop_icon_button.visible = False
+                    page.update()
+                threading.Thread(target=update_ai_response_native, daemon=True).start()
+            else:
+                ip, port, username, _, temperature, _, custom_endpoint, filter_mode = load_settings()
+                if filter_mode != "off" and strict_content(user_message):
+                    blocked_message = translate("content_blocked")
+                    ai_bubble = create_glowing_chat_bubble(
+                        blocked_message,
+                        is_user=False,
+                        theme_mode=theme_mode,
+                        bgcolor="red",
+                        glow_color="red",
+                        text_color=sidebar_text_color
+                    )
+                    ai_row = ft.Row(
+                        [ft.Icon(ft.icons.SHIELD_ROUNDED, color="red"), ai_bubble, ft.Container(width=40)],
+                        alignment=ft.MainAxisAlignment.START,
+                    )
+                    chat_area.controls.append(ai_row)
+                    page.update()
+                    typewriter_animation(blocked_message, ai_row, page)
+                    chat_history.append({"user": "You", "message": user_message, "is_user": True})
+                    chat_history.append({"user": "AI", "message": blocked_message, "is_user": False})
+                    save_chat_history(chat_history)
+                    input_field.value = ""
+                    page.update()
+                    return
+                ai_bubble = create_glowing_chat_bubble(
+                    "",
+                    is_user=False,
+                    theme_mode=theme_mode,
+                    bgcolor=ft.colors.with_opacity(0.3, "#86759c"),
+                    glow_color="#86759c",
+                    text_color=sidebar_text_color
+                )
+                ai_row = ft.Row(
+                    [
+                        ft.Icon(ft.icons.BLUR_ON_ROUNDED, color="#86759c"),
+                        ai_bubble,
+                        ft.IconButton(
+                            ft.icons.COPY,
+                            on_click=lambda e: copy_to_clipboard(e, ai_bubble.content.controls[0].value),
+                            icon_color="black" if theme_mode == "light" else "white",
+                        ),
+                        ft.Container(width=40),
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                )
+                chat_area.controls.append(ai_row)
+                send_icon_button.visible = False
+                stop_icon_button.visible = True
                 page.update()
-                return
-
-            ai_bubble = create_glowing_chat_bubble(
-                "",
-                is_user=False,
-                theme_mode=theme_mode,
-                bgcolor=ft.colors.with_opacity(0.3, "#86759c"),
-                glow_color="#86759c",
-                text_color=sidebar_text_color
-            )
-            ai_row = ft.Row(
-                [
-                    ft.Icon(ft.icons.BLUR_ON_ROUNDED, color="#86759c"),
-                    ai_bubble,
-                    ft.IconButton(
-                        ft.icons.COPY,
-                        on_click=lambda e: copy_to_clipboard(e, ai_bubble.content.controls[0].value),
-                        icon_color="black" if theme_mode == "light" else "white",
-                    ),
-                    ft.Container(width=40),
-                ],
-                alignment=ft.MainAxisAlignment.START,
-            )
-            chat_area.controls.append(ai_row)
-            send_icon_button.visible = False
-            stop_icon_button.visible = True
-            page.update()
-
-            is_generating = True
-            stop_generation_flag = False
-            def update_ai_response():
-                global is_generating, stop_generation_flag
-                full_response = stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_bubble, page, loading_color)
-                is_generating = False
+                is_generating = True
                 stop_generation_flag = False
-                send_icon_button.visible = True
-                stop_icon_button.visible = False
-                chat_history.append({"user": "You", "message": user_message, "is_user": True})
-                chat_history.append({"user": "AI", "message": full_response, "is_user": False})
-                save_chat_history(chat_history)
-                save_ollama_response(full_response)
-                page.update()
-            threading.Thread(target=update_ai_response, daemon=True).start()
+                def update_ai_response():
+                    global is_generating, stop_generation_flag
+                    full_response = stream_ai_response(user_message, ip, port, temperature, custom_endpoint, ai_bubble, page, loading_color)
+                    is_generating = False
+                    stop_generation_flag = False
+                    send_icon_button.visible = True
+                    stop_icon_button.visible = False
+                    chat_history.append({"user": "You", "message": user_message, "is_user": True})
+                    chat_history.append({"user": "AI", "message": full_response, "is_user": False})
+                    save_chat_history(chat_history)
+                    page.update()
+                threading.Thread(target=update_ai_response, daemon=True).start()
             input_field.value = ""
             page.update()
 
-    chat_history = load_chat_history()
+
     for message in chat_history:
         is_user = message.get("is_user", message["user"] == "You")
         bubble = create_glowing_chat_bubble(
@@ -846,7 +948,10 @@ def main(page: ft.Page):
         else:
             row = ft.Row(
                 [
-                    ft.Icon(ft.icons.HISTORY_ROUNDED, color="red" if message["message"] == translate("content_blocked") else "#86759c"),
+                    ft.Icon(
+                        ft.icons.HISTORY_ROUNDED,
+                        color="red" if message["message"] == translate("content_blocked") else "#86759c"
+                    ),
                     bubble,
                     ft.IconButton(
                         ft.icons.COPY,
@@ -858,7 +963,6 @@ def main(page: ft.Page):
                 alignment=ft.MainAxisAlignment.START,
             )
         chat_area.controls.append(row)
-
     input_field = ft.TextField(
         hint_text=translate("type_prompt"),
         autofocus=True,
@@ -877,6 +981,7 @@ def main(page: ft.Page):
         on_click=send_message,
         icon_color="black" if theme_mode == "light" else "white",
     )
+
     stop_icon_button = ft.IconButton(
         ft.icons.STOP_CIRCLE_ROUNDED,
         on_click=lambda e: stop_generation(),
@@ -996,6 +1101,12 @@ def main(page: ft.Page):
                     icon="ADD_LINK_OUTLINED",
                     on_click=lambda _: page.launch_url("https://relia.rf.gd/credits"),
                     style=ft.ButtonStyle(color=sidebar_text_color),
+                ),
+                ft.TextButton(
+                    "Upload Local Model",
+                    icon="FILE_UPLOAD_OUTLINED",
+                    on_click=lambda _: model_picker.pick_files(allowed_extensions=[]),
+                    style=ft.ButtonStyle(color=sidebar_text_color, elevation=2),
                 ),
                 ft.Text(translate("version"), size=10, color=sidebar_text_color),
             ],
