@@ -54,8 +54,8 @@
 <br><br>
 
 # Builds
-[Android Build](https://github.com/LTS-VVE/ReliaChat/releases/tag/V-1.3.3_PRE-RELEASE_ANDROID)<br>
-[iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat)<br><br>
+[Android Build](https://github.com/LTS-VVE/ReliaChat/tags)<br>
+[iOS Build (Comming soon)](https://github.com/LTS-VVE/ReliaChat/tags)<br><br>
 > [!NOTE]
 > Please remember that the iOS build is likely to come out on the first stable release.
 <br><br>
