@@ -1,4 +1,6 @@
-# Please star our project 🙌✨❤👀!
+# Please star our project 🙌✨❤👀!<br>
+Join the Beta wait list by emailing at: [reliachat@proton.me](malito:reliachat@proton.me)<br>
+
 > [!IMPORTANT]
 > New update to `1.3.5-Beta`:<br>
 > 1. Local Model Uplaods via non-external server setup has been added, however not yet compatible for Android or iOS as it is an unsupported package in flet.<br>We are actively working to port the LLAMA.cpp library into a flet extention in order for it to become supported for Android Devices. <br>`(Note: This feature is not translated and only available in the English version)`
