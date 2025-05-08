@@ -8,7 +8,7 @@ import signal
 
 app = Flask(__name__)
 
-# Define the directory and path for the ollama binary.
+# Define the directory and path for the ollama binary
 OLLAMA_DIR = os.path.expanduser("~/ollama")
 OLLAMA_BIN = os.path.join(OLLAMA_DIR, "ollama")
 
@@ -43,7 +43,7 @@ def stream_model_output(prompt):
     # Sanitize the prompt to prevent command injection
     safe_prompt = shlex.quote(prompt)
     
-    # Start the subprocess to run the command
+    # Start the subprocess to run the command with character-by-character streaming
     process = subprocess.Popen(
         [OLLAMA_BIN, "run", "gemma:2b"],
         cwd=OLLAMA_DIR,
@@ -51,7 +51,7 @@ def stream_model_output(prompt):
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
-        bufsize=1  # Line buffered
+        bufsize=0  # Unbuffered for character streaming
     )
     
     # Write the sanitized prompt to stdin and flush immediately
@@ -59,14 +59,16 @@ def stream_model_output(prompt):
     process.stdin.flush()
     process.stdin.close()
     
-    # Read and yield output line by line as soon as they are available
+    # Read character by character for lightning-fast streaming
     while True:
-        output_line = process.stdout.readline()
-        if output_line == '' and process.poll() is not None:
+        char = process.stdout.read(1)
+        
+        if not char and process.poll() is not None:
             break
-        if output_line:
-            # Immediately yield the current output line
-            yield f"data: {json.dumps({'response': output_line.strip()})}\n\n"
+            
+        if char:
+            # Stream each character immediately
+            yield f"data: {json.dumps({'response': char})}\n\n"
     
     # If an error occurred, yield the error message immediately
     if process.returncode != 0:
@@ -83,18 +85,19 @@ def query_model():
             status=400,
             mimetype='application/json'
         )
-    # Return a streaming response
+    
+    # Return a streaming response with headers for immediate streaming
     return Response(
         stream_with_context(stream_model_output(prompt)),
         mimetype='text/event-stream',
         headers={
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'X-Accel-Buffering': 'no'  # Disable proxy buffering
         }
     )
 
-# Status endpoint to always return connected status
 @app.route('/api/v1/status', methods=['GET'])
 def status():
     status_data = {
